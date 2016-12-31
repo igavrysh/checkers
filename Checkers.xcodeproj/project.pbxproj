@@ -14,6 +14,9 @@
 		858F5BBC1E17CEA600DB6D13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 858F5BB31E17CEA600DB6D13 /* LaunchScreen.storyboard */; };
 		858F5BBD1E17CEA600DB6D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 858F5BB51E17CEA600DB6D13 /* Main.storyboard */; };
 		858F5BC11E17CFC000DB6D13 /* GVRGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5BC01E17CFC000DB6D13 /* GVRGame.m */; };
+		858F5BC51E17F61F00DB6D13 /* GVRChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5BC41E17F61F00DB6D13 /* GVRChecker.m */; };
+		858F5BCA1E17F7C000DB6D13 /* GVRBoardPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5BC91E17F7C000DB6D13 /* GVRBoardPosition.m */; };
+		858F5BCE1E17FF8000DB6D13 /* GVRBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5BCD1E17FF8000DB6D13 /* GVRBoard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,12 @@
 		858F5BB61E17CEA600DB6D13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		858F5BBF1E17CFC000DB6D13 /* GVRGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRGame.h; sourceTree = "<group>"; };
 		858F5BC01E17CFC000DB6D13 /* GVRGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRGame.m; sourceTree = "<group>"; };
+		858F5BC31E17F61F00DB6D13 /* GVRChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRChecker.h; sourceTree = "<group>"; };
+		858F5BC41E17F61F00DB6D13 /* GVRChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRChecker.m; sourceTree = "<group>"; };
+		858F5BC81E17F7C000DB6D13 /* GVRBoardPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBoardPosition.h; sourceTree = "<group>"; };
+		858F5BC91E17F7C000DB6D13 /* GVRBoardPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoardPosition.m; sourceTree = "<group>"; };
+		858F5BCC1E17FF8000DB6D13 /* GVRBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBoard.h; sourceTree = "<group>"; };
+		858F5BCD1E17FF8000DB6D13 /* GVRBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +113,9 @@
 		858F5BB81E17CEA600DB6D13 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				858F5BCB1E17FDD700DB6D13 /* GVRBoard */,
+				858F5BC71E17F7B100DB6D13 /* GVRBoardPosition */,
+				858F5BC21E17F61200DB6D13 /* GVRChecker */,
 				858F5BBE1E17CFB400DB6D13 /* GVRGame */,
 			);
 			path = Library;
@@ -130,6 +142,33 @@
 				858F5BC01E17CFC000DB6D13 /* GVRGame.m */,
 			);
 			path = GVRGame;
+			sourceTree = "<group>";
+		};
+		858F5BC21E17F61200DB6D13 /* GVRChecker */ = {
+			isa = PBXGroup;
+			children = (
+				858F5BC31E17F61F00DB6D13 /* GVRChecker.h */,
+				858F5BC41E17F61F00DB6D13 /* GVRChecker.m */,
+			);
+			path = GVRChecker;
+			sourceTree = "<group>";
+		};
+		858F5BC71E17F7B100DB6D13 /* GVRBoardPosition */ = {
+			isa = PBXGroup;
+			children = (
+				858F5BC81E17F7C000DB6D13 /* GVRBoardPosition.h */,
+				858F5BC91E17F7C000DB6D13 /* GVRBoardPosition.m */,
+			);
+			path = GVRBoardPosition;
+			sourceTree = "<group>";
+		};
+		858F5BCB1E17FDD700DB6D13 /* GVRBoard */ = {
+			isa = PBXGroup;
+			children = (
+				858F5BCC1E17FF8000DB6D13 /* GVRBoard.h */,
+				858F5BCD1E17FF8000DB6D13 /* GVRBoard.m */,
+			);
+			path = GVRBoard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,9 +243,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				858F5BA21E17CCE100DB6D13 /* ViewController.m in Sources */,
+				858F5BC51E17F61F00DB6D13 /* GVRChecker.m in Sources */,
 				858F5BC11E17CFC000DB6D13 /* GVRGame.m in Sources */,
 				858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */,
 				858F5B9C1E17CCE100DB6D13 /* main.m in Sources */,
+				858F5BCE1E17FF8000DB6D13 /* GVRBoard.m in Sources */,
+				858F5BCA1E17F7C000DB6D13 /* GVRBoardPosition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

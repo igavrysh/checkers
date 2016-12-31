@@ -8,11 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-struct GVRBoardPosition {
-    NSUInteger x;
-    NSUInteger y;
-};
-
 @interface GVRGame : NSObject
 
 - (void)begin:(void(^)(BOOL success))block;
