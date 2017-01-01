@@ -12,15 +12,18 @@
 #import "GVRChecker.h"
 
 static const NSUInteger GVRBoardSize = 10;
-static const NSUInteger GVRInitialCheckersFilledRowsCount = 3;
+static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 
 @interface GVRBoard ()
-@property (nonatomic, strong)   NSArray     *positions;
-@property (nonatomic, readonly) NSUInteger  size;
-@property (nonatomic, assign)   NSUInteger  whiteCheckersCount;
-@property (nonatomic, assign)   NSUInteger  blackCheckersCount;
+@property (nonatomic, strong)   NSMutableArray  *positions;
+@property (nonatomic, assign)   NSUInteger      size;
+@property (nonatomic, assign)   NSUInteger      checkerRows;
+@property (nonatomic, assign)   NSUInteger      whiteCheckersCount;
+@property (nonatomic, assign)   NSUInteger      blackCheckersCount;
 
-- (void)initBoard;
+- (void)initBoardWithSize:(NSUInteger)size rowsFilledWithCheckers:(NSUInteger)checkerRows;
+
+- (void)setChecker:(GVRChecker *)checker atRow:(NSUInteger)row column:(NSUInteger)column;
 
 @end
 
@@ -40,77 +43,105 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 3;
 
 - (instancetype)init {
     if (self = [super init]) {
-        [self initBoard];
+        [self initBoardWithSize:GVRBoardSize rowsFilledWithCheckers:GVRInitialCheckersFilledRowsCount];
     }
 
     return self;
 }
 
-- (void)initBoard {
-    NSMutableArray *positions = [NSMutableArray new];
+- (void)initBoardWithSize:(NSUInteger)size rowsFilledWithCheckers:(NSUInteger)checkerRows {
+    self.size = size;
+    self.checkerRows = checkerRows;
+    
+    self.positions = [[NSMutableArray alloc] initWithCapacity:size*size];
     
     GVRChecker *whiteChecker = [GVRChecker checkerWithType:GVRCheckerTypeMan
                                                      color:GVRCheckerColorWhite];
     GVRChecker *blackChecker = [GVRChecker checkerWithType:GVRCheckerTypeMan
                                                      color:GVRCheckerColorWhite];
-    for (int i = 0; i < GVRBoardSize; i++) {
-        for (int j = 0; j < GVRBoardSize; j++) {
-            GVRBoardPositionColor positionColor = (i + j) % 2 == 0 ? GVRBoardPositionColorWhite : GVRBoardPositionColorBlack;
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            GVRBoardPosition *position = [[GVRBoardPosition alloc] initWithRow:i column:j board:self];
+            NSUInteger index = [self indexForRow:i column:j];
+            self.positions[index] = position;
             
             GVRChecker *checker = nil;
-            if (GVRBoardPositionColorBlack == positionColor) {
-                if (i < GVRInitialCheckersFilledRowsCount) {
+            NSUInteger rows = checkerRows / 2;
+            
+            if (GVRBoardPositionColorBlack == position.color) {
+                if (i < rows) {
                     checker = [whiteChecker copy];
-                    self.whiteCheckersCount++;
                 }
-                if (j >= GVRBoardSize - GVRInitialCheckersFilledRowsCount) {
+                if (j >= size - rows) {
                     checker = [blackChecker copy];
-                    self.blackCheckersCount++;
                 }
             }
             
-            GVRBoardPosition *position = [[GVRBoardPosition alloc] initWithColor:positionColor
-                                                                       rowNumber:i
-                                                                    columnNumber:j
-                                                                         checker:checker];
-            [positions addObject:position];
+            [self addChecker:checker atRow:i column:j];
         }
     }
-    
-    self.positions = [positions copy];
-}
-
-#pragma mark -
-#pragma mark Accessors 
-
-- (NSUInteger)size {
-    return [self.positions count];
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
-- (GVRChecker *)checkerAtPostion:(GVRBoardPosition *)position {
-    return self.positions[position.rowNumber * self.size + position.columnNumber];
+- (NSUInteger)indexForRow:(NSUInteger)row column:(NSUInteger)column {
+    return self.size * row + column;
 }
 
-- (void)addChecker:(GVRChecker *)checker
-        atPosition:(GVRBoardPosition *)position
-{
+- (BOOL)isCheckerPresentAtRow:(NSUInteger)row column:(NSUInteger)column {
+    return self[[self indexForRow:row column:column]].isFilled;
     
 }
 
-- (GVRChecker *)removeCheckerAtPosition:(GVRBoardPosition *)position
-{
-    return nil;
+- (GVRBoardPosition *)objectAtIndexedSubscript:(NSUInteger)index {
+    return self.positions[index];
 }
 
-- (void)moveCheckerFrom:(GVRBoardPosition *)fromPostion
-                     to:(GVRBoardPosition *)toPosition
-{
+- (void)setObject:(GVRChecker *)object atIndexedSubscript:(NSUInteger)index {
+    self.positions[index] = object;
+}
+
+- (GVRChecker *)checkerAtRow:(NSUInteger)row column:(NSUInteger)column {
+    return self[row * self.size + column].checker;
+}
+
+- (void)addChecker:(GVRChecker *)checker atRow:(NSUInteger)row column:(NSUInteger)column {
+    if ([self isCheckerPresentAtRow:row column:column]) {
+        return;
+    }
     
+    [self setChecker:checker atRow:row column:column];
+        
+    if (GVRCheckerColorBlack == checker.color) {
+        self.blackCheckersCount++;
+    } else if (GVRCheckerColorWhite == checker.color) {
+        self.whiteCheckersCount++;
+    }
 }
 
+- (void)removeCheckerAtRow:(NSUInteger)row column:(NSUInteger)column {
+    if (![self isCheckerPresentAtRow:row column:column]) {
+        return;
+    }
+    
+    GVRChecker *checker = self[[self indexForRow:row column:column]].checker;
+    GVRCheckerColor color = checker.color;
+    if (GVRCheckerColorBlack == color) {
+        self.blackCheckersCount--;
+    } else if (GVRCheckerColorWhite == color) {
+        self.whiteCheckersCount--;
+    }
+    
+    [self setChecker:nil atRow:row column:column];
+}
 
+- (void)moveCheckerFrom:(GVRBoardPosition *)fromPostion to:(GVRBoardPosition *)toPosition {
+}
+
+- (void)setChecker:(GVRChecker *)checker atRow:(NSUInteger)row column:(NSUInteger)column {
+    NSUInteger index = [self indexForRow:row column:column];
+    self[index].checker = checker;
+}
 
 @end

@@ -10,20 +10,23 @@
 
 #import "GVRChecker.h"
 
+@class GVRBoard;
+
 typedef enum : NSUInteger {
     GVRBoardPositionColorWhite,
     GVRBoardPositionColorBlack
 } GVRBoardPositionColor;
 
 @interface GVRBoardPosition : NSObject
-@property (nonatomic, strong)   GVRChecker              *checker;
-@property (nonatomic, readonly) NSUInteger              rowNumber;
-@property (nonatomic, readonly) NSUInteger              columnNumber;
-@property (nonatomic, readonly) GVRBoardPositionColor   color;
+@property (nonatomic, readonly)         NSUInteger              row;
+@property (nonatomic, readonly)         NSUInteger              column;
+@property (nonatomic, strong)           GVRChecker              *checker;
+@property (nonatomic, weak, readonly)   GVRBoard                *board;
+@property (nonatomic, readonly)         GVRBoardPositionColor   color;
+@property (nonatomic, readonly, getter=isFilled)    BOOL        isFilled;
 
-- (instancetype)initWithColor:(GVRBoardPositionColor)color
-                    rowNumber:(NSUInteger)rowNumber
-                 columnNumber:(NSUInteger)columnNumber
-                      checker:(GVRChecker *)checker;
+- (instancetype)initWithRow:(NSUInteger)row
+                     column:(NSUInteger)column
+                      board:(GVRBoard *)board;
 
 @end

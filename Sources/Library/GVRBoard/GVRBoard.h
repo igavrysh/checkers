@@ -12,19 +12,21 @@
 @class GVRBoardPosition;
 
 @interface GVRBoard : NSObject
+@property (nonatomic, readonly) NSUInteger  size;
 @property (nonatomic, readonly) NSUInteger  whiteCheckersCount;
 @property (nonatomic, readonly) NSUInteger  blackCheckersCount;
 
 + (instancetype)board;
 
-- (GVRChecker *)checkerAtPostion:(GVRBoardPosition *)position;
+- (void)addChecker:(GVRChecker *)checker atRow:(NSUInteger)row column:(NSUInteger)column;
 
-- (void)addChecker:(GVRChecker *)checker
-        atPosition:(GVRBoardPosition *)position;
-
-- (void)removeCheckerAtPosition:(GVRBoardPosition *)position;
+- (void)removeCheckerAtRow:(NSUInteger)row column:(NSUInteger)column;
 
 - (void)moveCheckerFrom:(GVRBoardPosition *)fromPostion
                      to:(GVRBoardPosition *)toPosition;
+
+- (NSUInteger)indexForRow:(NSUInteger)row column:(NSUInteger)column;
+
+- (BOOL)isCheckerPresentAtRow:(NSUInteger)row column:(NSUInteger)column;
 
 @end

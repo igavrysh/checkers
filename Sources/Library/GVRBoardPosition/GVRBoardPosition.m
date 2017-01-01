@@ -8,31 +8,46 @@
 
 #import "GVRBoardPosition.h"
 
+#import "GVRBoard.h"
+
 @interface GVRBoardPosition ()
-@property (nonatomic, assign)   GVRBoardPositionColor   color;
-@property (nonatomic, assign)   NSUInteger              rowNumber;
-@property (nonatomic, assign)   NSUInteger              columnNumber;
+@property (nonatomic, assign)   NSUInteger              row;
+@property (nonatomic, assign)   NSUInteger              column;
+@property (nonatomic, weak)     GVRBoard                *board;
 
 @end
 
 @implementation GVRBoardPosition
 
+@dynamic color;
+@dynamic isFilled;
+
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (instancetype)initWithColor:(GVRBoardPositionColor)color
-                    rowNumber:(NSUInteger)rowNumber
-                 columnNumber:(NSUInteger)columnNumber
-                      checker:(GVRChecker *)checker
+- (instancetype)initWithRow:(NSUInteger)row
+                     column:(NSUInteger)column
+                      board:(GVRBoard *)board
 {
     self = [super init];
     if (self) {
-        self.color = color;
-        self.checker = checker;
+        self.board = board;
+        self.row = row;
+        self.column = column;
     }
     
     return self;
 }
 
+#pragma mark -
+#pragma mark Accessors
+
+- (GVRBoardPositionColor)color {
+    return (self.row + self.column) % 2 == 0 ? GVRBoardPositionColorBlack : GVRBoardPositionColorWhite;
+}
+
+- (BOOL)isFilled {
+    return self.checker;
+}
 
 @end
