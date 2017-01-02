@@ -36,7 +36,6 @@ describe(@"GVRBoard", ^{
             [[theValue(board.blackCheckersCount) should] equal:theValue(15)];
         });
     });
-
 });
 
 

@@ -17,7 +17,6 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 @interface GVRBoard ()
 @property (nonatomic, strong)   NSMutableArray  *positions;
 @property (nonatomic, assign)   NSUInteger      size;
-@property (nonatomic, assign)   NSUInteger      checkerRows;
 @property (nonatomic, assign)   NSUInteger      whiteCheckersCount;
 @property (nonatomic, assign)   NSUInteger      blackCheckersCount;
 
@@ -49,7 +48,6 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 
 - (void)initBoardWithSize:(NSUInteger)size rowsFilledWithCheckers:(NSUInteger)checkerRows {
     self.size = size;
-    self.checkerRows = checkerRows;
     
     self.positions = [[NSMutableArray alloc] initWithCapacity:size*size];
     

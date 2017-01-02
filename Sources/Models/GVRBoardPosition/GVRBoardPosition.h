@@ -17,6 +17,13 @@ typedef enum : NSUInteger {
     GVRBoardPositionColorBlack
 } GVRBoardPositionColor;
 
+struct GVRBoardCell {
+    NSUInteger row;
+    NSUInteger cell;
+};
+
+typedef struct GVRBoardCell GVRBoardCell;
+
 @interface GVRBoardPosition : NSObject
 @property (nonatomic, readonly)         NSUInteger              row;
 @property (nonatomic, readonly)         NSUInteger              column;

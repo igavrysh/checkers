@@ -15,7 +15,7 @@
 
 @interface GVRGame()
 @property (nonatomic, strong)   GVRBoard        *board;
-@property (nonatomic, strong)   NSString        *players;
+@property (nonatomic, strong)   NSArray         *players;
 @property (nonatomic, assign)   NSUInteger      activePlayer;
 
 @end
@@ -28,7 +28,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.board = [GVRBoard board];
+        
     }
     
     return self;
@@ -38,6 +38,9 @@
 #pragma mark Public Methods
 
 - (void)begin:(void(^)(BOOL success))block {
+    self.board = [GVRBoard board];
+    self.activePlayer = 0;
+    self.players = @[@"id1", @"id2"];
     
     GVRBlockPerform(block, TRUE);
 }
@@ -47,10 +50,9 @@
     GVRBlockPerform(block, TRUE);
 }
 
-- (void)moveChekerForPlayer:(NSString *)palyer
-                       from:(GVRBoardPosition *)fromPosition
-                         to:(GVRBoardPosition *)toPosition
-      withCompletionHandler:(void(^)(BOOL success))block
+- (void)moveChekerByTrajectory:(NSArray *)trajectory
+               forPlayerWithId:(NSString *)playerId
+         withCompletionHandler:(void(^)(BOOL success))block
 {
     
 }
