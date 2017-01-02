@@ -11,6 +11,8 @@
 #include "GVRBoard.h"
 #import "GVRBoardPosition.h"
 
+#import "GVRBlockMacros.h"
+
 @interface GVRGame()
 @property (nonatomic, strong)   GVRBoard        *board;
 @property (nonatomic, strong)   NSString        *players;
@@ -37,10 +39,12 @@
 
 - (void)begin:(void(^)(BOOL success))block {
     
+    GVRBlockPerform(block, TRUE);
 }
 
 - (void)end:(void(^)(BOOL success))block {
     
+    GVRBlockPerform(block, TRUE);
 }
 
 - (void)moveChekerForPlayer:(NSString *)palyer

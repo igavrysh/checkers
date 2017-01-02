@@ -53,10 +53,8 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
     
     self.positions = [[NSMutableArray alloc] initWithCapacity:size*size];
     
-    GVRChecker *whiteChecker = [GVRChecker checkerWithType:GVRCheckerTypeMan
-                                                     color:GVRCheckerColorWhite];
-    GVRChecker *blackChecker = [GVRChecker checkerWithType:GVRCheckerTypeMan
-                                                     color:GVRCheckerColorBlack];
+    GVRChecker *whiteChecker = [GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite];
+    GVRChecker *blackChecker = [GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack];
     NSUInteger rows = checkerRows / 2;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
