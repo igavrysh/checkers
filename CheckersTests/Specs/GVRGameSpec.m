@@ -12,6 +12,7 @@
 
 #import "GVRGame.h"
 #import "GVRBoard.h"
+#import "GVRChecker.h"
 
 SPEC_BEGIN(GVRGameSpec)
 
@@ -21,7 +22,19 @@ registerMatchers(@"GVR");
 
 context(@"when board is initialized", ^{
     beforeEach(^{
-        board = [GVRBoard new];
+        board = [[GVRBoard alloc] initWithSize:GVRBoardSize];
+    });
+    
+    context(@"when one white man is added on the boad", ^{
+        beforeAll(^{
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
+                        atRow:0
+                       column:0];
+        });
+        
+        it(@"", ^{
+            
+        });
     });
     
     it(@"when white man moves 1 cell ahead-left, should return true", ^{});

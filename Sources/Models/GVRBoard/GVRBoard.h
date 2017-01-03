@@ -11,6 +11,10 @@
 @class GVRChecker;
 @class GVRBoardPosition;
 
+static const NSUInteger GVRBoardSize = 10;
+
+static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
+
 @interface GVRBoard : NSObject
 @property (nonatomic, readonly) NSUInteger  size;
 @property (nonatomic, readonly) NSUInteger  whiteCheckersCount;

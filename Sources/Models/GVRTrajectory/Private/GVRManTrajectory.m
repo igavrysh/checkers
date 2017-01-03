@@ -17,6 +17,10 @@
                                     fromPostion:(GVRBoardPosition *)position
                                  exceptPosition:(GVRBoardPosition *)exceptPosition;
 
+- (BOOL)applyForStepIndex:(NSUInteger)stepIndex
+                   player:(GVRPlayer)player
+                    error:(NSError **)error;
+
 @end
 
 @implementation GVRManTrajectory
@@ -24,21 +28,24 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
-    return NO;
+- (BOOL)applyForPlayer:(GVRPlayer)player error:(NSError **)error {
+    return [self applyForStepIndex:1
+                            player:player
+                             error:error];
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
-- (BOOL)applyForBoard:(GVRBoard *)board
-            stepIndex:(NSUInteger)stepIndex
-               player:(GVRPlayer)player
-                error:(NSError **)error
+- (BOOL)applyForStepIndex:(NSUInteger)stepIndex
+                   player:(GVRPlayer)player
+                    error:(NSError **)error
 {
     GVRBoardCell initialCell;
     GVRBoardCell cell;
     GVRBoardCell previousCell;
+    
+    GVRBoard *board = self.board;
     
     [self.steps[0] getValue:&initialCell];
     [self.steps[stepIndex] getValue:&cell];
@@ -55,6 +62,12 @@
     
     if (position.isFilled) {
         *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryStepOnFilledCell userInfo:nil];
+        
+        return NO;
+    }
+    
+    if (GVRCheckerTypeKing ==  initialPosition.checker.type) {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryTypeInconsistencyManAndKing userInfo:nil];
         
         return NO;
     }
@@ -134,11 +147,9 @@
                                                             fromPostion:position
                                                          exceptPosition:nil];
             } else {
-                result = [self applyForBoard:board
-                                   stepIndex:stepIndex + 1
-                                      player:player
-                                       error:error];
-                
+                result = [self applyForStepIndex:stepIndex + 1
+                                          player:player
+                                           error:error];
             }
             
             if (result) {
@@ -171,7 +182,10 @@
         return NO;
     };
     
-    return isTrajectoryAvailable(+1, +1) || isTrajectoryAvailable(+1, -1) || isTrajectoryAvailable(-1, +1) || isTrajectoryAvailable(-1, -1);
+    return isTrajectoryAvailable(+1, +1)
+        || isTrajectoryAvailable(+1, -1)
+        || isTrajectoryAvailable(-1, +1)
+        || isTrajectoryAvailable(-1, -1);
 }
 
 @end

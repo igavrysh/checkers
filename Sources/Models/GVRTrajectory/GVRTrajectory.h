@@ -15,6 +15,7 @@
 FOUNDATION_EXPORT NSString *const GVRTrajectoryErrorDomain;
 enum {
     GVRTrajectoryStepOnWhiteCell = 1000,
+    GVRTrajectoryTypeInconsistencyManAndKing,
     GVRTrajectoryStepOnFilledCell,
     GVRTrajectoryStepOutOfBoard,
     GVRTrajectoryBackwardsMove,
@@ -24,12 +25,15 @@ enum {
 };
 
 @interface GVRTrajectory : NSObject
-@property (nonatomic, readonly) NSArray     *steps;
+@property (nonatomic, readonly)         NSArray     *steps;
+@property (nonatomic, weak, readonly)   GVRBoard    *board;
 
-+ (instancetype)trajectoryWithSteps:(NSArray *)steps;
++ (instancetype)manTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board;
 
-- (instancetype)initWithSteps:(NSArray *)steps;
++ (instancetype)kingTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board;
 
-- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error;
+- (instancetype)initWithSteps:(NSArray *)steps board:(GVRBoard *)board;
+
+- (BOOL)applyForPlayer:(GVRPlayer)player error:(NSError **)error;
 
 @end

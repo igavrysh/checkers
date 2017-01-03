@@ -13,10 +13,7 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (BOOL)applyForBoard:(GVRBoard *)board
-         playerNumber:(NSUInteger)playerNumber
-                error:(NSError **)error
-{
+- (BOOL)applyForPlayer:(GVRPlayer)player error:(NSError **)error {
     return NO;
 }
 

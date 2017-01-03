@@ -10,10 +10,15 @@
 
 #import "GVRBoard.h"
 
+#import "GVRManTrajectory.h"
+#import "GVRKingTrajectory.h"
+#import "GVRBoardPosition.h"
+
 NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerror";
 
 @interface GVRTrajectory ()
 @property (nonatomic, strong)   NSArray     *steps;
+@property (nonatomic, weak)     GVRBoard    *board;
 
 @end
 
@@ -22,17 +27,21 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
 #pragma mark -
 #pragma mark Class Methods
 
-+ (instancetype)trajectoryWithSteps:(NSArray *)steps {
-    return [[self alloc] initWithSteps:steps];
++ (instancetype)manTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board {
+    return [[GVRManTrajectory alloc] initWithSteps:steps board:board];
+}
+
++ (instancetype)kingTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board {
+    return [[GVRKingTrajectory alloc] initWithSteps:steps board:board];
 }
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (instancetype)initWithSteps:(NSArray *)steps {
-    self = [super init];
+- (instancetype)initWithSteps:(NSArray *)steps board:(GVRBoard *)board {
     if (self) {
         self.steps = steps;
+        self.board = board;
     }
     
     return self;
@@ -41,7 +50,7 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
 #pragma mark -
 #pragma mark Public Methods
 
-- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
+- (BOOL)applyForPlayer:(GVRPlayer)player error:(NSError **)error {
     return NO;
 }
 

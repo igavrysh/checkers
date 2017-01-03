@@ -13,9 +13,6 @@
 
 #import "NSArray+GVRExtensions.h"
 
-static const NSUInteger GVRBoardSize = 10;
-static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
-
 @interface GVRBoard ()
 @property (nonatomic, strong)   NSMutableArray  *positions;
 @property (nonatomic, assign)   NSUInteger      size;

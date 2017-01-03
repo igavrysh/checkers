@@ -38,5 +38,4 @@ describe(@"GVRBoard", ^{
     });
 });
 
-
 SPEC_END
