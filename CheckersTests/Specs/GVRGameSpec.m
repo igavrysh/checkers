@@ -13,6 +13,7 @@
 #import "GVRGame.h"
 #import "GVRBoard.h"
 #import "GVRChecker.h"
+#import "GVRBoardPosition.h"
 
 SPEC_BEGIN(GVRGameSpec)
 
@@ -27,9 +28,8 @@ context(@"when board is initialized", ^{
         game = [GVRGame new];
     });
     
-    context(@"Beginning game", ^{
-        it(@"should successfully start game one second", ^{
-            
+    context(@"when starting game", ^{
+        it(@"should successfully start game within one second", ^{
             __block BOOL gameStarted = NO;
             
             [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
@@ -45,16 +45,25 @@ context(@"when board is initialized", ^{
         
     });
     
-    /*
+    
     context(@"when white man moves 1 cell ahead-left", ^{
-        beforeAll(^{
+        it(@"should successfully move checker", ^{
+            __block BOOL checkerMoved = NO;
             
+            GVRBoardCell cell;
+            cell.row = 1;
+            cell.column = 1;
+            
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&cell objCType:@encode(GVRBoardCell)]]
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+            {
+                checkerMoved = success;
+            }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
         });
-        
-        it(@"should return YES", ^{
-            return []
-        });
-    });*/
+    });
     
     it(@"when white man moves 1 cell ahead-left, should return true", ^{});
     

@@ -29,6 +29,10 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
 #pragma mark -
 #pragma mark Class Methods
 
++ (instancetype)trajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board {
+    return [[self alloc] initWithSteps:steps board:board];
+}
+
 + (instancetype)manTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board {
     return [[GVRManTrajectory alloc] __initWithSteps:steps board:board];
 }

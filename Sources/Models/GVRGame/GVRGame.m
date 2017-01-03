@@ -10,6 +10,7 @@
 
 #include "GVRBoard.h"
 #import "GVRBoardPosition.h"
+#import "GVRTrajectory.h"
 
 #import "GVRBlockMacros.h"
 
@@ -58,8 +59,17 @@
                 forPlayer:(GVRPlayer)player
     withCompletionHandler:(void(^)(BOOL success))block
 {
+    GVRTrajectory *trajectory = [GVRTrajectory trajectoryWithSteps:steps board:self.board];
     
+    NSError *error = nil;
     
+    BOOL result = [trajectory applyForPlayer:player error:&error];
+    
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+    
+    GVRBlockPerform(block, result);
 }
 
 @end

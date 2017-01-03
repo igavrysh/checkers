@@ -28,6 +28,8 @@ enum {
 @property (nonatomic, readonly)         NSArray     *steps;
 @property (nonatomic, weak, readonly)   GVRBoard    *board;
 
++ (instancetype)trajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board;
+
 + (instancetype)manTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board;
 
 + (instancetype)kingTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board;
