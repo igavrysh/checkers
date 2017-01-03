@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+    GVRPlayerWhiteCheckers,
+    GVRPlayerBlackCheckers
+} GVRPlayer;
+
 @interface GVRGame : NSObject
 
 - (void)begin:(void(^)(BOOL success))block;
@@ -15,7 +20,7 @@
 - (void)end:(void(^)(BOOL success))block;
 
 - (void)moveChekerBySteps:(NSArray *)steps
-              forPlayerId:(NSString *)playerId
+                forPlayer:(GVRPlayer)player
     withCompletionHandler:(void(^)(BOOL success))block;
 
 @end

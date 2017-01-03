@@ -36,4 +36,9 @@ typedef struct GVRBoardCell GVRBoardCell;
                      column:(NSUInteger)column
                       board:(GVRBoard *)board;
 
+- (BOOL)isEqualToPosition:(GVRBoardPosition *)position;
+
+- (instancetype)positionShiftedByDeltaRows:(NSInteger)deltaRows
+                              deltaColumns:(NSUInteger)deltaColumns;
+
 @end

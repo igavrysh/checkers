@@ -50,4 +50,25 @@
     return self.checker;
 }
 
+#pragma mark -
+#pragma mark Public Methods
+
+- (BOOL)isEqualToPosition:(GVRBoardPosition *)position {
+    return self.row == position.row && self.column == position.column;
+}
+
+- (instancetype)positionShiftedByDeltaRows:(NSInteger)deltaRows
+                              deltaColumns:(NSUInteger)deltaColumns
+{
+    NSInteger row = self.row + deltaRows;
+    NSInteger column = self.column + deltaColumns;
+    NSUInteger size = self.board.size;
+    
+    if (row < 0 || row >= size || column < 0 || column >= size) {
+        return nil;
+    }
+    
+    return [self.board positionForRow:row column:column];
+}
+
 @end

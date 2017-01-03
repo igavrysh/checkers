@@ -20,6 +20,8 @@
 
 - (instancetype)initWithSize:(NSUInteger)size;
 
+- (GVRBoardPosition *)positionForRow:(NSUInteger)row column:(NSUInteger)column;
+
 - (void)addChecker:(GVRChecker *)checker atRow:(NSUInteger)row column:(NSUInteger)column;
 
 - (void)removeCheckerAtRow:(NSUInteger)row column:(NSUInteger)column;

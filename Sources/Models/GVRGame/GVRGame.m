@@ -16,7 +16,7 @@
 @interface GVRGame()
 @property (nonatomic, strong)   GVRBoard        *board;
 @property (nonatomic, strong)   NSArray         *players;
-@property (nonatomic, assign)   NSUInteger      activePlayer;
+@property (nonatomic, assign)   GVRPlayer      activePlayer;
 
 @end
 
@@ -51,7 +51,7 @@
 }
 
 - (void)moveChekerBySteps:(NSArray *)steps
-              forPlayerId:(NSString *)playerId
+                forPlayer:(GVRPlayer)player
     withCompletionHandler:(void(^)(BOOL success))block
 {
     

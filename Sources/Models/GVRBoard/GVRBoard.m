@@ -68,6 +68,15 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
     return self;
 }
 
+- (GVRBoardPosition *)positionForRow:(NSUInteger)row column:(NSUInteger)column {
+    NSUInteger size = self.size;
+    if (row >= size || column >= size) {
+        return  nil;
+    }
+    
+    return self.positions[[self indexForRow:row column:column]];
+}
+
 - (void)addCheckersWithinRowsNumber:(NSUInteger)checkerRows {
     if (!self.positions) {
         return;

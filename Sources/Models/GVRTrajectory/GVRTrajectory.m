@@ -10,6 +10,13 @@
 
 #import "GVRBoard.h"
 
+NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerror";
+
+@interface GVRTrajectory ()
+@property (nonatomic, strong)   NSArray     *steps;
+
+@end
+
 @implementation GVRTrajectory
 
 #pragma mark -
@@ -25,7 +32,7 @@
 - (instancetype)initWithSteps:(NSArray *)steps {
     self = [super init];
     if (self) {
-        
+        self.steps = steps;
     }
     
     return self;
@@ -34,10 +41,7 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (BOOL)applyForBoard:(GVRBoard *)board
-         playerNumber:(NSUInteger)playerNumber
-                error:(NSError **)error
-{
+- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
     return NO;
 }
 
