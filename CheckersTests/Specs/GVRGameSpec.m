@@ -25,14 +25,14 @@ context(@"when board is initialized", ^{
         board = [[GVRBoard alloc] initWithSize:GVRBoardSize];
     });
     
-    context(@"when one white man is added on the boad", ^{
+    context(@"when white man moves 1 cell ahead-left", ^{
         beforeAll(^{
             [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
                         atRow:0
-                       column:0];
+                       column:2];
         });
         
-        it(@"", ^{
+        it(@"should return YES", ^{
             
         });
     });
