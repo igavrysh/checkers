@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class GVRBoard;
+
 typedef enum : NSUInteger {
     GVRPlayerWhiteCheckers,
     GVRPlayerBlackCheckers
@@ -16,6 +18,9 @@ typedef enum : NSUInteger {
 @interface GVRGame : NSObject
 
 - (void)begin:(void(^)(BOOL success))block;
+
+- (void)beginWithBoard:(GVRBoard *)board
+     completionHandler:(void (^)(BOOL))block;
 
 - (void)end:(void(^)(BOOL success))block;
 

@@ -15,8 +15,7 @@
 
 @interface GVRGame()
 @property (nonatomic, strong)   GVRBoard        *board;
-@property (nonatomic, strong)   NSArray         *players;
-@property (nonatomic, assign)   GVRPlayer      activePlayer;
+@property (nonatomic, assign)   GVRPlayer       activePlayer;
 
 @end
 
@@ -38,9 +37,14 @@
 #pragma mark Public Methods
 
 - (void)begin:(void(^)(BOOL success))block {
-    self.board = [GVRBoard board];
-    self.activePlayer = 0;
-    self.players = @[@"id1", @"id2"];
+    [self beginWithBoard:[GVRBoard board] completionHandler:block];
+}
+
+- (void)beginWithBoard:(GVRBoard *)board
+     completionHandler:(void (^)(BOOL))block
+{
+    self.board = board;
+    self.activePlayer = GVRPlayerWhiteCheckers;
     
     GVRBlockPerform(block, TRUE);
 }

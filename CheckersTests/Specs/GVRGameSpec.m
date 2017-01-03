@@ -17,25 +17,44 @@
 SPEC_BEGIN(GVRGameSpec)
 
 __block GVRBoard *board = nil;
+__block GVRGame *game = nil;
 
 registerMatchers(@"GVR");
 
 context(@"when board is initialized", ^{
     beforeEach(^{
         board = [[GVRBoard alloc] initWithSize:GVRBoardSize];
+        game = [GVRGame new];
     });
     
-    context(@"when white man moves 1 cell ahead-left", ^{
-        beforeAll(^{
+    context(@"Beginning game", ^{
+        it(@"should successfully start game one second", ^{
+            
+            __block BOOL gameStarted = NO;
+            
             [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
                         atRow:0
                        column:2];
+            
+            [game beginWithBoard:board completionHandler:^(BOOL success) {
+                gameStarted = YES;
+            }];
+            
+            [[expectFutureValue(theValue(gameStarted)) shouldEventually] beYes];
+        });
+        
+    });
+    
+    /*
+    context(@"when white man moves 1 cell ahead-left", ^{
+        beforeAll(^{
+            
         });
         
         it(@"should return YES", ^{
-            
+            return []
         });
-    });
+    });*/
     
     it(@"when white man moves 1 cell ahead-left, should return true", ^{});
     
