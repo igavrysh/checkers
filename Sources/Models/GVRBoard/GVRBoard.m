@@ -11,6 +11,8 @@
 #import "GVRBoardPosition.h"
 #import "GVRChecker.h"
 
+#import "NSArray+GVRExtensions.h"
+
 static const NSUInteger GVRBoardSize = 10;
 static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 
@@ -20,9 +22,9 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 @property (nonatomic, assign)   NSUInteger      whiteCheckersCount;
 @property (nonatomic, assign)   NSUInteger      blackCheckersCount;
 
-- (void)initBoardWithSize:(NSUInteger)size rowsFilledWithCheckers:(NSUInteger)checkerRows;
-
 - (void)setChecker:(GVRChecker *)checker atRow:(NSUInteger)row column:(NSUInteger)column;
+
+- (void)addCheckersWithinRowsNumber:(NSUInteger)checkerRows;
 
 @end
 
@@ -39,28 +41,48 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 #pragma mark Initializations and Deallocations
 
 - (instancetype)init {
-    if (self = [super init]) {
-        [self initBoardWithSize:GVRBoardSize rowsFilledWithCheckers:GVRInitialCheckersFilledRowsCount];
+    if (self = [self initWithSize:GVRBoardSize]) {
+        [self addCheckersWithinRowsNumber:GVRInitialCheckersFilledRowsCount];
     }
 
     return self;
 }
 
-- (void)initBoardWithSize:(NSUInteger)size rowsFilledWithCheckers:(NSUInteger)checkerRows {
+- (instancetype)initWithSize:(NSUInteger)size {
+    if (!(self = [super init])) {
+        return nil;
+    }
+    
     self.size = size;
     
     self.positions = [[NSMutableArray alloc] initWithCapacity:size*size];
     
-    GVRChecker *whiteChecker = [GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite];
-    GVRChecker *blackChecker = [GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack];
-    NSUInteger rows = checkerRows / 2;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             GVRBoardPosition *position = [[GVRBoardPosition alloc] initWithRow:i column:j board:self];
             NSUInteger index = [self indexForRow:i column:j];
             self.positions[index] = position;
-            
+        }
+    }
+    
+    return self;
+}
+
+- (void)addCheckersWithinRowsNumber:(NSUInteger)checkerRows {
+    if (!self.positions) {
+        return;
+    }
+    
+    GVRChecker *whiteChecker = [GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite];
+    GVRChecker *blackChecker = [GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack];
+    NSUInteger rows = checkerRows / 2;
+    NSUInteger size = self.size;
+    
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             GVRChecker *checker = nil;
+            
+            GVRBoardPosition *position = self[[self indexForRow:i column:j]];
             
             if (GVRBoardPositionColorBlack == position.color) {
                 if (i < rows) {
@@ -75,6 +97,25 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
             }
         }
     }
+}
+
+- (void)addCheckers:(NSArray *)checkers atCells:(NSArray *)cells {
+    if (checkers.count != cells.count) {
+        return;
+    }
+    
+    [checkers performBlockWithEachObject:^(GVRChecker *checker, NSValue *cellValue) {
+        GVRBoardCell cell;;
+        [cellValue getValue:&cell];
+        
+        [self addChecker:checker atCell:cell];
+    } pairwiseWithArray:cells];
+    
+    //[NSValue valueWithBytes:&p objCType:@encode(Megapoint)];
+}
+
+- (void)addChecker:(GVRChecker *)checker atCell:(GVRBoardCell)cell {
+    
 }
 
 #pragma mark -

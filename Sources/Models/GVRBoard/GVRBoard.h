@@ -18,6 +18,8 @@
 
 + (instancetype)board;
 
+- (instancetype)initWithSize:(NSUInteger)size;
+
 - (void)addChecker:(GVRChecker *)checker atRow:(NSUInteger)row column:(NSUInteger)column;
 
 - (void)removeCheckerAtRow:(NSUInteger)row column:(NSUInteger)column;
