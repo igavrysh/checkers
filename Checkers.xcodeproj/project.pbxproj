@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0B30D883B0E8AC2615AD1412 /* libPods-CheckersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F0A1BC67157B0A29F86F09 /* libPods-CheckersTests.a */; };
+		855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96481E1BA49200FC6F1F /* GVRTrajectory.m */; };
+		855F964A1E1BA49200FC6F1F /* GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96481E1BA49200FC6F1F /* GVRTrajectory.m */; };
+		855F964E1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */; };
+		855F964F1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */; };
+		855F96521E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */; };
+		855F96531E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */; };
 		8567AC7B1E1A60700036A95F /* GVRGameSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 8567AC7A1E1A60700036A95F /* GVRGameSpec.m */; };
 		858F5B9C1E17CCE100DB6D13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5B9B1E17CCE100DB6D13 /* main.m */; };
 		858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5B9E1E17CCE100DB6D13 /* AppDelegate.m */; };
@@ -46,6 +52,12 @@
 		35F0A1BC67157B0A29F86F09 /* libPods-CheckersTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CheckersTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A09053FF374A36068D554CD /* libPods-Checkers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Checkers.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E2266F6134EA6CB511DB17 /* Pods-Checkers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Checkers.release.xcconfig"; path = "Pods/Target Support Files/Pods-Checkers/Pods-Checkers.release.xcconfig"; sourceTree = "<group>"; };
+		855F96471E1BA49200FC6F1F /* GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRTrajectory.h; sourceTree = "<group>"; };
+		855F96481E1BA49200FC6F1F /* GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRTrajectory.m; sourceTree = "<group>"; };
+		855F964C1E1BAB2C00FC6F1F /* GVRManTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRManTrajectory.h; sourceTree = "<group>"; };
+		855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRManTrajectory.m; sourceTree = "<group>"; };
+		855F96501E1BAB3F00FC6F1F /* GVRKingTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRKingTrajectory.h; sourceTree = "<group>"; };
+		855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRKingTrajectory.m; sourceTree = "<group>"; };
 		8567AC7A1E1A60700036A95F /* GVRGameSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRGameSpec.m; sourceTree = "<group>"; };
 		8567AC7E1E1A61AD0036A95F /* GVRBlockMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBlockMacros.h; sourceTree = "<group>"; };
 		8567AC831E1A62060036A95F /* GVRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRMacros.h; sourceTree = "<group>"; };
@@ -115,6 +127,27 @@
 				35F0A1BC67157B0A29F86F09 /* libPods-CheckersTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		855F96461E1BA46000FC6F1F /* GVRTrajectory */ = {
+			isa = PBXGroup;
+			children = (
+				855F964B1E1BA7F400FC6F1F /* Private */,
+				855F96471E1BA49200FC6F1F /* GVRTrajectory.h */,
+				855F96481E1BA49200FC6F1F /* GVRTrajectory.m */,
+			);
+			path = GVRTrajectory;
+			sourceTree = "<group>";
+		};
+		855F964B1E1BA7F400FC6F1F /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				855F964C1E1BAB2C00FC6F1F /* GVRManTrajectory.h */,
+				855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */,
+				855F96501E1BAB3F00FC6F1F /* GVRKingTrajectory.h */,
+				855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 		8567AC7C1E1A61AD0036A95F /* Utilites */ = {
@@ -229,6 +262,7 @@
 				859CD1391E195AF9004BE15C /* GVRBoard */,
 				859CD13C1E195AF9004BE15C /* GVRBoardPosition */,
 				859CD13F1E195AF9004BE15C /* GVRChecker */,
+				855F96461E1BA46000FC6F1F /* GVRTrajectory */,
 				859CD1421E195AF9004BE15C /* GVRGame */,
 			);
 			path = Models;
@@ -517,10 +551,13 @@
 				859CD1471E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
 				859CD14B1E195AF9004BE15C /* GVRGame.m in Sources */,
 				85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */,
+				855F96521E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */,
 				859CD1451E195AF9004BE15C /* GVRBoard.m in Sources */,
 				858F5BA21E17CCE100DB6D13 /* ViewController.m in Sources */,
 				859CD1491E195AF9004BE15C /* GVRChecker.m in Sources */,
 				858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */,
+				855F964E1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
+				855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
 				858F5B9C1E17CCE100DB6D13 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,10 +569,13 @@
 				8567AC7B1E1A60700036A95F /* GVRGameSpec.m in Sources */,
 				859CD14C1E195AF9004BE15C /* GVRGame.m in Sources */,
 				85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */,
+				855F96531E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */,
 				859CD14E1E195C17004BE15C /* GVRBoardSpec.m in Sources */,
 				859CD1461E195AF9004BE15C /* GVRBoard.m in Sources */,
 				859CD1311E195967004BE15C /* CheckersTests.m in Sources */,
 				859CD1481E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
+				855F964F1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
+				855F964A1E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
 				859CD14A1E195AF9004BE15C /* GVRChecker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

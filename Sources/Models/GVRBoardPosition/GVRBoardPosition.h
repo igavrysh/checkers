@@ -19,7 +19,7 @@ typedef enum : NSUInteger {
 
 struct GVRBoardCell {
     NSUInteger row;
-    NSUInteger cell;
+    NSUInteger column;
 };
 
 typedef struct GVRBoardCell GVRBoardCell;

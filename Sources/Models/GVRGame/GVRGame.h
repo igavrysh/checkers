@@ -14,5 +14,8 @@
 
 - (void)end:(void(^)(BOOL success))block;
 
+- (void)moveChekerBySteps:(NSArray *)steps
+              forPlayerId:(NSString *)playerId
+    withCompletionHandler:(void(^)(BOOL success))block;
 
 @end

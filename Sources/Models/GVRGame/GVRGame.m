@@ -50,9 +50,9 @@
     GVRBlockPerform(block, TRUE);
 }
 
-- (void)moveChekerByTrajectory:(NSArray *)trajectory
-               forPlayerWithId:(NSString *)playerId
-         withCompletionHandler:(void(^)(BOOL success))block
+- (void)moveChekerBySteps:(NSArray *)steps
+              forPlayerId:(NSString *)playerId
+    withCompletionHandler:(void(^)(BOOL success))block
 {
     
 }

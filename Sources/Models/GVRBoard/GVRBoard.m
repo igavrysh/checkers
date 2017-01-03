@@ -99,25 +99,6 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
     }
 }
 
-- (void)addCheckers:(NSArray *)checkers atCells:(NSArray *)cells {
-    if (checkers.count != cells.count) {
-        return;
-    }
-    
-    [checkers performBlockWithEachObject:^(GVRChecker *checker, NSValue *cellValue) {
-        GVRBoardCell cell;;
-        [cellValue getValue:&cell];
-        
-        [self addChecker:checker atCell:cell];
-    } pairwiseWithArray:cells];
-    
-    //[NSValue valueWithBytes:&p objCType:@encode(Megapoint)];
-}
-
-- (void)addChecker:(GVRChecker *)checker atCell:(GVRBoardCell)cell {
-    
-}
-
 #pragma mark -
 #pragma mark Public Methods
 
@@ -127,7 +108,6 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 
 - (BOOL)isCheckerPresentAtRow:(NSUInteger)row column:(NSUInteger)column {
     return self[[self indexForRow:row column:column]].isFilled;
-    
 }
 
 - (GVRBoardPosition *)objectAtIndexedSubscript:(NSUInteger)index {
