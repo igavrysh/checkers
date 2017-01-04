@@ -28,8 +28,9 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (BOOL)applyForPlayer:(GVRPlayer)player error:(NSError **)error {
-    return [self applyForStepIndex:1
+- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
+    return [self applyForBoard:board
+                     stepIndex:1
                             player:player
                              error:error];
 }
@@ -37,15 +38,14 @@
 #pragma mark -
 #pragma mark Private Methods
 
-- (BOOL)applyForStepIndex:(NSUInteger)stepIndex
-                   player:(GVRPlayer)player
-                    error:(NSError **)error
+- (BOOL)applyForBoard:(GVRBoard *)board
+            stepIndex:(NSUInteger)stepIndex
+               player:(GVRPlayer)player
+                error:(NSError **)error
 {
     GVRBoardCell initialCell;
     GVRBoardCell cell;
     GVRBoardCell previousCell;
-    
-    GVRBoard *board = self.board;
     
     [self.steps[0] getValue:&initialCell];
     [self.steps[stepIndex] getValue:&cell];

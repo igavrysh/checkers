@@ -23,7 +23,7 @@ __block GVRGame *game = nil;
 registerMatchers(@"GVR");
 
 context(@"when board is initialized", ^{
-    beforeEach(^{
+    beforeAll(^{
         board = [[GVRBoard alloc] initWithSize:GVRBoardSize];
         game = [GVRGame new];
     });
@@ -34,7 +34,7 @@ context(@"when board is initialized", ^{
             
             [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
                         atRow:0
-                       column:2];
+                       column:0];
             
             [game beginWithBoard:board completionHandler:^(BOOL success) {
                 gameStarted = YES;
@@ -42,19 +42,20 @@ context(@"when board is initialized", ^{
             
             [[expectFutureValue(theValue(gameStarted)) shouldEventually] beYes];
         });
-        
     });
-    
     
     context(@"when white man moves 1 cell ahead-left", ^{
         it(@"should successfully move checker", ^{
             __block BOOL checkerMoved = NO;
             
-            GVRBoardCell cell;
-            cell.row = 1;
-            cell.column = 1;
+            GVRBoardCell cell1, cell2;
+            cell1.row = 0;
+            cell1.column = 0;
+            cell2.row = 1;
+            cell2.column = 1;
             
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&cell objCType:@encode(GVRBoardCell)]]
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&cell1 objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&cell2 objCType:@encode(GVRBoardCell)]]
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
             {

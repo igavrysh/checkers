@@ -11,6 +11,7 @@
 #import "Kiwi.h"
 
 #import "GVRBoard.h"
+#import "GVRBoardPosition.h"
 
 SPEC_BEGIN(GVRBoardSpec)
 
@@ -34,6 +35,22 @@ describe(@"GVRBoard", ^{
         
         it(@"should have black checkers count of 3 * 5 = 15", ^{
             [[theValue(board.blackCheckersCount) should] equal:theValue(15)];
+        });
+        
+        it(@"should have black board position on {0; 0}", ^{
+            [[theValue([[board positionForRow:0 column:0] color]) should] equal:theValue(GVRBoardPositionColorBlack)];
+        });
+        
+        it(@"should have black board position on {0; 1}", ^{
+            [[theValue([[board positionForRow:0 column:1] color]) should] equal:theValue(GVRBoardPositionColorWhite)];
+        });
+        
+        it(@"should have black board position on {1; 1}", ^{
+            [[theValue([[board positionForRow:1 column:1] color]) should] equal:theValue(GVRBoardPositionColorBlack)];
+        });
+        
+        it(@"should have black board position on {1; 0}", ^{
+            [[theValue([[board positionForRow:1 column:0] color]) should] equal:theValue(GVRBoardPositionColorWhite)];
         });
     });
 });

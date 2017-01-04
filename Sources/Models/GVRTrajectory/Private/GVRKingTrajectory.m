@@ -13,7 +13,7 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (BOOL)applyForPlayer:(GVRPlayer)player error:(NSError **)error {
+- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
     return NO;
 }
 

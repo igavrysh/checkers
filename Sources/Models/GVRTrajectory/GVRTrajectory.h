@@ -26,16 +26,15 @@ enum {
 
 @interface GVRTrajectory : NSObject
 @property (nonatomic, readonly)         NSArray     *steps;
-@property (nonatomic, weak, readonly)   GVRBoard    *board;
 
 + (instancetype)trajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board;
 
-+ (instancetype)manTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board;
++ (instancetype)manTrajectoryWithSteps:(NSArray *)steps;
 
-+ (instancetype)kingTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board;
++ (instancetype)kingTrajectoryWithSteps:(NSArray *)steps;
 
 - (instancetype)initWithSteps:(NSArray *)steps board:(GVRBoard *)board;
 
-- (BOOL)applyForPlayer:(GVRPlayer)player error:(NSError **)error;
+- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error;
 
 @end

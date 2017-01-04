@@ -18,9 +18,8 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
 
 @interface GVRTrajectory ()
 @property (nonatomic, strong)   NSArray     *steps;
-@property (nonatomic, weak)     GVRBoard    *board;
 
-- (instancetype)__initWithSteps:(NSArray *)steps board:(GVRBoard *)board;
+- (instancetype)initWithSteps:(NSArray *)steps;
 
 @end
 
@@ -33,12 +32,12 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
     return [[self alloc] initWithSteps:steps board:board];
 }
 
-+ (instancetype)manTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board {
-    return [[GVRManTrajectory alloc] __initWithSteps:steps board:board];
++ (instancetype)manTrajectoryWithSteps:(NSArray *)steps {
+    return [[GVRManTrajectory alloc] initWithSteps:steps];
 }
 
-+ (instancetype)kingTrajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board {
-    return [[GVRKingTrajectory alloc] __initWithSteps:steps board:board];
++ (instancetype)kingTrajectoryWithSteps:(NSArray *)steps {
+    return [[GVRKingTrajectory alloc] initWithSteps:steps];
 }
 
 #pragma mark -
@@ -47,7 +46,7 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
 - (instancetype)initWithSteps:(NSArray *)steps board:(GVRBoard *)board {
     self = nil;
     
-    if (self.steps.count == 0) {
+    if (steps.count == 0) {
         return nil;
     }
     
@@ -55,18 +54,17 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
     [self.steps[0] getValue:&cell];
     GVRBoardPosition *position = [board positionForRow:cell.row column:cell.column];
     if (GVRCheckerTypeMan == position.checker.type) {
-        self = [[self class] manTrajectoryWithSteps:steps board:board];
+        self = [GVRTrajectory manTrajectoryWithSteps:steps];
     } else if (GVRCheckerTypeKing == position.checker.type) {
-        self = [[self class] kingTrajectoryWithSteps:steps board:board];
+        self = [GVRTrajectory kingTrajectoryWithSteps:steps];
     }
     
     return self;
 }
 
-- (instancetype)__initWithSteps:(NSArray *)steps board:(GVRBoard *)board {
+- (instancetype)initWithSteps:(NSArray *)steps {
     if (self) {
         self.steps = steps;
-        self.board = board;
     }
     
     return self;
@@ -75,7 +73,7 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
 #pragma mark -
 #pragma mark Public Methods
 
-- (BOOL)applyForPlayer:(GVRPlayer)player error:(NSError **)error {
+- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
     return NO;
 }
 

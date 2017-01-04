@@ -63,7 +63,7 @@
     
     NSError *error = nil;
     
-    BOOL result = [trajectory applyForPlayer:player error:&error];
+    BOOL result = [trajectory applyForBoard:self.board player:player error:&error];
     
     if (error) {
         NSLog(@"Error: %@", error);
