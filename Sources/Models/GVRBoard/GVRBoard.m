@@ -159,6 +159,9 @@
 }
 
 - (void)moveCheckerFrom:(GVRBoardPosition *)fromPostion to:(GVRBoardPosition *)toPosition {
+    [self addChecker:fromPostion.checker atRow:toPosition.row column:toPosition.column];
+    
+    [self removeCheckerAtRow:fromPostion.row column:fromPostion.column];
 }
 
 #pragma mark -

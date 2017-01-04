@@ -60,6 +60,10 @@ context(@"when board is initialized", ^{
               withCompletionHandler:^(BOOL success)
             {
                 checkerMoved = success;
+                
+                [[theValue([board positionForRow:0 column:0].isFilled) should] beNo];
+                
+                [[theValue([board positionForRow:1 column:1].isFilled) should] beYes];
             }];
             
             [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
