@@ -115,7 +115,7 @@
     return self.size * row + column;
 }
 
-- (NSUInteger)indexForBoardCell:(GVRBoardCell)cell {
+- (NSUInteger)indexForCell:(GVRBoardCell)cell {
     return [self indexForRow:cell.row column:cell.column];
 }
 
@@ -153,7 +153,7 @@
     }
 }
 
-- (void)addChecker:(GVRChecker *)checker atBoardCell:(GVRBoardCell)cell {
+- (void)addChecker:(GVRChecker *)checker atCell:(GVRBoardCell)cell {
     [self addChecker:checker atRow:cell.row column:cell.column];
 }
 
@@ -173,7 +173,7 @@
     [self setChecker:nil atRow:row column:column];
 }
 
-- (void)removeCheckerAtBoardCell:(GVRBoardCell)cell {
+- (void)removeCheckerAtCell:(GVRBoardCell)cell {
     [self removeCheckerAtRow:cell.row column:cell.column];
 }
 

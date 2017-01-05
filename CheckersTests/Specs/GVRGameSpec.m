@@ -50,31 +50,30 @@ context(@"when board is initialized", ^{
     
     context(@"when white man moves 1 cell ahead-right", ^{
         it(@"should successfully move checker", ^{
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                        atRow:0
-                       column:0];
+            GVRBoardCell initialCell, finalCell;
+            initialCell.row = 0;
+            initialCell.column = 0;
+            finalCell.row = 1;
+            finalCell.column = 1;
             
             __block BOOL checkerMoved = NO;
             
-            GVRBoardCell cell1, cell2;
-            cell1.row = 0;
-            cell1.column = 0;
-            cell2.row = 1;
-            cell2.column = 1;
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
+                       atCell:initialCell];
             
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&cell1 objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&cell2 objCType:@encode(GVRBoardCell)]]
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
             {
                 checkerMoved = success;
                 
-                [[theValue([board positionForRow:0 column:0].isFilled) should] beNo];
+                [[theValue([[board positionForCell:initialCell] isFilled]) should] beNo];
                 
-                [[theValue([board positionForRow:1 column:1].isFilled) should] beYes];
+                [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
                 
-                [board removeCheckerAtRow:cell1.row column:cell1.column];
-                [board removeCheckerAtRow:cell2.row column:cell2.column];
+                [board removeCheckerAtCell:initialCell];
+                [board removeCheckerAtCell:finalCell];
             }];
             
             [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
@@ -83,24 +82,30 @@ context(@"when board is initialized", ^{
     
     context(@"when white man moves 1 cell ahead-left", ^{
         it(@"should successfully move checker", ^{
+            GVRBoardCell initialCell, finalCell;
+            initialCell.row = 0;
+            initialCell.column = 4;
+            finalCell.row = 1;
+            finalCell.column = 3;
+            
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
+                       atCell:initialCell];
+            
             __block BOOL checkerMoved = NO;
             
-            GVRBoardCell cell1, cell2;
-            cell1.row = 0;
-            cell1.column = 4;
-            cell2.row = 1;
-            cell2.column = 3;
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&cell1 objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&cell2 objCType:@encode(GVRBoardCell)]]
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
                  checkerMoved = success;
                  
-                 [[theValue([board positionForRow:0 column:4].isFilled) should] beNo];
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beNo];
                  
-                 [[theValue([board positionForRow:1 column:3].isFilled) should] beYes];
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:finalCell];
              }];
             
             [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
@@ -109,24 +114,24 @@ context(@"when board is initialized", ^{
     
     context(@"when white man moves 1 cell backwards to the left", ^{
         it(@"should return false and checker should stay on initial position", ^{
+            GVRBoardCell initialCell, finalCell;
+            initialCell.row = 4;
+            initialCell.column = 4;
+            finalCell.row = 3;
+            finalCell.column = 3;
+            
             __block BOOL checkerMoved = YES;
             
-            GVRBoardCell cell1, cell2;
-            cell1.row = 4;
-            cell1.column = 4;
-            cell2.row = 3;
-            cell2.column = 3;
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&cell1 objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&cell2 objCType:@encode(GVRBoardCell)]]
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
                  checkerMoved = success;
                  
-                 [[theValue([board positionForRow:4 column:4].isFilled) should] beYes];
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beYes];
                  
-                 [[theValue([board positionForRow:3 column:3].isFilled) should] beNo];
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beNo];
              }];
             
             [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beNo];

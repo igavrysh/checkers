@@ -30,10 +30,10 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 - (GVRBoardPosition *)positionForCell:(GVRBoardCell)cell;
 
 - (void)addChecker:(GVRChecker *)checker atRow:(NSUInteger)row column:(NSUInteger)column;
-- (void)addChecker:(GVRChecker *)checker atBoardCell:(GVRBoardCell)cell;
+- (void)addChecker:(GVRChecker *)checker atCell:(GVRBoardCell)cell;
 
 - (void)removeCheckerAtRow:(NSUInteger)row column:(NSUInteger)column;
-- (void)removeCheckerAtBoardCell:(GVRBoardCell)cell;
+- (void)removeCheckerAtCell:(GVRBoardCell)cell;
 
 - (void)moveCheckerFromCell:(GVRBoardCell)fromCell toCell:(GVRBoardCell)toCell;
 - (void)moveCheckerFromRow:(NSUInteger)fromRow
@@ -44,7 +44,7 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
                      to:(GVRBoardPosition *)toPosition;
 
 - (NSUInteger)indexForRow:(NSUInteger)row column:(NSUInteger)column;
-- (NSUInteger)indexForBoardCell:(GVRBoardCell)cell;
+- (NSUInteger)indexForCell:(GVRBoardCell)cell;
 
 - (BOOL)isCheckerPresentAtRow:(NSUInteger)row column:(NSUInteger)column;
 - (BOOL)isCheckerPresentAtCell:(GVRBoardCell)cell;
