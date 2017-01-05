@@ -72,7 +72,14 @@
         return NO;
     }
     
-    if (GVRCheckerTypeKing ==  initialPosition.checker.type) {
+    if (!initialPosition.isFilled) {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryNoActiveCheckerInStepsSequence];
+        
+        return NO;
+    }
+    
+    if (GVRCheckerTypeKing == initialPosition.checker.type) {
         *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                      code:GVRTrajectoryTypeInconsistencyManAndKing];
         
@@ -80,7 +87,7 @@
     }
     
     NSUInteger size = board.size;
-    if (cell.row >= size || cell.column > size) {
+    if (cell.row >= size || cell.column >= size) {
         *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                      code:GVRTrajectoryStepOutOfBoard];
         
@@ -112,14 +119,12 @@
             && ((GVRPlayerWhiteCheckers == player && 1 == deltaRow)
                 || (GVRPlayerBlackCheckers == player && -1 == deltaRow)))
         {
-            
             if ([self isRequiredTrajectoriesAvailalbleOnBoard:board
                                                   fromPostion:initialPosition
                                                exceptPosition:nil])
             {
                 *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                              code:GVRTrajectoryMissRequiredJump];
-                
                 return NO;
             }
             
@@ -137,7 +142,6 @@
         if (!victimPosition.isFilled) {
             *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                          code:GVRTrajectoryLongJump];
-            
             return NO;
         }
         
@@ -146,7 +150,6 @@
         {
             *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                          code:GVRTrajectoryJumpOverFriendlyChecker];
-        
             return NO;
         }
         
@@ -187,6 +190,7 @@
         GVRBoardPosition *nextPosition = [board positionForRow:2 * deltaRow column:2 * deltaColumn];
         
         if (victimPosition
+            && victimPosition.isFilled
             && victimPosition.checker.color != position.checker.color
             && !nextPosition.isFilled
             && position != exceptPosition) {

@@ -169,15 +169,134 @@ context(@"when board is initialized", ^{
         });
     });
     
+    context(@"when black man moves 1 cell ahead-right", ^{
+        it(@"should successfully move checker", ^{
+            GVRBoardCell initialCell, finalCell;
+            initialCell.row = 9;
+            initialCell.column = 1;
+            finalCell.row = 8;
+            finalCell.column = 0;
+            
+            __block BOOL checkerMoved = NO;
+            
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
+                       atCell:initialCell];
+            
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+                          forPlayer:GVRPlayerBlackCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
+        });
+    });
+    
+    context(@"when black man moves 1 cell ahead-left", ^{
+        it(@"should successfully move checker", ^{
+            GVRBoardCell initialCell, finalCell;
+            initialCell.row = 9;
+            initialCell.column = 1;
+            finalCell.row = 8;
+            finalCell.column = 2;
+            
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
+                       atCell:initialCell];
+            
+            __block BOOL checkerMoved = NO;
+            
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+                          forPlayer:GVRPlayerBlackCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
+        });
+    });
+    
+    context(@"when black man moves 1 cell backwards to the left", ^{
+        it(@"should return false and checker should stay on initial position", ^{
+            GVRBoardCell initialCell, finalCell;
+            initialCell.row = 8;
+            initialCell.column = 2;
+            finalCell.row = 9;
+            finalCell.column = 1;
+            
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
+                       atCell:initialCell];
+            
+            __block BOOL checkerMoved = YES;
+            
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+                          forPlayer:GVRPlayerBlackCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beNo];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beNo];
+        });
+    });
     
     
-    it(@"when black man moves 1 cell ahead-left, should return true", ^{});
-    
-    it(@"when black man moves 1 cell ahead-right, should return true", ^{});
-    
-    it(@"when black man moves 1 cell backwards to the right, should return false", ^{});
-    
-    it(@"when black man moves 1 cell backwards to the left, should return false", ^{});
+    context(@"when black man moves 1 cell backwards to the right", ^{
+        it(@"should return false and checker should stay on initial position", ^{
+            GVRBoardCell initialCell, finalCell;
+            initialCell.row = 8;
+            initialCell.column = 0;
+            finalCell.row = 9;
+            finalCell.column = 1;
+            
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
+                       atCell:initialCell];
+            
+            __block BOOL checkerMoved = YES;
+            
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+                          forPlayer:GVRPlayerBlackCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beNo];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beNo];
+        });
+    });
     
     it(@"when black player moves white man should call block with false", ^{});
     
@@ -222,9 +341,6 @@ context(@"when board is initialized", ^{
     it(@"when only 1 white and 1 black king is left on the board, the game should end, draw", ^{});
     
     it(@"when only 1 white/black and 2 black/white kings are left on the board, the game should end - draw", ^{});
-    
-    
-    
 });
 
 
