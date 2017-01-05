@@ -8,7 +8,6 @@
 
 #import "GVRBoard.h"
 
-#import "GVRBoardPosition.h"
 #import "GVRChecker.h"
 
 #import "NSArray+GVRExtensions.h"
@@ -74,6 +73,10 @@
     return self.positions[[self indexForRow:row column:column]];
 }
 
+- (GVRBoardPosition *)positionForCell:(GVRBoardCell)cell {
+    return [self positionForRow:cell.row column:cell.column];
+}
+
 - (void)addCheckersWithinRowsNumber:(NSUInteger)checkerRows {
     if (!self.positions) {
         return;
@@ -112,8 +115,16 @@
     return self.size * row + column;
 }
 
+- (NSUInteger)indexForBoardCell:(GVRBoardCell)cell {
+    return [self indexForRow:cell.row column:cell.column];
+}
+
 - (BOOL)isCheckerPresentAtRow:(NSUInteger)row column:(NSUInteger)column {
     return self[[self indexForRow:row column:column]].isFilled;
+}
+
+- (BOOL)isCheckerPresentAtCell:(GVRBoardCell)cell {
+    return [self isCheckerPresentAtRow:cell.row column:cell.column];
 }
 
 - (GVRBoardPosition *)objectAtIndexedSubscript:(NSUInteger)index {
@@ -142,6 +153,10 @@
     }
 }
 
+- (void)addChecker:(GVRChecker *)checker atBoardCell:(GVRBoardCell)cell {
+    [self addChecker:checker atRow:cell.row column:cell.column];
+}
+
 - (void)removeCheckerAtRow:(NSUInteger)row column:(NSUInteger)column {
     if (![self isCheckerPresentAtRow:row column:column]) {
         return;
@@ -158,10 +173,34 @@
     [self setChecker:nil atRow:row column:column];
 }
 
+- (void)removeCheckerAtBoardCell:(GVRBoardCell)cell {
+    [self removeCheckerAtRow:cell.row column:cell.column];
+}
+
 - (void)moveCheckerFrom:(GVRBoardPosition *)fromPostion to:(GVRBoardPosition *)toPosition {
-    [self addChecker:fromPostion.checker atRow:toPosition.row column:toPosition.column];
+    [self moveCheckerFromRow:fromPostion.row
+                      column:fromPostion.column
+                       toRow:toPosition.row
+                      column:toPosition.column];
+}
+
+- (void)moveCheckerFromCell:(GVRBoardCell)fromCell toCell:(GVRBoardCell)toCell {
+    [self moveCheckerFromRow:fromCell.row
+                      column:fromCell.column
+                       toRow:toCell.row
+                      column:toCell.column];
+}
+
+- (void)moveCheckerFromRow:(NSUInteger)fromRow
+                    column:(NSUInteger)fromColumn
+                     toRow:(NSUInteger)toRow
+                    column:(NSUInteger)toColumn
+{
+    GVRChecker *checker = [self positionForRow:fromRow column:fromColumn].checker;
     
-    [self removeCheckerAtRow:fromPostion.row column:fromPostion.column];
+    [self addChecker:checker atRow:toRow column:toColumn];
+    
+    [self removeCheckerAtRow:fromRow column:fromColumn];
 }
 
 #pragma mark -

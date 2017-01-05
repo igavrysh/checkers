@@ -11,15 +11,18 @@
 #import "GVRBoard.h"
 #import "GVRBoardPosition.h"
 
+#import "NSError+GVRExtensions.h"
+
 @interface GVRManTrajectory ()
 
 - (BOOL)isRequiredTrajectoriesAvailalbleOnBoard:(GVRBoard *)board
                                     fromPostion:(GVRBoardPosition *)position
                                  exceptPosition:(GVRBoardPosition *)exceptPosition;
 
-- (BOOL)applyForStepIndex:(NSUInteger)stepIndex
-                   player:(GVRPlayer)player
-                    error:(NSError **)error;
+- (BOOL)applyForBoard:(GVRBoard *)board
+            stepIndex:(NSUInteger)stepIndex
+               player:(GVRPlayer)player
+                error:(NSError **)error;
 
 @end
 
@@ -31,8 +34,8 @@
 - (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
     return [self applyForBoard:board
                      stepIndex:1
-                            player:player
-                             error:error];
+                        player:player
+                        error:error];
 }
 
 #pragma mark -
@@ -51,30 +54,35 @@
     [self.steps[stepIndex] getValue:&cell];
     [self.steps[stepIndex - 1] getValue:&previousCell];
     
-    GVRBoardPosition *initialPosition = [board positionForRow:initialCell.row column:initialCell.column];
+    GVRBoardPosition *initialPosition = [board positionForRow:initialCell.row
+                                                       column:initialCell.column];
     GVRBoardPosition *position = [board positionForRow:cell.row column:cell.column];
     
     if (GVRBoardPositionColorWhite == position.color) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryStepOnWhiteCell userInfo:nil];
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryStepOnWhiteCell];
         
         return NO;
     }
     
     if (position.isFilled) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryStepOnFilledCell userInfo:nil];
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryStepOnFilledCell];
         
         return NO;
     }
     
     if (GVRCheckerTypeKing ==  initialPosition.checker.type) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryTypeInconsistencyManAndKing userInfo:nil];
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryTypeInconsistencyManAndKing];
         
         return NO;
     }
     
     NSUInteger size = board.size;
     if (cell.row >= size || cell.column > size) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryStepOutOfBoard userInfo:nil];
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryStepOutOfBoard];
         
         return NO;
     }
@@ -83,7 +91,8 @@
     NSInteger deltaColumn = cell.column - previousCell.column;
     
     if (labs(deltaRow) > 2 || labs(deltaColumn) > 2) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryLongJump userInfo:nil];
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryLongJump];
         
         return NO;
     }
@@ -93,7 +102,8 @@
         if ((GVRPlayerWhiteCheckers == player && deltaRow < 0)
             || (GVRPlayerBlackCheckers == player && deltaRow > 0))
         {
-            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryBackwardsMove userInfo:nil];
+            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                         code:GVRTrajectoryBackwardsMove];
             
             return NO;
         }
@@ -107,7 +117,8 @@
                                                   fromPostion:initialPosition
                                                exceptPosition:nil])
             {
-                *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryMissRequiredJump userInfo:nil];
+                *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                             code:GVRTrajectoryMissRequiredJump];
                 
                 return NO;
             }
@@ -124,7 +135,8 @@
         
         GVRBoardPosition *victimPosition = [board positionForRow:victimRow column:victimColumn];
         if (!victimPosition.isFilled) {
-            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryLongJump userInfo:nil];
+            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                         code:GVRTrajectoryLongJump];
             
             return NO;
         }
@@ -132,7 +144,8 @@
         if ((GVRBoardPositionColorWhite == victimPosition.color && GVRPlayerWhiteCheckers == player)
             || (GVRBoardPositionColorBlack == victimPosition.color && GVRPlayerBlackCheckers == player))
         {
-            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain code:GVRTrajectoryJumpOverFriendlyChecker userInfo:nil];
+            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                         code:GVRTrajectoryJumpOverFriendlyChecker];
         
             return NO;
         }
@@ -147,9 +160,10 @@
                                                             fromPostion:position
                                                          exceptPosition:nil];
             } else {
-                result = [self applyForStepIndex:stepIndex + 1
-                                          player:player
-                                           error:error];
+                result = [self applyForBoard:board
+                                   stepIndex:stepIndex + 1
+                                      player:player
+                                       error:error];
             }
             
             if (result) {

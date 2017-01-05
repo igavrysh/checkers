@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "GVRBoardPosition.h"
+
 @class GVRChecker;
 @class GVRBoardPosition;
 
@@ -25,16 +27,26 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 - (instancetype)initWithSize:(NSUInteger)size;
 
 - (GVRBoardPosition *)positionForRow:(NSUInteger)row column:(NSUInteger)column;
+- (GVRBoardPosition *)positionForCell:(GVRBoardCell)cell;
 
 - (void)addChecker:(GVRChecker *)checker atRow:(NSUInteger)row column:(NSUInteger)column;
+- (void)addChecker:(GVRChecker *)checker atBoardCell:(GVRBoardCell)cell;
 
 - (void)removeCheckerAtRow:(NSUInteger)row column:(NSUInteger)column;
+- (void)removeCheckerAtBoardCell:(GVRBoardCell)cell;
 
+- (void)moveCheckerFromCell:(GVRBoardCell)fromCell toCell:(GVRBoardCell)toCell;
+- (void)moveCheckerFromRow:(NSUInteger)fromRow
+                    column:(NSUInteger)fromColumn
+                     toRow:(NSUInteger)toRow
+                    column:(NSUInteger)toColumn;
 - (void)moveCheckerFrom:(GVRBoardPosition *)fromPostion
                      to:(GVRBoardPosition *)toPosition;
 
 - (NSUInteger)indexForRow:(NSUInteger)row column:(NSUInteger)column;
+- (NSUInteger)indexForBoardCell:(GVRBoardCell)cell;
 
 - (BOOL)isCheckerPresentAtRow:(NSUInteger)row column:(NSUInteger)column;
+- (BOOL)isCheckerPresentAtCell:(GVRBoardCell)cell;
 
 @end

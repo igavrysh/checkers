@@ -33,6 +33,8 @@
 		859CD14E1E195C17004BE15C /* GVRBoardSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD14D1E195C17004BE15C /* GVRBoardSpec.m */; };
 		85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
 		85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
+		85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F916201E1E493400F78545 /* NSError+GVRExtensions.m */; };
+		85F916221E1E493400F78545 /* NSError+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F916201E1E493400F78545 /* NSError+GVRExtensions.m */; };
 		C9D0929CCAA2161E4297CCB8 /* libPods-Checkers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A09053FF374A36068D554CD /* libPods-Checkers.a */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +88,8 @@
 		859CD14D1E195C17004BE15C /* GVRBoardSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoardSpec.m; sourceTree = "<group>"; };
 		85F48FA11E1B2307004FD8D1 /* NSArray+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+GVRExtensions.h"; sourceTree = "<group>"; };
 		85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GVRExtensions.m"; sourceTree = "<group>"; };
+		85F9161F1E1E493400F78545 /* NSError+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVRExtensions.h"; sourceTree = "<group>"; };
+		85F916201E1E493400F78545 /* NSError+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GVRExtensions.m"; sourceTree = "<group>"; };
 		BADAC0206DD4740F4AA0FC2D /* Pods-CheckersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CheckersTests/Pods-CheckersTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -333,6 +337,7 @@
 		85F48F9D1E1B2307004FD8D1 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				85F9161D1E1E48FE00F78545 /* NSError */,
 				85F48F9E1E1B2307004FD8D1 /* NSArray */,
 			);
 			path = Categories;
@@ -345,6 +350,15 @@
 				85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */,
 			);
 			path = NSArray;
+			sourceTree = "<group>";
+		};
+		85F9161D1E1E48FE00F78545 /* NSError */ = {
+			isa = PBXGroup;
+			children = (
+				85F9161F1E1E493400F78545 /* NSError+GVRExtensions.h */,
+				85F916201E1E493400F78545 /* NSError+GVRExtensions.m */,
+			);
+			path = NSError;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -555,6 +569,7 @@
 				859CD1451E195AF9004BE15C /* GVRBoard.m in Sources */,
 				858F5BA21E17CCE100DB6D13 /* ViewController.m in Sources */,
 				859CD1491E195AF9004BE15C /* GVRChecker.m in Sources */,
+				85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */,
 				858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */,
 				855F964E1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
 				855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
@@ -573,6 +588,7 @@
 				859CD14E1E195C17004BE15C /* GVRBoardSpec.m in Sources */,
 				859CD1461E195AF9004BE15C /* GVRBoard.m in Sources */,
 				859CD1311E195967004BE15C /* CheckersTests.m in Sources */,
+				85F916221E1E493400F78545 /* NSError+GVRExtensions.m in Sources */,
 				859CD1481E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
 				855F964F1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
 				855F964A1E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
