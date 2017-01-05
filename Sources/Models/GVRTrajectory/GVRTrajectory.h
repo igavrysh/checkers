@@ -16,6 +16,7 @@ FOUNDATION_EXPORT NSString *const GVRTrajectoryErrorDomain;
 enum {
     GVRTrajectoryStepOnWhiteCell = 1000,
     GVRTrajectoryNoActiveCheckerInStepsSequence,
+    GVRTrajectoryPlayerMovesOpponentsChecker,
     GVRTrajectoryTypeInconsistencyManAndKing,
     GVRTrajectoryStepOnFilledCell,
     GVRTrajectoryStepOutOfBoard,

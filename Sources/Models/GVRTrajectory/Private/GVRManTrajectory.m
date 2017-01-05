@@ -79,6 +79,14 @@
         return NO;
     }
     
+    if ((player == GVRPlayerWhiteCheckers && GVRCheckerColorBlack == initialPosition.checker.color)
+        || (player == GVRPlayerBlackCheckers && GVRCheckerColorWhite == initialPosition.checker.color))
+    {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryPlayerMovesOpponentsChecker];
+        return NO;
+    }
+    
     if (GVRCheckerTypeKing == initialPosition.checker.type) {
         *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                      code:GVRTrajectoryTypeInconsistencyManAndKing];
