@@ -29,4 +29,6 @@ typedef enum : NSUInteger {
 - (instancetype)initWithType:(GVRCheckerType)type
                        color:(GVRCheckerColor)color;
 
+- (void)promoteCheckerType;
+
 @end

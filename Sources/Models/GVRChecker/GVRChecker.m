@@ -40,6 +40,13 @@
     return self;
 }
 
+#pragma mark -
+#pragma mark Public Methos
+
+- (void)promoteCheckerType {
+    self.type = GVRCheckerTypeKing;
+}
+
 #pragma mark - 
 #pragma mark NSCopying
 

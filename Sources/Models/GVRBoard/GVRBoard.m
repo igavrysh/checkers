@@ -198,6 +198,15 @@
 {
     GVRChecker *checker = [self positionForRow:fromRow column:fromColumn].checker;
     
+    NSUInteger size = self.size;
+    if (GVRCheckerTypeMan == checker.type) {
+        if ((GVRCheckerColorWhite == checker.color && toRow == size - 1)
+            || (GVRCheckerColorBlack == checker.color && toRow == 0))
+        {
+            [checker promoteCheckerType];
+        }
+    }
+    
     [self addChecker:checker atRow:toRow column:toColumn];
     
     [self removeCheckerAtRow:fromRow column:fromColumn];
