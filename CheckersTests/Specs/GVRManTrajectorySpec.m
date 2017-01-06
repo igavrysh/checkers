@@ -722,7 +722,7 @@ context(@"when board is initialized", ^{
                                       [NSValue valueWithBytes:&interim2Cell objCType:@encode(GVRBoardCell)],
                                       [NSValue valueWithBytes:&interim3Cell objCType:@encode(GVRBoardCell)],
                                       [NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)]]
-                          forPlayer:GVRPlayerWhiteCheckers
+                          forPlayer:GVRPlayerBlackCheckers
               withCompletionHandler:^(BOOL success)
              {
                  checkerMoved = success;

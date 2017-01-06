@@ -19,9 +19,9 @@ typedef enum : NSUInteger {
 } GVRCheckerColor;
 
 @interface GVRChecker : NSObject <NSCopying>
-@property (nonatomic, readonly)     GVRCheckerType  type;
-@property (nonatomic, readonly)     GVRCheckerColor color;
-
+@property (nonatomic, readonly)                             GVRCheckerType  type;
+@property (nonatomic, readonly)                             GVRCheckerColor color;
+@property (nonatomic, assign, getter=isMarkedForRemoval)    BOOL            markedForRemoval;
 
 + (instancetype)checkerWithType:(GVRCheckerType)type
                           color:(GVRCheckerColor)color;

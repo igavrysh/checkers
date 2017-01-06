@@ -49,4 +49,6 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 - (BOOL)isCheckerPresentAtRow:(NSUInteger)row column:(NSUInteger)column;
 - (BOOL)isCheckerPresentAtCell:(GVRBoardCell)cell;
 
+- (void)resetMarkedForRemovalCheckers;
+
 @end

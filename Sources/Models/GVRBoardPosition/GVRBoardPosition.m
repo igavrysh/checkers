@@ -10,6 +10,14 @@
 
 #import "GVRBoard.h"
 
+GVRBoardCell GVRBoardCellMake(NSUInteger row, NSUInteger column) {
+    GVRBoardCell cell;
+    cell.row = row;
+    cell.column = column;
+    
+    return cell;
+}
+
 @interface GVRBoardPosition ()
 @property (nonatomic, assign)   NSUInteger              row;
 @property (nonatomic, assign)   NSUInteger              column;

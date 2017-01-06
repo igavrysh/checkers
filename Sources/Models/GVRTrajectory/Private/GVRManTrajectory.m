@@ -16,8 +16,7 @@
 @interface GVRManTrajectory ()
 
 - (BOOL)isRequiredTrajectoriesAvailalbleOnBoard:(GVRBoard *)board
-                                    fromPostion:(GVRBoardPosition *)position
-                                 exceptPosition:(GVRBoardPosition *)exceptPosition;
+                                    fromPostion:(GVRBoardPosition *)position;
 
 - (BOOL)applyForBoard:(GVRBoard *)board
             stepIndex:(NSUInteger)stepIndex
@@ -32,10 +31,14 @@
 #pragma mark Public Methods
 
 - (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
-    return [self applyForBoard:board
+    BOOL result = [self applyForBoard:board
                      stepIndex:1
                         player:player
                         error:error];
+    
+    [board resetMarkedForRemovalCheckers];
+    
+    return result;
 }
 
 #pragma mark -
@@ -55,6 +58,7 @@
     [self.steps[stepIndex - 1] getValue:&previousCell];
     
     GVRBoardPosition *initialPosition = [board positionForCell:initialCell];
+    GVRBoardPosition *previousPosition = [board positionForCell:previousCell];
     GVRBoardPosition *position = [board positionForCell:cell];
     
     if (GVRBoardPositionColorWhite == position.color) {
@@ -64,7 +68,9 @@
         return NO;
     }
     
-    if (position.isFilled) {
+    if (position.isFilled
+        && position != initialPosition)         // Cycle movements
+    {
         *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                      code:GVRTrajectoryStepOnFilledCell];
         
@@ -133,8 +139,7 @@
                 || (GVRPlayerBlackCheckers == player && -1 == deltaRow)))
         {
             if ([self isRequiredTrajectoriesAvailalbleOnBoard:board
-                                                  fromPostion:initialPosition
-                                               exceptPosition:nil])
+                                                  fromPostion:initialPosition])
             {
                 *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                              code:GVRTrajectoryMissRequiredJump];
@@ -148,11 +153,8 @@
     }
     
     if (2 == labs(deltaRow) && 2 == labs(deltaColumn)) {
-        NSUInteger victimRow = previousCell.row + deltaRow / 2;
-        NSUInteger victimColumn = previousCell.column + deltaColumn / 2;
-        
-        GVRBoardPosition *victimPosition = [board positionForRow:victimRow column:victimColumn];
-        GVRBoardPosition *previousPosition = [board positionForCell:previousCell];
+        GVRBoardPosition *victimPosition = [previousPosition positionShiftedByDeltaRows:deltaRow / 2
+                                                                           deltaColumns:deltaColumn / 2];
         
         if (!victimPosition.isFilled) {
             *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
@@ -160,23 +162,26 @@
             return NO;
         }
         
-        if ((GVRBoardPositionColorWhite == victimPosition.color && GVRPlayerWhiteCheckers == player)
-            || (GVRBoardPositionColorBlack == victimPosition.color && GVRPlayerBlackCheckers == player))
+        GVRCheckerColor victimColor = victimPosition.checker.color;
+        
+        if ((GVRCheckerColorWhite == victimColor  && GVRPlayerWhiteCheckers == player)
+            || (GVRCheckerColorBlack == victimColor && GVRPlayerBlackCheckers == player))
         {
             *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                          code:GVRTrajectoryJumpOverFriendlyChecker];
             return NO;
         }
         
-        if ((GVRBoardPositionColorBlack == victimPosition.color && GVRPlayerWhiteCheckers == player)
-            || (GVRBoardPositionColorWhite == victimPosition.color && GVRPlayerBlackCheckers == player))
+        if ((GVRCheckerColorBlack == victimColor && GVRPlayerWhiteCheckers == player)
+            || (GVRCheckerColorWhite == victimColor && GVRPlayerBlackCheckers == player))
         {
             BOOL result = NO;
             
+            victimPosition.checker.markedForRemoval = YES;
+            
             if (stepIndex == self.steps.count - 1) {
                 result = ![self isRequiredTrajectoriesAvailalbleOnBoard:board
-                                                            fromPostion:position
-                                                         exceptPosition:previousPosition];
+                                                            fromPostion:position];
                 if (result) {
                     [board moveCheckerFrom:initialPosition to:position];
                 }
@@ -188,7 +193,7 @@
             }
             
             if (result) {
-                [board removeCheckerAtRow:victimRow column:victimColumn];
+                [board removeCheckerAtRow:victimPosition.row column:victimPosition.column];
             }
             
             return result;
@@ -200,7 +205,6 @@
 
 - (BOOL)isRequiredTrajectoriesAvailalbleOnBoard:(GVRBoard *)board
                                     fromPostion:(GVRBoardPosition *)position
-                                 exceptPosition:(GVRBoardPosition *)exceptPosition
 {
     BOOL (^isTrajectoryAvailable)(NSInteger, NSInteger)
     = ^BOOL(NSInteger deltaRow, NSInteger deltaColumn) {
@@ -212,10 +216,11 @@
                                                                  deltaColumns:2 * deltaColumn];
         
         if (victimPosition
+            && nextPosition
             && victimPosition.isFilled
             && victimPosition.checker.color != position.checker.color
             && !nextPosition.isFilled
-            && nextPosition != exceptPosition)
+            && !victimPosition.checker.isMarkedForRemoval)
         {
             return YES;
         }

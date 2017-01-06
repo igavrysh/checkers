@@ -196,6 +196,10 @@
                      toRow:(NSUInteger)toRow
                     column:(NSUInteger)toColumn
 {
+    if (fromRow == toRow && fromColumn == toColumn) {
+        return;
+    }
+    
     GVRChecker *checker = [self positionForRow:fromRow column:fromColumn].checker;
     
     NSUInteger size = self.size;
@@ -210,6 +214,12 @@
     [self addChecker:checker atRow:toRow column:toColumn];
     
     [self removeCheckerAtRow:fromRow column:fromColumn];
+}
+
+- (void)resetMarkedForRemovalCheckers {
+    [self.positions performBlockWithEachObject:^(GVRBoardPosition *position) {
+        position.checker.markedForRemoval = NO;
+    }];
 }
 
 #pragma mark -

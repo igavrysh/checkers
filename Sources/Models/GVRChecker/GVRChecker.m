@@ -51,7 +51,10 @@
 #pragma mark NSCopying
 
 - (id)copyWithZone:(nullable NSZone *)zone {
-    return [GVRChecker checkerWithType:self.type color:self.color];
+    GVRChecker *checker = [GVRChecker checkerWithType:self.type color:self.color];
+    checker.markedForRemoval = self.markedForRemoval;
+    
+    return checker;
 }
 
 @end

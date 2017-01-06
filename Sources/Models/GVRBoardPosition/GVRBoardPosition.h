@@ -24,6 +24,8 @@ struct GVRBoardCell {
 
 typedef struct GVRBoardCell GVRBoardCell;
 
+extern GVRBoardCell GVRBoardCellMake(NSUInteger row, NSUInteger column);
+
 @interface GVRBoardPosition : NSObject
 @property (nonatomic, readonly)         NSUInteger              row;
 @property (nonatomic, readonly)         NSUInteger              column;
