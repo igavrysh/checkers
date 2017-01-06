@@ -111,6 +111,12 @@
         return NO;
     }
     
+    if (self.steps.count > 2 && 1 == labs(deltaColumn) && 1 == labs(deltaRow)) {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryMoreThanOneOneCellMove];
+        return NO;
+    }
+    
     if (1 == stepIndex) {
         
         if ((GVRPlayerWhiteCheckers == player && -1 == deltaRow)
@@ -121,7 +127,7 @@
             
             return NO;
         }
-        
+         
         if (1 == labs(deltaColumn)
             && ((GVRPlayerWhiteCheckers == player && 1 == deltaRow)
                 || (GVRPlayerBlackCheckers == player && -1 == deltaRow)))

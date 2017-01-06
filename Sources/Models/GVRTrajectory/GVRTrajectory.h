@@ -17,6 +17,7 @@ enum {
     GVRTrajectoryStepOnWhiteCell = 1000,
     GVRTrajectoryNoActiveCheckerInStepsSequence,
     GVRTrajectoryPlayerMovesOpponentsChecker,
+    GVRTrajectoryMoreThanOneOneCellMove,
     GVRTrajectoryTypeInconsistencyManAndKing,
     GVRTrajectoryStepOnFilledCell,
     GVRTrajectoryStepOutOfBoard,

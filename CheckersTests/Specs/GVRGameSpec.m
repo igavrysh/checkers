@@ -500,9 +500,47 @@ context(@"when board is initialized", ^{
             [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
         });
     });
+    
+    context(@"when checker jumps twice, by 1 cell each turn", ^{
+        it(@"should set success flag to false", ^{
+            GVRBoardCell initialCell, interimCell, finalCell;
+            initialCell.row = 0;
+            initialCell.column = 0;
+            interimCell.row = 1;
+            interimCell.column = 1;
+            finalCell.row = 2;
+            finalCell.column = 2;
+            
+            __block BOOL checkerMoved = YES;
+            
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
+                       atCell:initialCell];
+            
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&interimCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:interimCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beNo];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beNo];
+        });
+    });
+    
 
     /*
-    it(@"when checker jumps twice, by 1 cell each, should return false", ^{});
+    it(@"when checker jumps twice, by 1 cell each turn, should return false", ^{});
      
     it(@"when checker kills victim and then jumps one more time")
     
