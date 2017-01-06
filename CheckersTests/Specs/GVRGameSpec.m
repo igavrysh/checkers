@@ -459,9 +459,52 @@ context(@"when board is initialized", ^{
         });
     });
     
-    
-    
-    it(@"when white man kills black man and occupies next cell, without any checker nearby, should return true", ^{});
+    context(@"when white man kills black man and occupies next cell, without any checker nearby", ^{
+        it(@"should set success flag to true", ^{
+            GVRBoardCell initialCell, opponentCell, finalCell;
+            initialCell.row = 0;
+            initialCell.column = 0;
+            opponentCell.row = 1;
+            opponentCell.column = 1;
+            finalCell.row = 2;
+            finalCell.column = 2;
+            
+            __block BOOL checkerMoved = NO;
+            
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
+                       atCell:initialCell];
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
+                       atCell:opponentCell];
+            
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponentCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
+                 
+                 [[theValue([board positionForCell:finalCell].checker.color) should]
+                     equal:theValue(GVRCheckerColorWhite)];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:opponentCell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
+        });
+    });
+
+    /*
+    it(@"when checker jumps twice, by 1 cell each, should return false", ^{});
+     
+    it(@"when checker kills victim and then jumps one more time")
     
     it(@"when white man kills black man and doesn't kill next black man, located nearby, should return false", ^{});
     
@@ -490,6 +533,8 @@ context(@"when board is initialized", ^{
     it(@"when only 1 white and 1 black king is left on the board, the game should end, draw", ^{});
     
     it(@"when only 1 white/black and 2 black/white kings are left on the board, the game should end - draw", ^{});
+     
+     */
 });
 
 

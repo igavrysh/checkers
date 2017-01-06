@@ -54,9 +54,8 @@
     [self.steps[stepIndex] getValue:&cell];
     [self.steps[stepIndex - 1] getValue:&previousCell];
     
-    GVRBoardPosition *initialPosition = [board positionForRow:initialCell.row
-                                                       column:initialCell.column];
-    GVRBoardPosition *position = [board positionForRow:cell.row column:cell.column];
+    GVRBoardPosition *initialPosition = [board positionForCell:initialCell];
+    GVRBoardPosition *position = [board positionForCell:cell];
     
     if (GVRBoardPositionColorWhite == position.color) {
         *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
@@ -114,8 +113,8 @@
     
     if (1 == stepIndex) {
         
-        if ((GVRPlayerWhiteCheckers == player && deltaRow < 0)
-            || (GVRPlayerBlackCheckers == player && deltaRow > 0))
+        if ((GVRPlayerWhiteCheckers == player && -1 == deltaRow)
+            || (GVRPlayerBlackCheckers == player && 1 == deltaRow))
         {
             *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                          code:GVRTrajectoryBackwardsMove];
@@ -147,6 +146,8 @@
         NSUInteger victimColumn = previousCell.column + deltaColumn / 2;
         
         GVRBoardPosition *victimPosition = [board positionForRow:victimRow column:victimColumn];
+        GVRBoardPosition *previousPosition = [board positionForCell:previousCell];
+        
         if (!victimPosition.isFilled) {
             *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                          code:GVRTrajectoryLongJump];
@@ -169,7 +170,10 @@
             if (stepIndex == self.steps.count - 1) {
                 result = ![self isRequiredTrajectoriesAvailalbleOnBoard:board
                                                             fromPostion:position
-                                                         exceptPosition:nil];
+                                                         exceptPosition:previousPosition];
+                if (result) {
+                    [board moveCheckerFrom:initialPosition to:position];
+                }
             } else {
                 result = [self applyForBoard:board
                                    stepIndex:stepIndex + 1
@@ -194,14 +198,19 @@
 {
     BOOL (^isTrajectoryAvailable)(NSInteger, NSInteger)
     = ^BOOL(NSInteger deltaRow, NSInteger deltaColumn) {
-        GVRBoardPosition *victimPosition = [board positionForRow:deltaRow column:deltaColumn];
-        GVRBoardPosition *nextPosition = [board positionForRow:2 * deltaRow column:2 * deltaColumn];
+        
+        GVRBoardPosition *victimPosition = [position positionShiftedByDeltaRows:deltaRow
+                                                                   deltaColumns:deltaColumn];
+        
+        GVRBoardPosition *nextPosition = [position positionShiftedByDeltaRows:2 * deltaRow
+                                                                 deltaColumns:2 * deltaColumn];
         
         if (victimPosition
             && victimPosition.isFilled
             && victimPosition.checker.color != position.checker.color
             && !nextPosition.isFilled
-            && position != exceptPosition) {
+            && nextPosition != exceptPosition)
+        {
             return YES;
         }
         
