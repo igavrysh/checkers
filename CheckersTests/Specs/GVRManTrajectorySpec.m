@@ -630,7 +630,7 @@ context(@"when board is initialized", ^{
     });
     
     context(@"when white man kills black man and kills next black man, with no other options left", ^{
-        it(@"should set success flag to false", ^{
+        it(@"should set success flag to true", ^{
             GVRBoardCell initialCell, opponent1Cell, opponent2Cell, interimCell, finalCell;
             initialCell.row = 0;
             initialCell.column = 0;
@@ -675,6 +675,73 @@ context(@"when board is initialized", ^{
                  [board removeCheckerAtCell:opponent2Cell];
                  [board removeCheckerAtCell:interimCell];
                  [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
+        });
+    });
+    
+    context(@"when black man kills 4 white men located in cycle", ^{
+        it(@"should set success flag to true", ^{
+            GVRBoardCell initialCell, interim1Cell, interim2Cell, interim3Cell;
+            GVRBoardCell opponent1Cell, opponent2Cell, opponent3Cell, opponent4Cell;
+            initialCell.row = 2;
+            initialCell.column = 0;
+            
+            opponent1Cell.row = 3;
+            opponent1Cell.column = 1;
+            opponent2Cell.row = 3;
+            opponent2Cell.column = 3;
+            opponent3Cell.row = 1;
+            opponent3Cell.column = 3;
+            opponent4Cell.row = 1;
+            opponent4Cell.column = 1;
+            
+            interim1Cell.row = 4;
+            interim1Cell.column = 2;
+            interim2Cell.row = 2;
+            interim2Cell.column = 4;
+            interim3Cell.row = 0;
+            interim3Cell.column = 2;
+            
+            __block BOOL checkerMoved = NO;
+            
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
+                       atCell:initialCell];
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
+                       atCell:opponent1Cell];
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
+                       atCell:opponent2Cell];
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
+                       atCell:opponent3Cell];
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
+                       atCell:opponent4Cell];
+            
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&interim1Cell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&interim2Cell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&interim3Cell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)]]
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:opponent1Cell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponent2Cell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponent3Cell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponent4Cell] isFilled]) should] beNo];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:opponent1Cell];
+                 [board removeCheckerAtCell:opponent2Cell];
+                 [board removeCheckerAtCell:opponent3Cell];
+                 [board removeCheckerAtCell:opponent4Cell];
              }];
             
             [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];

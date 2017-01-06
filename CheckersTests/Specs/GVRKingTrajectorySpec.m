@@ -40,8 +40,8 @@ context(@"when board is initialized", ^{
         });
     });
     
-    context(@"when man riches board's opposite side", ^{
-        it(@"should change its type from man to king", ^{
+    context(@"when checker with a man type riches board's opposite side", ^{
+        it(@"should switch its type from man to king", ^{
             GVRBoardCell initialCell, finalCell;
             initialCell.row = 8;
             initialCell.column = 4;
@@ -77,8 +77,6 @@ context(@"when board is initialized", ^{
 });
 
 /*
- 
- it(@", it should switch its state to king", ^{});
  
  it(@"when king moves 1 cell ahead to the left, should return true", ^{});
  
