@@ -14,6 +14,8 @@
 #import "GVRKingTrajectory.h"
 #import "GVRBoardPosition.h"
 
+#import "NSError+GVRExtensions.h"
+
 NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerror";
 
 @interface GVRTrajectory ()
@@ -75,6 +77,62 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
 
 - (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
     return NO;
+}
+
+- (BOOL)__applyForBoard:(GVRBoard *)board
+              stepIndex:(NSUInteger)stepIndex
+                 player:(GVRPlayer)player
+                  error:(NSError **)error
+{
+    GVRBoardCell initialCell;
+    GVRBoardCell cell;
+    
+    [self.steps[0] getValue:&initialCell];
+    [self.steps[stepIndex] getValue:&cell];
+    
+    GVRBoardPosition *initialPosition = [board positionForCell:initialCell];
+    GVRBoardPosition *position = [board positionForCell:cell];
+    
+    if (GVRBoardPositionColorWhite == position.color) {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryStepOnWhiteCell];
+        
+        return NO;
+    }
+    
+    if (position.isFilled
+        && position != initialPosition)         // Cycle movements
+    {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryStepOnFilledCell];
+        
+        return NO;
+    }
+    
+    if (!initialPosition.isFilled) {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryNoActiveCheckerInStepsSequence];
+        
+        return NO;
+    }
+    
+    if ((player == GVRPlayerWhiteCheckers && GVRCheckerColorBlack == initialPosition.checker.color)
+        || (player == GVRPlayerBlackCheckers && GVRCheckerColorWhite == initialPosition.checker.color))
+    {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryPlayerMovesOpponentsChecker];
+        return NO;
+    }
+    
+    NSUInteger size = board.size;
+    if (cell.row >= size || cell.column >= size) {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryStepOutOfBoard];
+        
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end

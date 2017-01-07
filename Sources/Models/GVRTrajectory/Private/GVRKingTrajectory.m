@@ -17,10 +17,10 @@
 
 - (NSArray *)unifiedStepsForBoard:(GVRBoard *)board;
 
-- (BOOL)applyForBoard:(GVRBoard *)board
-            stepIndex:(NSUInteger)stepIndex
-               player:(GVRPlayer)player
-                error:(NSError **)error;
+- (BOOL)__applyForBoard:(GVRBoard *)board
+              stepIndex:(NSUInteger)stepIndex
+                 player:(GVRPlayer)player
+                  error:(NSError **)error;
 
 @end
 
@@ -76,11 +76,35 @@
     return [unifiedSteps copy];;
 }
 
-- (BOOL)applyForBoard:(GVRBoard *)board
-            stepIndex:(NSUInteger)stepIndex
-               player:(GVRPlayer)player
-                error:(NSError **)error
+- (BOOL)__applyForBoard:(GVRBoard *)board
+              stepIndex:(NSUInteger)stepIndex
+                 player:(GVRPlayer)player
+                  error:(NSError **)error
 {
+    if (![super __applyForBoard:board stepIndex:stepIndex player:player error:error]) {
+        return NO;
+    }
+    
+    GVRBoardCell initialCell;
+    GVRBoardCell cell;
+    GVRBoardCell previousCell;
+    
+    [self.steps[0] getValue:&initialCell];
+    [self.steps[stepIndex] getValue:&cell];
+    [self.steps[stepIndex - 1] getValue:&previousCell];
+    
+    GVRBoardPosition *initialPosition = [board positionForCell:initialCell];
+    GVRBoardPosition *previousPosition = [board positionForCell:previousCell];
+    GVRBoardPosition *position = [board positionForCell:cell];
+    
+    if (GVRCheckerTypeMan == initialPosition.checker.type) {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryTypeInconsistencyManAndKing];
+        
+        return NO;
+    }
+    
+    
     return NO;
 }
 

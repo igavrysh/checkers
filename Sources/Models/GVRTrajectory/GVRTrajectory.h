@@ -38,6 +38,13 @@ enum {
 
 - (instancetype)initWithSteps:(NSArray *)steps board:(GVRBoard *)board;
 
-- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error;
+- (BOOL)applyForBoard:(GVRBoard *)board
+               player:(GVRPlayer)player
+                error:(NSError **)error;
+
+- (BOOL)__applyForBoard:(GVRBoard *)board
+            stepIndex:(NSUInteger)stepIndex
+               player:(GVRPlayer)player
+                error:(NSError **)error;
 
 @end

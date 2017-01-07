@@ -18,7 +18,7 @@
 - (BOOL)isRequiredTrajectoriesAvailalbleOnBoard:(GVRBoard *)board
                                     fromPostion:(GVRBoardPosition *)position;
 
-- (BOOL)applyForBoard:(GVRBoard *)board
+- (BOOL)__applyForBoard:(GVRBoard *)board
             stepIndex:(NSUInteger)stepIndex
                player:(GVRPlayer)player
                 error:(NSError **)error;
@@ -31,10 +31,10 @@
 #pragma mark Public Methods
 
 - (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
-    BOOL result = [self applyForBoard:board
-                     stepIndex:1
-                        player:player
-                        error:error];
+    BOOL result = [self __applyForBoard:board
+                              stepIndex:1
+                                 player:player
+                                  error:error];
     
     [board resetMarkedForRemovalCheckers];
     
@@ -44,11 +44,15 @@
 #pragma mark -
 #pragma mark Private Methods
 
-- (BOOL)applyForBoard:(GVRBoard *)board
-            stepIndex:(NSUInteger)stepIndex
-               player:(GVRPlayer)player
-                error:(NSError **)error
+- (BOOL)__applyForBoard:(GVRBoard *)board
+              stepIndex:(NSUInteger)stepIndex
+                 player:(GVRPlayer)player
+                  error:(NSError **)error
 {
+    if (![super __applyForBoard:board stepIndex:stepIndex player:player error:error]) {
+        return NO;
+    }
+    
     GVRBoardCell initialCell;
     GVRBoardCell cell;
     GVRBoardCell previousCell;
@@ -61,48 +65,9 @@
     GVRBoardPosition *previousPosition = [board positionForCell:previousCell];
     GVRBoardPosition *position = [board positionForCell:cell];
     
-    if (GVRBoardPositionColorWhite == position.color) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                     code:GVRTrajectoryStepOnWhiteCell];
-        
-        return NO;
-    }
-    
-    if (position.isFilled
-        && position != initialPosition)         // Cycle movements
-    {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                     code:GVRTrajectoryStepOnFilledCell];
-        
-        return NO;
-    }
-    
-    if (!initialPosition.isFilled) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                     code:GVRTrajectoryNoActiveCheckerInStepsSequence];
-        
-        return NO;
-    }
-    
-    if ((player == GVRPlayerWhiteCheckers && GVRCheckerColorBlack == initialPosition.checker.color)
-        || (player == GVRPlayerBlackCheckers && GVRCheckerColorWhite == initialPosition.checker.color))
-    {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                     code:GVRTrajectoryPlayerMovesOpponentsChecker];
-        return NO;
-    }
-    
     if (GVRCheckerTypeKing == initialPosition.checker.type) {
         *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                      code:GVRTrajectoryTypeInconsistencyManAndKing];
-        
-        return NO;
-    }
-    
-    NSUInteger size = board.size;
-    if (cell.row >= size || cell.column >= size) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                     code:GVRTrajectoryStepOutOfBoard];
         
         return NO;
     }
@@ -186,7 +151,7 @@
                     [board moveCheckerFrom:initialPosition to:position];
                 }
             } else {
-                result = [self applyForBoard:board
+                result = [self __applyForBoard:board
                                    stepIndex:stepIndex + 1
                                       player:player
                                        error:error];
