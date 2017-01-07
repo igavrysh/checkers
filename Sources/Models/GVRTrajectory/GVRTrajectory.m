@@ -75,7 +75,7 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
 #pragma mark -
 #pragma mark Public Methods
 
-- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
+- (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {    
     return NO;
 }
 
@@ -86,9 +86,11 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
 {
     GVRBoardCell initialCell;
     GVRBoardCell cell;
+    GVRBoardCell previousCell;
     
     [self.steps[0] getValue:&initialCell];
     [self.steps[stepIndex] getValue:&cell];
+    [self.steps[stepIndex - 1] getValue:&previousCell];
     
     GVRBoardPosition *initialPosition = [board positionForCell:initialCell];
     GVRBoardPosition *position = [board positionForCell:cell];
@@ -128,7 +130,14 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
     if (cell.row >= size || cell.column >= size) {
         *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
                                      code:GVRTrajectoryStepOutOfBoard];
-        
+        return NO;
+    }
+    
+    NSInteger deltaRow = cell.row - previousCell.row;
+    NSInteger deltaColumn = cell.column - previousCell.column;
+    if (labs(deltaRow) != labs(deltaColumn)) {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryNonDiagonalMove];
         return NO;
     }
     

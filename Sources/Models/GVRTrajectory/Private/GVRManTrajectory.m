@@ -118,8 +118,8 @@
     }
     
     if (2 == labs(deltaRow) && 2 == labs(deltaColumn)) {
-        GVRBoardPosition *victimPosition = [previousPosition positionShiftedByDeltaRows:deltaRow / 2
-                                                                           deltaColumns:deltaColumn / 2];
+        GVRBoardPosition *victimPosition = [previousPosition positionShiftedByDeltaRows:deltaRow / labs(deltaRow)
+                                                                           deltaColumns:deltaColumn / labs(deltaColumn)];
         
         if (!victimPosition.isFilled) {
             *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain

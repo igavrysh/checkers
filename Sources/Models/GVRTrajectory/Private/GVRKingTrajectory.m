@@ -30,7 +30,14 @@
 #pragma mark Public Methods
 
 - (BOOL)applyForBoard:(GVRBoard *)board player:(GVRPlayer)player error:(NSError **)error {
-    return NO;
+    BOOL result = [self __applyForBoard:board
+                              stepIndex:1
+                                 player:player
+                                  error:error];
+    
+    [board resetMarkedForRemovalCheckers];
+    
+    return result;
 }
 
 #pragma mark -
@@ -104,6 +111,54 @@
         return NO;
     }
     
+    NSInteger deltaRow = cell.row - previousCell.row;
+    NSInteger deltaColumn = cell.column - previousCell.column;
+    GVRBoardPosition *victimPosition = [previousPosition positionShiftedByDeltaRows:deltaRow / labs(deltaRow)
+                                                                       deltaColumns:deltaColumn / labs(deltaColumn)];
+    
+    GVRBoardPosition *victimPosition2 = [previousPosition positionShiftedByDeltaRows:2 * deltaRow / labs(deltaRow)
+                                                                        deltaColumns:2 * deltaColumn / labs(deltaColumn)];
+    
+    if (victimPosition && victimPosition2 && victimPosition.isFilled && victimPosition2.isFilled) {
+        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                     code:GVRTrajectoryLongJump];
+        return NO;
+    }
+    
+    if (victimPosition && victimPosition.isFilled) {
+        GVRCheckerColor victimColor = victimPosition.checker.color;
+        
+        if ((GVRCheckerColorWhite == victimColor  && GVRPlayerWhiteCheckers == player)
+            || (GVRCheckerColorBlack == victimColor && GVRPlayerBlackCheckers == player))
+        {
+            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
+                                         code:GVRTrajectoryJumpOverFriendlyChecker];
+            return NO;
+        }
+        
+        if ((GVRCheckerColorBlack == victimColor && GVRPlayerWhiteCheckers == player)
+            || (GVRCheckerColorWhite == victimColor && GVRPlayerBlackCheckers == player))
+        {
+            BOOL result = NO;
+            
+            victimPosition.checker.markedForRemoval = YES;
+        
+        	if (stepIndex == self.steps.count - 1) {
+                [board moveCheckerFrom:initialPosition to:position];
+            } else {
+                result = [self __applyForBoard:board
+                                     stepIndex:stepIndex + 1
+                                        player:player
+                                         error:error];
+            }
+            
+            if (result) {
+                [board removeCheckerAtRow:victimPosition.row column:victimPosition.column];
+            }
+            
+            return result;
+        }
+    }
     
     return NO;
 }

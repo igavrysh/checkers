@@ -21,6 +21,7 @@ enum {
     GVRTrajectoryTypeInconsistencyManAndKing,
     GVRTrajectoryStepOnFilledCell,
     GVRTrajectoryStepOutOfBoard,
+    GVRTrajectoryNonDiagonalMove,
     GVRTrajectoryBackwardsMove,
     GVRTrajectoryLongJump,
     GVRTrajectoryJumpOverFriendlyChecker,
