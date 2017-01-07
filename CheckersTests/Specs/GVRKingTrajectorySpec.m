@@ -42,11 +42,8 @@ context(@"when board is initialized", ^{
     
     context(@"when checker with a man type riches board's opposite side", ^{
         it(@"should switch its type from man to king", ^{
-            GVRBoardCell initialCell, finalCell;
-            initialCell.row = 8;
-            initialCell.column = 4;
-            finalCell.row = 9;
-            finalCell.column = 5;
+            GVRBoardCell initialCell = GVRBoardCellMake(8, 4);
+            GVRBoardCell finalCell= GVRBoardCellMake(9, 5);
             
             __block BOOL checkerMoved = NO;
             
