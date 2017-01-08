@@ -51,4 +51,12 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 
 - (void)resetMarkedForRemovalCheckers;
 
+- (void)iterateDiagonallyFromCell:(GVRBoardCell)fromCell
+                    withDirection:(GVRBoardDirection)direction
+                            block:(void (^)(GVRBoardPosition *position, BOOL *stop))block;
+
+- (void)iterateDiagonallyFromCell:(GVRBoardCell)fromCell
+                           toCell:(GVRBoardCell)toCell
+                        withBlock:(void (^)(GVRBoardPosition *position, BOOL *stop))block;
+
 @end

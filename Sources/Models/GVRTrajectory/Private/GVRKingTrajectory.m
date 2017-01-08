@@ -11,7 +11,8 @@
 #import "GVRBoard.h"
 #import "GVRBoardPosition.h"
 
-#import "NSError+GVRExtensions.h"
+#import "NSError+GVRTrajectory.h"
+#import "NSArray+GVRExtensions.h"
 
 @interface GVRKingTrajectory ()
 
@@ -83,6 +84,50 @@
     return [unifiedSteps copy];;
 }
 
+- (BOOL)isAllowedDistanceToVictim:(NSInteger)distance {
+    return YES;
+}
+
+- (BOOL)isAllowedSingleJumpDistance:(NSInteger)distance {
+    return YES;
+}
+
+- (BOOL)isRequiredTrajectoriesAvailalbleOnBoard:(GVRBoard *)board
+                               lastMoveFromCell:(GVRBoardCell)previousCell
+                                         toCell:(GVRBoardCell)cell
+                                    isFirstMove:(BOOL)isFirstMove
+{
+    BOOL (^isTrajectoryAvailable)(GVRBoardDirection)
+    = ^BOOL(GVRBoardDirection direction) {
+        __block BOOL isTrajectoryAvailable = NO;
+        
+        [board iterateDiagonallyFromCell:cell
+                           withDirection:direction
+                                   block:^(GVRBoardPosition *position, BOOL *stop)
+        {
+            if ([self isAllowedDistanceToVictim:labs((NSInteger)position.row - (NSInteger)cell.row)]) {
+                GVRBoardPosition *nextPosition = [position positionShiftedByDirection:direction distance:1];
+                
+                if (nextPosition && !nextPosition.isFilled) {
+                    isTrajectoryAvailable = YES;
+                }
+                
+                *stop = YES;
+            } else {
+                *stop = YES;
+            }
+        }];
+        
+        return isTrajectoryAvailable;
+    };
+    
+    return  isTrajectoryAvailable(GVRBoardDirectionMake(+1, +1))
+        ||  isTrajectoryAvailable(GVRBoardDirectionMake(+1, -1))
+        ||  isTrajectoryAvailable(GVRBoardDirectionMake(-1, +1))
+        ||  isTrajectoryAvailable(GVRBoardDirectionMake(-1, -1));
+    
+}
+
 - (BOOL)__applyForBoard:(GVRBoard *)board
               stepIndex:(NSUInteger)stepIndex
                  player:(GVRPlayer)player
@@ -92,64 +137,83 @@
         return NO;
     }
     
+    if (self.steps.count <= 1) {
+        return NO;
+    }
+    
     GVRBoardCell initialCell;
     GVRBoardCell cell;
     GVRBoardCell previousCell;
+    [self.steps getValue:&initialCell atIndex:0];
+    [self.steps getValue:&cell atIndex:stepIndex];
+    [self.steps getValue:&previousCell atIndex:stepIndex - 1];
     
-    [self.steps[0] getValue:&initialCell];
-    [self.steps[stepIndex] getValue:&cell];
-    [self.steps[stepIndex - 1] getValue:&previousCell];
-    
-    GVRBoardPosition *initialPosition = [board positionForCell:initialCell];
-    GVRBoardPosition *previousPosition = [board positionForCell:previousCell];
-    GVRBoardPosition *position = [board positionForCell:cell];
-    
-    if (GVRCheckerTypeMan == initialPosition.checker.type) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                     code:GVRTrajectoryTypeInconsistencyManAndKing];
-        
+    if (!GVRIsDiagonalDistance(initialCell, cell)
+        || !GVRIsDiagonalDistance(initialCell, cell)
+        || !GVRIsDiagonalDistance(cell, previousCell))
+    {
+        *error = [NSError trajectoryErrorWithCode:GVRTrajectoryNonDiagonalMove];
         return NO;
     }
     
-    NSInteger deltaRow = cell.row - previousCell.row;
-    NSInteger deltaColumn = cell.column - previousCell.column;
-    GVRBoardPosition *victimPosition = [previousPosition positionShiftedByDeltaRows:deltaRow / labs(deltaRow)
-                                                                       deltaColumns:deltaColumn / labs(deltaColumn)];
+    __block GVRBoardPosition *victimPosition = nil;
+    [board iterateDiagonallyFromCell:previousCell
+                              toCell:cell
+                           withBlock:^(GVRBoardPosition *position, BOOL *stop)
+     {
+         if (position.isFilled) {
+             if ((GVRBoardPositionColorBlack == position.checker.color && GVRPlayerBlackCheckers == player)
+                 || (GVRBoardPositionColorWhite == position.checker.color && GVRPlayerWhiteCheckers == player))
+             {
+                 *stop = YES;
+                 
+                 *error = [NSError trajectoryErrorWithCode:GVRTrajectoryJumpOverFriendlyChecker];
+             }
+             
+             if ((GVRBoardPositionColorWhite == position.checker.color && GVRPlayerBlackCheckers == player)
+                 || (GVRBoardPositionColorBlack == position.checker.color && GVRPlayerWhiteCheckers == player)) {
+                 if (victimPosition) {
+                     *stop = YES;
+                     
+                     *error = [NSError trajectoryErrorWithCode:GVRTrajectoryLongJump];
+                 } else {
+                     victimPosition = position;
+                 }
+             }
+         }
+     }];
     
-    GVRBoardPosition *victimPosition2 = [previousPosition positionShiftedByDeltaRows:2 * deltaRow / labs(deltaRow)
-                                                                        deltaColumns:2 * deltaColumn / labs(deltaColumn)];
-    
-    if (victimPosition && victimPosition2 && victimPosition.isFilled && victimPosition2.isFilled) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                     code:GVRTrajectoryLongJump];
+    if (error) {
         return NO;
     }
     
-    if (victimPosition && victimPosition.isFilled) {
-        GVRCheckerColor victimColor = victimPosition.checker.color;
-        
-        if ((GVRCheckerColorWhite == victimColor  && GVRPlayerWhiteCheckers == player)
-            || (GVRCheckerColorBlack == victimColor && GVRPlayerBlackCheckers == player))
+    if (self.steps.count > 2 && !victimPosition) {
+        *error = [NSError trajectoryErrorWithCode:GVRTrajectoryMoreThanOneOneCellMove];
+        return NO;
+    }
+    
+    if (victimPosition) {
+        if ([self isAllowedDistanceToVictim:(NSInteger)victimPosition.row - (NSInteger)previousCell.row]
+            && [self isAllowedDistanceToVictim:(NSInteger)cell.row - (NSInteger)victimPosition.row])
         {
-            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                         code:GVRTrajectoryJumpOverFriendlyChecker];
-            return NO;
-        }
-        
-        if ((GVRCheckerColorBlack == victimColor && GVRPlayerWhiteCheckers == player)
-            || (GVRCheckerColorWhite == victimColor && GVRPlayerBlackCheckers == player))
-        {
+            victimPosition.checker.markedForRemoval = YES;
+            
             BOOL result = NO;
             
-            victimPosition.checker.markedForRemoval = YES;
-        
-        	if (stepIndex == self.steps.count - 1) {
-                [board moveCheckerFrom:initialPosition to:position];
+            if (stepIndex < self.steps.count - 1) {
+                result = [self __applyForBoard:board stepIndex:stepIndex + 1 player:player error:error];
             } else {
-                result = [self __applyForBoard:board
-                                     stepIndex:stepIndex + 1
-                                        player:player
-                                         error:error];
+                result = ![self isRequiredTrajectoriesAvailalbleOnBoard:board
+                                                       lastMoveFromCell:previousCell
+                                                                 toCell:cell
+                                                            isFirstMove:NO];
+                if (result) {
+                    [board moveCheckerFromCell:initialCell toCell:cell];
+                } else {
+                    *error = [NSError trajectoryErrorWithCode:GVRTrajectoryMissRequiredJump];
+                    
+                    return NO;
+                }
             }
             
             if (result) {
@@ -157,6 +221,30 @@
             }
             
             return result;
+        } else {
+            *error = [NSError trajectoryErrorWithCode:GVRTrajectoryLongJump];
+            return NO;
+        }
+    } else {
+        NSInteger distance = (player == GVRPlayerWhiteCheckers ? +1 : -1) * (cell.row - previousCell.row);
+        if ([self isAllowedSingleJumpDistance:distance]) {
+            BOOL result = result = ![self isRequiredTrajectoriesAvailalbleOnBoard:board
+                                                                 lastMoveFromCell:previousCell
+                                                                           toCell:cell
+                                                                      isFirstMove:YES];
+            if (result) {
+                [board moveCheckerFromCell:initialCell toCell:cell];
+            
+                return YES;
+            } else {
+                *error = [NSError trajectoryErrorWithCode:GVRTrajectoryMissRequiredJump];
+                
+                return NO;
+            }
+        } else {
+            *error = [NSError trajectoryErrorWithCode:GVRTrajectoryLongJump];
+            
+            return NO;
         }
     }
     

@@ -21,4 +21,6 @@
 
 - (NSArray *)filteredArrayUsingBlock:(BOOL (^)(id object))block;
 
+- (void)getValue:(void *)value atIndex:(NSUInteger)index;
+
 @end

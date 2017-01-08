@@ -53,11 +53,12 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
     }
     
     GVRBoardCell cell;
-    [self.steps[0] getValue:&cell];
+    [steps[0] getValue:&cell];
     GVRBoardPosition *position = [board positionForRow:cell.row column:cell.column];
-    if (GVRCheckerTypeMan == position.checker.type) {
+    GVRCheckerType type = position.checker.type;
+    if (GVRCheckerTypeMan == type) {
         self = [GVRTrajectory manTrajectoryWithSteps:steps];
-    } else if (GVRCheckerTypeKing == position.checker.type) {
+    } else if (GVRCheckerTypeKing == type) {
         self = [GVRTrajectory kingTrajectoryWithSteps:steps];
     }
     

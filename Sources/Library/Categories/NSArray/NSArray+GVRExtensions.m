@@ -58,7 +58,6 @@
     }];
 }
 
-
 - (NSArray *)filteredArrayUsingBlock:(BOOL (^)(id object))block {
     if (!block) {
         return nil;
@@ -71,6 +70,10 @@
     NSArray *result = [self filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:arrayFilter]];
     
     return result;
+}
+
+- (void)getValue:(void *)value atIndex:(NSUInteger)index {
+    [self[index] getValue:&value];
 }
 
 @end

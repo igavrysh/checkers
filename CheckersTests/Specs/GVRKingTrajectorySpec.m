@@ -71,11 +71,42 @@ context(@"when board is initialized", ^{
             [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
         });
     });
+    
+    context(@"when king moves 1 cell ahead to the left", ^{
+        it(@"should set success variable to true", ^{
+            GVRBoardCell initialCell = GVRBoardCellMake(2, 4);
+            GVRBoardCell finalCell = GVRBoardCellMake(3, 5);
+            
+            __block BOOL checkerMoved = NO;
+            
+            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeKing color:GVRCheckerColorWhite]
+                       atCell:initialCell];
+            
+            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
+                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
+                 
+                 [[theValue([board positionForCell:finalCell].checker.type) should]
+                  equal:theValue(GVRCheckerTypeKing)];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
+        });
+    });
 });
 
 /*
  
- it(@"when king moves 1 cell ahead to the left, should return true", ^{});
  
  it(@"when king moves 1 cell ahead to the right, should return true", ^{});
  

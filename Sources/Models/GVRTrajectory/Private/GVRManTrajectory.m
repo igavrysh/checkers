@@ -11,7 +11,7 @@
 #import "GVRBoard.h"
 #import "GVRBoardPosition.h"
 
-#import "NSError+GVRExtensions.h"
+#import "NSError+GVRTrajectory.h"
 
 @interface GVRManTrajectory ()
 
@@ -41,6 +41,14 @@
     return result;
 }
 
+- (BOOL)isAllowedDistanceToVictim:(NSInteger)distance {
+    return labs(distance) == 1 ? YES : NO;
+}
+
+- (BOOL)isAllowedSingleJumpDistance:(NSInteger)distance {
+    return distance > 0 && distance <= 1 ? YES : NO;
+}
+
 #pragma mark -
 #pragma mark Private Methods
 
@@ -66,8 +74,7 @@
     GVRBoardPosition *position = [board positionForCell:cell];
     
     if (GVRCheckerTypeKing == initialPosition.checker.type) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                     code:GVRTrajectoryTypeInconsistencyManAndKing];
+        *error = [NSError trajectoryErrorWithCode:GVRTrajectoryTypeInconsistencyManAndKing];
         
         return NO;
     }
@@ -76,15 +83,14 @@
     NSInteger deltaColumn = cell.column - previousCell.column;
     
     if (labs(deltaRow) > 2 || labs(deltaColumn) > 2) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                     code:GVRTrajectoryLongJump];
+        *error = [NSError trajectoryErrorWithCode:GVRTrajectoryLongJump];
         
         return NO;
     }
     
     if (self.steps.count > 2 && 1 == labs(deltaColumn) && 1 == labs(deltaRow)) {
-        *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                     code:GVRTrajectoryMoreThanOneOneCellMove];
+        *error = [NSError trajectoryErrorWithCode:GVRTrajectoryMoreThanOneOneCellMove];
+        
         return NO;
     }
     
@@ -93,8 +99,7 @@
         if ((GVRPlayerWhiteCheckers == player && -1 == deltaRow)
             || (GVRPlayerBlackCheckers == player && 1 == deltaRow))
         {
-            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                         code:GVRTrajectoryBackwardsMove];
+            *error = [NSError trajectoryErrorWithCode:GVRTrajectoryBackwardsMove];
             
             return NO;
         }
@@ -106,8 +111,7 @@
             if ([self isRequiredTrajectoriesAvailalbleOnBoard:board
                                                   fromPostion:initialPosition])
             {
-                *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                             code:GVRTrajectoryMissRequiredJump];
+                *error = [NSError trajectoryErrorWithCode:GVRTrajectoryMissRequiredJump];
                 return NO;
             }
             
@@ -118,22 +122,20 @@
     }
     
     if (2 == labs(deltaRow) && 2 == labs(deltaColumn)) {
-        GVRBoardPosition *victimPosition = [previousPosition positionShiftedByDeltaRows:deltaRow / labs(deltaRow)
-                                                                           deltaColumns:deltaColumn / labs(deltaColumn)];
+        GVRBoardPosition *victimPosition = [position positionShiftedByDeltaRows:-1 * deltaRow / labs(deltaRow)
+                                                                   deltaColumns:-1 * deltaColumn / labs(deltaColumn)];
         
         if (!victimPosition.isFilled) {
-            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                         code:GVRTrajectoryLongJump];
+            *error = [NSError trajectoryErrorWithCode:GVRTrajectoryLongJump];
             return NO;
         }
         
         GVRCheckerColor victimColor = victimPosition.checker.color;
         
-        if ((GVRCheckerColorWhite == victimColor  && GVRPlayerWhiteCheckers == player)
+        if ((GVRCheckerColorWhite == victimColor && GVRPlayerWhiteCheckers == player)
             || (GVRCheckerColorBlack == victimColor && GVRPlayerBlackCheckers == player))
         {
-            *error = [NSError errorWithDomain:GVRTrajectoryErrorDomain
-                                         code:GVRTrajectoryJumpOverFriendlyChecker];
+            *error = [NSError trajectoryErrorWithCode:GVRTrajectoryJumpOverFriendlyChecker];
             return NO;
         }
         

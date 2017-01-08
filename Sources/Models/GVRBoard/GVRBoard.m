@@ -12,6 +12,8 @@
 
 #import "NSArray+GVRExtensions.h"
 
+#import "GVRBlockMacros.h"
+
 @interface GVRBoard ()
 @property (nonatomic, strong)   NSMutableArray  *positions;
 @property (nonatomic, assign)   NSUInteger      size;
@@ -53,8 +55,8 @@
     
     self.positions = [[NSMutableArray alloc] initWithCapacity:size*size];
     
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
+    for (NSUInteger i = 0; i < size; i++) {
+        for (NSUInteger j = 0; j < size; j++) {
             GVRBoardPosition *position = [[GVRBoardPosition alloc] initWithRow:i column:j board:self];
             NSUInteger index = [self indexForRow:i column:j];
             self.positions[index] = position;
@@ -65,7 +67,7 @@
 }
 
 - (GVRBoardPosition *)positionForRow:(NSUInteger)row column:(NSUInteger)column {
-    NSUInteger size = self.size;
+    NSInteger size = self.size;
     if (row >= size || column >= size) {
         return  nil;
     }
@@ -87,8 +89,8 @@
     NSUInteger rows = checkerRows / 2;
     NSUInteger size = self.size;
     
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
+    for (NSUInteger i = 0; i < size; i++) {
+        for (NSUInteger j = 0; j < size; j++) {
             GVRChecker *checker = nil;
             
             GVRBoardPosition *position = self[[self indexForRow:i column:j]];
@@ -220,6 +222,72 @@
     [self.positions performBlockWithEachObject:^(GVRBoardPosition *position) {
         position.checker.markedForRemoval = NO;
     }];
+}
+
+- (void)iterateDiagonallyFromCell:(GVRBoardCell)fromCell
+                    withDirection:(GVRBoardDirection)direction
+                            block:(void (^)(GVRBoardPosition *position, BOOL *stop))block
+{
+    GVRBoardCell toCell;
+    
+    NSInteger minDistance;
+    NSUInteger size = self.size;
+    
+    if (direction.rowDirection == 1) {
+        if (direction.columnDirection == 1) {
+            minDistance = MIN(size - fromCell.row - 1, size - fromCell.column - 1);
+        } else if (direction.columnDirection == -1) {
+            minDistance = MIN(size - fromCell.row - 1, fromCell.column);
+        }
+    } else if (direction.rowDirection == -1) {
+        if (direction.columnDirection == 1) {
+            minDistance = MIN(fromCell.row, fromCell.column);
+        } else if (direction.columnDirection == 1) {
+            minDistance = MIN(fromCell.row, size - fromCell.column - 1);
+        }
+    }
+    
+    toCell.row = direction.rowDirection * minDistance;
+    toCell.column = direction.columnDirection * minDistance;
+    
+    [self iterateDiagonallyFromCell:fromCell toCell:toCell withBlock:block];
+}
+
+- (void)iterateDiagonallyFromCell:(GVRBoardCell)fromCell
+                           toCell:(GVRBoardCell)toCell
+                        withBlock:(void (^)(GVRBoardPosition *position, BOOL *stop))block
+{
+    if (labs(fromCell.row - toCell.row) != labs(fromCell.column - toCell.column)) {
+        return;
+    }
+    
+    GVRBoardPosition *fromPosition = [self positionForCell:fromCell];
+    GVRBoardPosition *toPosition = [self positionForCell:toCell];
+    GVRBoardDirection direction = [fromPosition directionToPosition:toPosition];
+    
+    for (NSInteger row = fromPosition.row;
+         row != toPosition.row + direction.rowDirection;
+         row += direction.rowDirection)
+    {
+        for (NSInteger column = fromPosition.column;
+             column != toPosition.column + direction.columnDirection;
+             column += direction.columnDirection)
+        {
+            BOOL *stop;
+            *stop = NO;
+            
+            GVRBoardPosition *position = [self positionForRow:row column:column];
+            if (!position) {
+                return;
+            }
+            
+            GVRBlockPerform(block, position, stop);
+            
+            if (*stop) {
+                return;
+            }
+        }
+    }
 }
 
 #pragma mark -

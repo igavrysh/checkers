@@ -39,6 +39,10 @@ enum {
 
 - (instancetype)initWithSteps:(NSArray *)steps board:(GVRBoard *)board;
 
+- (BOOL)isAllowedDistanceToVictim:(NSInteger)distance;
+
+- (BOOL)isAllowedSingleJumpDistance:(NSInteger)distance;
+
 - (BOOL)applyForBoard:(GVRBoard *)board
                player:(GVRPlayer)player
                 error:(NSError **)error;

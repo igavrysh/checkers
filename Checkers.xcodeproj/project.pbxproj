@@ -34,6 +34,8 @@
 		859CD14E1E195C17004BE15C /* GVRBoardSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD14D1E195C17004BE15C /* GVRBoardSpec.m */; };
 		85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
 		85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
+		85F6A8AD1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */; };
+		85F6A8AE1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */; };
 		85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F916201E1E493400F78545 /* NSError+GVRExtensions.m */; };
 		85F916221E1E493400F78545 /* NSError+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F916201E1E493400F78545 /* NSError+GVRExtensions.m */; };
 		C9D0929CCAA2161E4297CCB8 /* libPods-Checkers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A09053FF374A36068D554CD /* libPods-Checkers.a */; };
@@ -90,6 +92,8 @@
 		859CD14D1E195C17004BE15C /* GVRBoardSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoardSpec.m; sourceTree = "<group>"; };
 		85F48FA11E1B2307004FD8D1 /* NSArray+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+GVRExtensions.h"; sourceTree = "<group>"; };
 		85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GVRExtensions.m"; sourceTree = "<group>"; };
+		85F6A8AB1E22574100FE07A1 /* NSError+GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVRTrajectory.h"; sourceTree = "<group>"; };
+		85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GVRTrajectory.m"; sourceTree = "<group>"; };
 		85F9161F1E1E493400F78545 /* NSError+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVRExtensions.h"; sourceTree = "<group>"; };
 		85F916201E1E493400F78545 /* NSError+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GVRExtensions.m"; sourceTree = "<group>"; };
 		BADAC0206DD4740F4AA0FC2D /* Pods-CheckersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CheckersTests/Pods-CheckersTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 				855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */,
 				855F96501E1BAB3F00FC6F1F /* GVRKingTrajectory.h */,
 				855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */,
+				85F6A8AB1E22574100FE07A1 /* NSError+GVRTrajectory.h */,
+				85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -572,6 +578,7 @@
 				859CD1451E195AF9004BE15C /* GVRBoard.m in Sources */,
 				858F5BA21E17CCE100DB6D13 /* ViewController.m in Sources */,
 				859CD1491E195AF9004BE15C /* GVRChecker.m in Sources */,
+				85F6A8AD1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,
 				85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */,
 				858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */,
 				855F964E1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
@@ -596,6 +603,7 @@
 				859CD1481E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
 				855F964F1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
 				855F964A1E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
+				85F6A8AE1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,
 				859CD14A1E195AF9004BE15C /* GVRChecker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

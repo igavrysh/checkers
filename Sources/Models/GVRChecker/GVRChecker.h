@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 typedef enum : NSUInteger {
+    GVRCheckerTypeNone,
     GVRCheckerTypeMan,
     GVRCheckerTypeKing
 } GVRCheckerType;
 
 typedef enum : NSUInteger {
+    GVRCheckerColorNone,
     GVRCheckerColorWhite,
     GVRCheckerColorBlack
 } GVRCheckerColor;

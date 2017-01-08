@@ -18,13 +18,25 @@ typedef enum : NSUInteger {
 } GVRBoardPositionColor;
 
 struct GVRBoardCell {
-    NSUInteger row;
-    NSUInteger column;
+    NSInteger row;
+    NSInteger column;
 };
 
 typedef struct GVRBoardCell GVRBoardCell;
 
+struct GVRBoardDirection {
+    NSInteger rowDirection;
+    NSInteger columnDirection;
+};
+
+typedef struct GVRBoardDirection GVRBoardDirection;
+
 extern GVRBoardCell GVRBoardCellMake(NSUInteger row, NSUInteger column);
+
+extern GVRBoardDirection GVRBoardDirectionMake(NSInteger rowDirectin,
+                                               NSInteger columnDirection);
+
+extern BOOL GVRIsDiagonalDistance(GVRBoardCell cell1, GVRBoardCell cell2);
 
 @interface GVRBoardPosition : NSObject
 @property (nonatomic, readonly)         NSUInteger              row;
@@ -40,7 +52,18 @@ extern GVRBoardCell GVRBoardCellMake(NSUInteger row, NSUInteger column);
 
 - (BOOL)isEqualToPosition:(GVRBoardPosition *)position;
 
-- (instancetype)positionShiftedByDeltaRows:(NSInteger)deltaRows
-                              deltaColumns:(NSUInteger)deltaColumns;
+- (instancetype)positionShiftedByDeltaRows:(NSInteger)deltaRows deltaColumns:(NSInteger)deltaColumns;
+
+- (instancetype)positionShiftedByDirection:(GVRBoardDirection)direction distance:(NSInteger)distance;
+
+- (NSInteger)rowDeltaToPosition:(GVRBoardPosition *)position;
+
+- (NSInteger)columnDeltaToPosition:(GVRBoardPosition *)position;
+
+- (NSInteger)rowDirectionToPosition:(GVRBoardPosition *)position;
+
+- (NSInteger)columnDirectionToPosition:(GVRBoardPosition *)position;
+
+- (GVRBoardDirection)directionToPosition:(GVRBoardPosition *)position;
 
 @end
