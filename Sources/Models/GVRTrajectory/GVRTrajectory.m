@@ -94,6 +94,7 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
     [self.steps[stepIndex - 1] getValue:&previousCell];
     
     GVRBoardPosition *initialPosition = [board positionForCell:initialCell];
+    initialPosition.checker.markedForRemoval = YES;
     GVRBoardPosition *position = [board positionForCell:cell];
     
     if (GVRBoardPositionColorWhite == position.color) {
@@ -143,6 +144,14 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
     }
     
     return YES;
+}
+
+- (BOOL)isAllowedDistanceToVictim:(NSInteger)distance {
+    return NO;
+}
+
+- (BOOL)isAllowedSingleJumpDistance:(NSInteger)distance {
+    return NO;
 }
 
 @end

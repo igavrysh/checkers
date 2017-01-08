@@ -228,27 +228,7 @@
                     withDirection:(GVRBoardDirection)direction
                             block:(void (^)(GVRBoardPosition *position, BOOL *stop))block
 {
-    GVRBoardCell toCell;
-    
-    NSInteger minDistance;
-    NSUInteger size = self.size;
-    
-    if (direction.rowDirection == 1) {
-        if (direction.columnDirection == 1) {
-            minDistance = MIN(size - fromCell.row - 1, size - fromCell.column - 1);
-        } else if (direction.columnDirection == -1) {
-            minDistance = MIN(size - fromCell.row - 1, fromCell.column);
-        }
-    } else if (direction.rowDirection == -1) {
-        if (direction.columnDirection == 1) {
-            minDistance = MIN(fromCell.row, fromCell.column);
-        } else if (direction.columnDirection == 1) {
-            minDistance = MIN(fromCell.row, size - fromCell.column - 1);
-        }
-    }
-    
-    toCell.row = direction.rowDirection * minDistance;
-    toCell.column = direction.columnDirection * minDistance;
+    GVRBoardCell toCell = GVREdgeCellMake(self.size, fromCell, direction);
     
     [self iterateDiagonallyFromCell:fromCell toCell:toCell withBlock:block];
 }
@@ -273,17 +253,16 @@
              column != toPosition.column + direction.columnDirection;
              column += direction.columnDirection)
         {
-            BOOL *stop;
-            *stop = NO;
+            BOOL stop = NO;
             
             GVRBoardPosition *position = [self positionForRow:row column:column];
             if (!position) {
                 return;
             }
             
-            GVRBlockPerform(block, position, stop);
+            GVRBlockPerform(block, position, &stop);
             
-            if (*stop) {
+            if (stop) {
                 return;
             }
         }

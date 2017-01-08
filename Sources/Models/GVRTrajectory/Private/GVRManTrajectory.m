@@ -173,14 +173,9 @@
 - (BOOL)isRequiredTrajectoriesAvailalbleOnBoard:(GVRBoard *)board
                                     fromPostion:(GVRBoardPosition *)position
 {
-    BOOL (^isTrajectoryAvailable)(NSInteger, NSInteger)
-    = ^BOOL(NSInteger deltaRow, NSInteger deltaColumn) {
-        
-        GVRBoardPosition *victimPosition = [position positionShiftedByDeltaRows:deltaRow
-                                                                   deltaColumns:deltaColumn];
-        
-        GVRBoardPosition *nextPosition = [position positionShiftedByDeltaRows:2 * deltaRow
-                                                                 deltaColumns:2 * deltaColumn];
+    BOOL (^isTrajectoryAvailable)(GVRBoardDirection) = ^BOOL(GVRBoardDirection direction) {
+        GVRBoardPosition *victimPosition = [position positionShiftedByDirection:direction distance:1];
+        GVRBoardPosition *nextPosition = [position positionShiftedByDirection:direction distance:2];
         
         if (victimPosition
             && nextPosition
@@ -195,10 +190,10 @@
         return NO;
     };
     
-    return isTrajectoryAvailable(+1, +1)
-        || isTrajectoryAvailable(+1, -1)
-        || isTrajectoryAvailable(-1, +1)
-        || isTrajectoryAvailable(-1, -1);
+    return isTrajectoryAvailable(GVRBoardDirectionMake(+1, +1))
+        || isTrajectoryAvailable(GVRBoardDirectionMake(+1, -1))
+        || isTrajectoryAvailable(GVRBoardDirectionMake(-1, +1))
+        || isTrajectoryAvailable(GVRBoardDirectionMake(-1, -1));
 }
 
 @end

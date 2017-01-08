@@ -1,5 +1,5 @@
 //
-//  NSError+GVRTrajectory.h
+//  NSArray+GVRTrajectory.h
 //  Checkers
 //
 //  Created by Ievgen on 1/8/17.
@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSError (GVRTrajectory)
+#import "GVRBoardPosition.h"
 
-+ (instancetype)trajectoryErrorWithCode:(NSInteger)code;
+@interface NSArray (GVRTrajectory)
+
+- (GVRBoardCell)cellAtIndex:(NSUInteger)index;
 
 @end

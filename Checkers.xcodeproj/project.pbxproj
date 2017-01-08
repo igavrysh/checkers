@@ -36,6 +36,8 @@
 		85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
 		85F6A8AD1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */; };
 		85F6A8AE1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */; };
+		85F6A8B11E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */; };
+		85F6A8B21E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */; };
 		85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F916201E1E493400F78545 /* NSError+GVRExtensions.m */; };
 		85F916221E1E493400F78545 /* NSError+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F916201E1E493400F78545 /* NSError+GVRExtensions.m */; };
 		C9D0929CCAA2161E4297CCB8 /* libPods-Checkers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A09053FF374A36068D554CD /* libPods-Checkers.a */; };
@@ -94,6 +96,8 @@
 		85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GVRExtensions.m"; sourceTree = "<group>"; };
 		85F6A8AB1E22574100FE07A1 /* NSError+GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVRTrajectory.h"; sourceTree = "<group>"; };
 		85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GVRTrajectory.m"; sourceTree = "<group>"; };
+		85F6A8AF1E22B35300FE07A1 /* NSArray+GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+GVRTrajectory.h"; sourceTree = "<group>"; };
+		85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GVRTrajectory.m"; sourceTree = "<group>"; };
 		85F9161F1E1E493400F78545 /* NSError+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVRExtensions.h"; sourceTree = "<group>"; };
 		85F916201E1E493400F78545 /* NSError+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GVRExtensions.m"; sourceTree = "<group>"; };
 		BADAC0206DD4740F4AA0FC2D /* Pods-CheckersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CheckersTests/Pods-CheckersTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */,
 				85F6A8AB1E22574100FE07A1 /* NSError+GVRTrajectory.h */,
 				85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */,
+				85F6A8AF1E22B35300FE07A1 /* NSArray+GVRTrajectory.h */,
+				85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -584,6 +590,7 @@
 				855F964E1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
 				855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
 				858F5B9C1E17CCE100DB6D13 /* main.m in Sources */,
+				85F6A8B11E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +598,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85F6A8B21E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */,
 				8567AC7B1E1A60700036A95F /* GVRGameSpec.m in Sources */,
 				859CD14C1E195AF9004BE15C /* GVRGame.m in Sources */,
 				85611E281E1F2A780029EB41 /* GVRManTrajectorySpec.m in Sources */,
