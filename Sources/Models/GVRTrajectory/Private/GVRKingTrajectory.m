@@ -186,19 +186,19 @@
              
              GVRBoardPosition *nextPosition = [position positionShiftedByDirection:GVRBoardDirectionUsingCells(fromCell, toCell)
                                                                           distance:1];
-             if (!nextPosition.isFilled) {
+             if (nextPosition.isFilled) {
                  *error = [NSError trajectoryErrorWithCode:GVRTrajectoryLongJump];
                  
                  return;
              }
              
              if (![self isAllowedDistanceToVictim:(NSInteger)position.row - (NSInteger)fromCell.row]
-                 || ![self isAllowedDistanceToVictim:(NSInteger)toCell.row - (NSInteger)position.row]) {
+                 || ![self isAllowedDistanceToVictim:(NSInteger)toCell.row - (NSInteger)position.row])
+             {
                  *error = [NSError trajectoryErrorWithCode:GVRTrajectoryLongJump];
                  
                  return;
-             }
-             else if ((GVRCheckerColorWhite == color && GVRPlayerBlackCheckers == player)
+             } else if ((GVRCheckerColorWhite == color && GVRPlayerBlackCheckers == player)
                 || (GVRCheckerColorBlack == color && GVRPlayerWhiteCheckers == player))
              {
                  victimPosition = position;
@@ -235,7 +235,8 @@
     }
     
     GVRBoardPosition *victimPosition = [self victimPositionOnBoard:board
-                                                          fromCell:previousCell toCell:cell
+                                                          fromCell:previousCell
+                                                            toCell:cell
                                                          forPlayer:player
                                                              error:error];
     if (*error) {

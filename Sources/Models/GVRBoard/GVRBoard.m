@@ -245,26 +245,21 @@
     GVRBoardPosition *toPosition = [self positionForCell:toCell];
     GVRBoardDirection direction = [fromPosition directionToPosition:toPosition];
     
-    for (NSInteger row = fromPosition.row;
+    for (NSInteger row = fromPosition.row, column = fromPosition.column;
          row != toPosition.row + direction.rowDirection;
-         row += direction.rowDirection)
+         row += direction.rowDirection, column += direction.columnDirection)
     {
-        for (NSInteger column = fromPosition.column;
-             column != toPosition.column + direction.columnDirection;
-             column += direction.columnDirection)
-        {
-            BOOL stop = NO;
-            
-            GVRBoardPosition *position = [self positionForRow:row column:column];
-            if (!position) {
-                return;
-            }
-            
-            GVRBlockPerform(block, position, &stop);
-            
-            if (stop) {
-                return;
-            }
+        BOOL stop = NO;
+        
+        GVRBoardPosition *position = [self positionForRow:row column:column];
+        if (!position) {
+            return;
+        }
+        
+        GVRBlockPerform(block, position, &stop);
+        
+        if (stop) {
+            return;
         }
     }
 }
