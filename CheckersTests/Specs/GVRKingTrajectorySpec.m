@@ -260,11 +260,39 @@ context(@"when board is initialized", ^{
             [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beNo];
         });
     });
+    
+    context(@"when white king jumps over at least one white men in his move, and does not proceed with required jumps", ^{
+        it(@"should set succes variable to false", ^ {
+            GVRBoardCell initialCell = GVRBoardCellMake(0, 0);
+            GVRBoardCell opponent1Cell = GVRBoardCellMake(2, 2);
+            GVRBoardCell opponent2Cell = GVRBoardCellMake(1, 5);
+            GVRBoardCell finalCell = GVRBoardCellMake(3, 3);
+            [board addChecker:[GVRChecker whiteKing] atCell:initialCell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent1Cell];
+            [board addChecker:[GVRChecker blackKing] atCell:opponent2Cell];
+            
+            __block BOOL checkerMoved = YES;
+            [game moveChekerBySteps:@[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]]
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beYes];
+                 [[theValue([[board positionForCell:opponent1Cell] isFilled]) should] beYes];
+                 [[theValue([[board positionForCell:opponent2Cell] isFilled]) should] beYes];
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beNo];
+                 [[theValue([board positionForCell:initialCell].checker.type) should] equal:theValue(GVRCheckerTypeKing)];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:opponent1Cell];
+                 [board removeCheckerAtCell:opponent2Cell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beNo];
+        
+        });
+    });
 });
-
-/*
- 
- it(@"when white king jumps over at least one white men in his move, should return false", ^{});
- */
 
 SPEC_END

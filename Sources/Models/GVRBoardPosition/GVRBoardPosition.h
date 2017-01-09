@@ -41,6 +41,8 @@ extern GVRBoardDirection GVRBoardDirectionUsingCells(GVRBoardCell fromCell,
 
 extern BOOL GVRIsDiagonalDistance(GVRBoardCell cell1, GVRBoardCell cell2);
 
+extern GVRBoardCell GVRBoardCellShift(GVRBoardCell cell, GVRBoardDirection direction, NSInteger delta);
+
 extern GVRBoardCell GVREdgeCellMake(NSUInteger size,
                                     GVRBoardCell fromCell,
                                     GVRBoardDirection direction);

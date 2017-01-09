@@ -259,11 +259,12 @@
         if (stepIndex < self.steps.count - 1) {
             result = [self __applyForBoard:board stepIndex:stepIndex + 1 player:player error:error];
         } else {
-            
             if (victimPosition) {
+                GVRBoardCell victimCell = [victimPosition cell];
+                GVRBoardDirection dir = GVRBoardDirectionUsingCells(victimCell, cell);
                 result = ![self isReqMoveAvailalbleOnBoard:board
-                                               fromCell:previousCell
-                                              direction:GVRBoardDirectionUsingCells(previousCell, cell)
+                                               fromCell:GVRBoardCellShift(victimCell, dir, 1)
+                                              direction:dir
                                                     player:player];
             }
             

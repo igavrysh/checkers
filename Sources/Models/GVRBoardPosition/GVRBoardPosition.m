@@ -37,6 +37,16 @@ GVRBoardDirection GVRBoardDirectionUsingCells(GVRBoardCell fromCell,
     return GVRBoardDirectionMake(deltaRow/labs(deltaColumn), deltaColumn/labs(deltaColumn));
 }
 
+GVRBoardCell GVRBoardCellShift(GVRBoardCell cell,
+                               GVRBoardDirection direction,
+                               NSInteger delta) {
+    GVRBoardCell shiftedCell;
+    shiftedCell.row = cell.row + direction.rowDirection * delta;
+    shiftedCell.column = cell.column + direction.columnDirection * delta;
+    
+    return shiftedCell;
+}
+
 BOOL GVRIsDiagonalDistance(GVRBoardCell cell1, GVRBoardCell cell2) {
     return labs((NSInteger)cell1.row - (NSInteger)cell2.row)
         == labs((NSInteger)cell1.column - (NSInteger)cell2.column)
@@ -65,8 +75,8 @@ GVRBoardCell GVREdgeCellMake(NSUInteger size,
         }
     }
     
-    toCell.row = direction.rowDirection * minDistance;
-    toCell.column = direction.columnDirection * minDistance;
+    toCell.row = fromCell.row + direction.rowDirection * minDistance;
+    toCell.column = fromCell.row + direction.columnDirection * minDistance;
     
     return toCell;
 }
@@ -147,13 +157,13 @@ GVRBoardCell GVREdgeCellMake(NSUInteger size,
 - (NSInteger)rowDirectionToPosition:(GVRBoardPosition *)position {
     NSInteger delta = [self rowDeltaToPosition:position];
     
-    return delta / labs(delta);
+    return delta != 0 ? delta / labs(delta) : 0;
 }
 
 - (NSInteger)columnDirectionToPosition:(GVRBoardPosition *)position {
     NSInteger delta = [self columnDeltaToPosition:position];
     
-    return delta / labs(delta);
+    return delta != 0 ? delta / labs(delta) : 0;
 }
 
 - (GVRBoardDirection)directionToPosition:(GVRBoardPosition *)position {
