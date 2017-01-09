@@ -17,11 +17,25 @@
 @implementation GVRChecker
 
 #pragma mark -
-#pragma mark Class Method
+#pragma mark Class Methods
 
-+ (instancetype)checkerWithType:(GVRCheckerType)type
-                          color:(GVRCheckerColor)color
-{
++ (instancetype)whiteKing {
+    return [self checkerWithType:GVRCheckerTypeKing color:GVRCheckerColorWhite];
+}
+
++ (instancetype)blackKing {
+    return [self checkerWithType:GVRCheckerTypeKing color:GVRCheckerColorBlack];
+}
+
++ (instancetype)whiteMan {
+    return [self checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite];
+}
+
++ (instancetype)blackMan {
+    return [self checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack];
+}
+
++ (instancetype)checkerWithType:(GVRCheckerType)type color:(GVRCheckerColor)color {
     return [[self alloc] initWithType:type color:color];
 }
 
