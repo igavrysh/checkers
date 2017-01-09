@@ -15,6 +15,8 @@
 #import "GVRChecker.h"
 #import "GVRBoardPosition.h"
 
+#import "NSValue+GVRExtensions.h"
+
 SPEC_BEGIN(GVRManTrajectorySpec)
 
 __block GVRBoard *board = nil;
@@ -46,12 +48,9 @@ context(@"when board is initialized", ^{
             GVRBoardCell finalCell = GVRBoardCellMake(1, 1);
             
             __block BOOL checkerMoved = NO;
-            
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -73,14 +72,12 @@ context(@"when board is initialized", ^{
         it(@"should successfully move checker", ^{
             GVRBoardCell initialCell = GVRBoardCellMake(0, 4);
             GVRBoardCell finalCell = GVRBoardCellMake(1, 3);
-            
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
             
             __block BOOL checkerMoved = NO;
             
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -108,8 +105,8 @@ context(@"when board is initialized", ^{
             
             __block BOOL checkerMoved = YES;
             
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -132,14 +129,12 @@ context(@"when board is initialized", ^{
         it(@"should return false and checker should stay on initial position", ^{
             GVRBoardCell initialCell = GVRBoardCellMake(4, 4);
             GVRBoardCell finalCell = GVRBoardCellMake(3, 3);
-            
             [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
                        atCell:initialCell];
             
             __block BOOL checkerMoved = YES;
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -163,12 +158,10 @@ context(@"when board is initialized", ^{
             GVRBoardCell finalCell = GVRBoardCellMake(8, 0);
             
             __block BOOL checkerMoved = NO;
-            
             [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
                        atCell:initialCell];
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerBlackCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -190,14 +183,12 @@ context(@"when board is initialized", ^{
         it(@"should successfully move checker", ^{
             GVRBoardCell initialCell = GVRBoardCellMake(9, 1);
             GVRBoardCell finalCell = GVRBoardCellMake(8, 2);
-            
             [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
                        atCell:initialCell];
             
             __block BOOL checkerMoved = NO;
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerBlackCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -219,14 +210,11 @@ context(@"when board is initialized", ^{
         it(@"should return false and checker should stay on initial position", ^{
             GVRBoardCell initialCell = GVRBoardCellMake(8, 2);
             GVRBoardCell finalCell = GVRBoardCellMake(9, 1);
-            
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:initialCell];
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
             
             __block BOOL checkerMoved = YES;
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerBlackCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -248,14 +236,11 @@ context(@"when board is initialized", ^{
         it(@"should return false and checker should stay on initial position", ^{
             GVRBoardCell initialCell = GVRBoardCellMake(8, 0);
             GVRBoardCell finalCell = GVRBoardCellMake(9, 1);
-            
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:initialCell];
+            [board addChecker:[GVRChecker blackMan] atCell:initialCell];
             
             __block BOOL checkerMoved = YES;
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerBlackCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -279,12 +264,9 @@ context(@"when board is initialized", ^{
             GVRBoardCell finalCell = GVRBoardCellMake(1, 1);
             
             __block BOOL checkerMoved = YES;
-            
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerBlackCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -309,11 +291,12 @@ context(@"when board is initialized", ^{
             
             __block BOOL checkerMoved = YES;
             
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
+            [board addChecker:[GVRChecker blackMan]
                        atCell:initialCell];
             
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell],
+                              [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -338,11 +321,10 @@ context(@"when board is initialized", ^{
             
             __block BOOL checkerMoved = YES;
             
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
             
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            [game moveChekerBySteps:@[[NSValue valueWithCell:initialCell],
+                                      [NSValue valueWithCell:finalCell]]
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -369,9 +351,8 @@ context(@"when board is initialized", ^{
             
             [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
                        atCell:initialCell];
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -401,8 +382,8 @@ context(@"when board is initialized", ^{
             [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
                        atCell:finalCell];
             
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -428,13 +409,11 @@ context(@"when board is initialized", ^{
 
             __block BOOL checkerMoved = NO;
             
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:opponentCell];
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponentCell];
             
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -446,8 +425,7 @@ context(@"when board is initialized", ^{
                  
                  [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
                  
-                 [[theValue([board positionForCell:finalCell].checker.color) should]
-                  equal:theValue(GVRCheckerColorWhite)];
+                 [[theValue([board positionForCell:finalCell].checker.color) should] equal:theValue(GVRCheckerColorWhite)];
                  
                  [board removeCheckerAtCell:initialCell];
                  [board removeCheckerAtCell:opponentCell];
@@ -466,12 +444,12 @@ context(@"when board is initialized", ^{
             
             __block BOOL checkerMoved = YES;
             
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
             
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&interimCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell],
+                              [NSValue valueWithCell:interimCell],
+                              [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -499,15 +477,11 @@ context(@"when board is initialized", ^{
             GVRBoardCell finalCell = GVRBoardCellMake(3, 3);
             
             __block BOOL checkerMoved = YES;
-            
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:opponentCell];
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&interimCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponentCell];
+            [game moveChekerBySteps:@[[NSValue valueWithCell:initialCell],
+                                      [NSValue valueWithCell:interimCell],
+                                      [NSValue valueWithCell:finalCell]]
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -540,15 +514,12 @@ context(@"when board is initialized", ^{
             
             __block BOOL checkerMoved = YES;
             
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:opponent1Cell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:opponent2Cell];
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent1Cell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent2Cell];
             
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&interimCell objCType:@encode(GVRBoardCell)]]
+            [game moveChekerBySteps:@[[NSValue valueWithCell:initialCell],
+                                      [NSValue valueWithCell:interimCell]]
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -581,17 +552,13 @@ context(@"when board is initialized", ^{
             GVRBoardCell finalCell = GVRBoardCellMake(4, 0);
             
             __block BOOL checkerMoved = NO;
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent1Cell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent2Cell];
             
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:opponent1Cell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:opponent2Cell];
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&interimCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            [game moveChekerBySteps:@[[NSValue valueWithCell:initialCell],
+                                      [NSValue valueWithCell:interimCell],
+                                      [NSValue valueWithCell:finalCell]]
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -622,24 +589,16 @@ context(@"when board is initialized", ^{
         it(@"should kill men and set success flag to true", ^{
             GVRBoardCell initialCell = GVRBoardCellMake(0, 0);
             GVRBoardCell finalCell = GVRBoardCellMake(2, 2);
-            
             GVRBoardCell opponent1Cell = GVRBoardCellMake(1, 1);
             GVRBoardCell opponent2Cell = GVRBoardCellMake(3, 1);
             GVRBoardCell opponent3Cell = GVRBoardCellMake(4, 0);
             
             __block BOOL checkerMoved = NO;
-            
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:opponent1Cell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:opponent2Cell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:opponent3Cell];
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&finalCell objCType:@encode(GVRBoardCell)]]
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent1Cell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent2Cell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent3Cell];
+            [game moveChekerBySteps:@[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]]
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success) {
                   checkerMoved = success;
@@ -670,31 +629,23 @@ context(@"when board is initialized", ^{
             GVRBoardCell interim1Cell = GVRBoardCellMake(4, 2);
             GVRBoardCell interim2Cell = GVRBoardCellMake(2, 4);
             GVRBoardCell interim3Cell = GVRBoardCellMake(0, 2);
-            
             GVRBoardCell opponent1Cell = GVRBoardCellMake(3, 1);
             GVRBoardCell opponent2Cell = GVRBoardCellMake(3, 3);
             GVRBoardCell opponent3Cell = GVRBoardCellMake(1, 3);
             GVRBoardCell opponent4Cell = GVRBoardCellMake(1, 1);
             
             __block BOOL checkerMoved = NO;
-            
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorBlack]
-                       atCell:initialCell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:opponent1Cell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:opponent2Cell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:opponent3Cell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:opponent4Cell];
-            
-            [game moveChekerBySteps:@[[NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&interim1Cell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&interim2Cell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&interim3Cell objCType:@encode(GVRBoardCell)],
-                                      [NSValue valueWithBytes:&initialCell objCType:@encode(GVRBoardCell)]]
-                          forPlayer:GVRPlayerBlackCheckers
+            [board addChecker:[GVRChecker blackMan] atCell:initialCell];
+            [board addChecker:[GVRChecker whiteMan] atCell:opponent1Cell];
+            [board addChecker:[GVRChecker whiteMan] atCell:opponent2Cell];
+            [board addChecker:[GVRChecker whiteMan] atCell:opponent3Cell];
+            [board addChecker:[GVRChecker whiteMan] atCell:opponent4Cell];
+            NSArray *path = @[[NSValue valueWithCell:initialCell],
+                              [NSValue valueWithCell:interim1Cell],
+                              [NSValue valueWithCell:interim2Cell],
+                              [NSValue valueWithCell:interim3Cell],
+                              [NSValue valueWithCell:initialCell]];
+            [game moveChekerBySteps:path forPlayer:GVRPlayerBlackCheckers
               withCompletionHandler:^(BOOL success)
              {
                  checkerMoved = success;

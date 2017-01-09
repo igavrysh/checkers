@@ -55,9 +55,7 @@ extern GVRBoardCell GVREdgeCellMake(NSUInteger size,
 @property (nonatomic, readonly)         GVRBoardPositionColor   color;
 @property (nonatomic, readonly, getter=isFilled)    BOOL        isFilled;
 
-- (instancetype)initWithRow:(NSUInteger)row
-                     column:(NSUInteger)column
-                      board:(GVRBoard *)board;
+- (instancetype)initWithRow:(NSUInteger)row column:(NSUInteger)column board:(GVRBoard *)board;
 
 - (BOOL)isEqualToPosition:(GVRBoardPosition *)position;
 
