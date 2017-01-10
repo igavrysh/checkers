@@ -47,9 +47,4 @@ enum {
                player:(GVRPlayer)player
                 error:(NSError **)error;
 
-- (BOOL)__applyForBoard:(GVRBoard *)board
-            stepIndex:(NSUInteger)stepIndex
-               player:(GVRPlayer)player
-                error:(NSError **)error;
-
 @end
