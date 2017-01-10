@@ -7,19 +7,72 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B30D883B0E8AC2615AD1412 /* libPods-CheckersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F0A1BC67157B0A29F86F09 /* libPods-CheckersTests.a */; };
+		855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96481E1BA49200FC6F1F /* GVRTrajectory.m */; };
+		855F964A1E1BA49200FC6F1F /* GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96481E1BA49200FC6F1F /* GVRTrajectory.m */; };
+		855F964E1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */; };
+		855F964F1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */; };
+		855F96521E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */; };
+		855F96531E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */; };
+		85611E281E1F2A780029EB41 /* GVRManTrajectorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 85611E271E1F2A780029EB41 /* GVRManTrajectorySpec.m */; };
+		85611E2A1E1F2B030029EB41 /* GVRKingTrajectorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 85611E291E1F2B030029EB41 /* GVRKingTrajectorySpec.m */; };
+		8567AC7B1E1A60700036A95F /* GVRGameSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 8567AC7A1E1A60700036A95F /* GVRGameSpec.m */; };
 		858F5B9C1E17CCE100DB6D13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5B9B1E17CCE100DB6D13 /* main.m */; };
 		858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5B9E1E17CCE100DB6D13 /* AppDelegate.m */; };
 		858F5BA21E17CCE100DB6D13 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5BA11E17CCE100DB6D13 /* ViewController.m */; };
 		858F5BBB1E17CEA600DB6D13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 858F5BB21E17CEA600DB6D13 /* Assets.xcassets */; };
 		858F5BBC1E17CEA600DB6D13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 858F5BB31E17CEA600DB6D13 /* LaunchScreen.storyboard */; };
 		858F5BBD1E17CEA600DB6D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 858F5BB51E17CEA600DB6D13 /* Main.storyboard */; };
-		858F5BC11E17CFC000DB6D13 /* GVRGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5BC01E17CFC000DB6D13 /* GVRGame.m */; };
-		858F5BC51E17F61F00DB6D13 /* GVRChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5BC41E17F61F00DB6D13 /* GVRChecker.m */; };
-		858F5BCA1E17F7C000DB6D13 /* GVRBoardPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5BC91E17F7C000DB6D13 /* GVRBoardPosition.m */; };
-		858F5BCE1E17FF8000DB6D13 /* GVRBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5BCD1E17FF8000DB6D13 /* GVRBoard.m */; };
+		859CD1451E195AF9004BE15C /* GVRBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD13B1E195AF9004BE15C /* GVRBoard.m */; };
+		859CD1461E195AF9004BE15C /* GVRBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD13B1E195AF9004BE15C /* GVRBoard.m */; };
+		859CD1471E195AF9004BE15C /* GVRBoardPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD13E1E195AF9004BE15C /* GVRBoardPosition.m */; };
+		859CD1481E195AF9004BE15C /* GVRBoardPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD13E1E195AF9004BE15C /* GVRBoardPosition.m */; };
+		859CD1491E195AF9004BE15C /* GVRChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD1411E195AF9004BE15C /* GVRChecker.m */; };
+		859CD14A1E195AF9004BE15C /* GVRChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD1411E195AF9004BE15C /* GVRChecker.m */; };
+		859CD14B1E195AF9004BE15C /* GVRGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD1441E195AF9004BE15C /* GVRGame.m */; };
+		859CD14C1E195AF9004BE15C /* GVRGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD1441E195AF9004BE15C /* GVRGame.m */; };
+		859CD14E1E195C17004BE15C /* GVRBoardSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD14D1E195C17004BE15C /* GVRBoardSpec.m */; };
+		85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
+		85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
+		85F6A8AD1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */; };
+		85F6A8AE1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */; };
+		85F6A8B11E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */; };
+		85F6A8B21E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */; };
+		85F6A8B61E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8B51E23109C00FE07A1 /* NSValue+GVRExtensions.m */; };
+		85F6A8B71E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8B51E23109C00FE07A1 /* NSValue+GVRExtensions.m */; };
+		85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F916201E1E493400F78545 /* NSError+GVRExtensions.m */; };
+		85F916221E1E493400F78545 /* NSError+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F916201E1E493400F78545 /* NSError+GVRExtensions.m */; };
+		C9D0929CCAA2161E4297CCB8 /* libPods-Checkers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A09053FF374A36068D554CD /* libPods-Checkers.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		859CD1331E195967004BE15C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 858F5B8F1E17CCE000DB6D13 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 858F5B961E17CCE000DB6D13;
+			remoteInfo = Checkers;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		085130B305A50ED5598EFA6C /* Pods-CheckersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CheckersTests/Pods-CheckersTests.release.xcconfig"; sourceTree = "<group>"; };
+		2F14723392F3B5A9D28B8168 /* Pods-Checkers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Checkers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Checkers/Pods-Checkers.debug.xcconfig"; sourceTree = "<group>"; };
+		35F0A1BC67157B0A29F86F09 /* libPods-CheckersTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CheckersTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A09053FF374A36068D554CD /* libPods-Checkers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Checkers.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E2266F6134EA6CB511DB17 /* Pods-Checkers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Checkers.release.xcconfig"; path = "Pods/Target Support Files/Pods-Checkers/Pods-Checkers.release.xcconfig"; sourceTree = "<group>"; };
+		855F96471E1BA49200FC6F1F /* GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRTrajectory.h; sourceTree = "<group>"; };
+		855F96481E1BA49200FC6F1F /* GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRTrajectory.m; sourceTree = "<group>"; };
+		855F964C1E1BAB2C00FC6F1F /* GVRManTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRManTrajectory.h; sourceTree = "<group>"; };
+		855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRManTrajectory.m; sourceTree = "<group>"; };
+		855F96501E1BAB3F00FC6F1F /* GVRKingTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRKingTrajectory.h; sourceTree = "<group>"; };
+		855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRKingTrajectory.m; sourceTree = "<group>"; };
+		85611E271E1F2A780029EB41 /* GVRManTrajectorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRManTrajectorySpec.m; sourceTree = "<group>"; };
+		85611E291E1F2B030029EB41 /* GVRKingTrajectorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRKingTrajectorySpec.m; sourceTree = "<group>"; };
+		8567AC7A1E1A60700036A95F /* GVRGameSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRGameSpec.m; sourceTree = "<group>"; };
+		8567AC7E1E1A61AD0036A95F /* GVRBlockMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBlockMacros.h; sourceTree = "<group>"; };
+		8567AC831E1A62060036A95F /* GVRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRMacros.h; sourceTree = "<group>"; };
+		8567AC881E1A624F0036A95F /* GVRCompilerMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRCompilerMacros.h; sourceTree = "<group>"; };
 		858F5B971E17CCE100DB6D13 /* Checkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		858F5B9B1E17CCE100DB6D13 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		858F5B9D1E17CCE100DB6D13 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -30,14 +83,28 @@
 		858F5BB21E17CEA600DB6D13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		858F5BB41E17CEA600DB6D13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		858F5BB61E17CEA600DB6D13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		858F5BBF1E17CFC000DB6D13 /* GVRGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRGame.h; sourceTree = "<group>"; };
-		858F5BC01E17CFC000DB6D13 /* GVRGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRGame.m; sourceTree = "<group>"; };
-		858F5BC31E17F61F00DB6D13 /* GVRChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRChecker.h; sourceTree = "<group>"; };
-		858F5BC41E17F61F00DB6D13 /* GVRChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRChecker.m; sourceTree = "<group>"; };
-		858F5BC81E17F7C000DB6D13 /* GVRBoardPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBoardPosition.h; sourceTree = "<group>"; };
-		858F5BC91E17F7C000DB6D13 /* GVRBoardPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoardPosition.m; sourceTree = "<group>"; };
-		858F5BCC1E17FF8000DB6D13 /* GVRBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBoard.h; sourceTree = "<group>"; };
-		858F5BCD1E17FF8000DB6D13 /* GVRBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoard.m; sourceTree = "<group>"; };
+		859CD12E1E195967004BE15C /* CheckersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		859CD1321E195967004BE15C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		859CD13A1E195AF9004BE15C /* GVRBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBoard.h; sourceTree = "<group>"; };
+		859CD13B1E195AF9004BE15C /* GVRBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoard.m; sourceTree = "<group>"; };
+		859CD13D1E195AF9004BE15C /* GVRBoardPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBoardPosition.h; sourceTree = "<group>"; };
+		859CD13E1E195AF9004BE15C /* GVRBoardPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoardPosition.m; sourceTree = "<group>"; };
+		859CD1401E195AF9004BE15C /* GVRChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRChecker.h; sourceTree = "<group>"; };
+		859CD1411E195AF9004BE15C /* GVRChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRChecker.m; sourceTree = "<group>"; };
+		859CD1431E195AF9004BE15C /* GVRGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRGame.h; sourceTree = "<group>"; };
+		859CD1441E195AF9004BE15C /* GVRGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRGame.m; sourceTree = "<group>"; };
+		859CD14D1E195C17004BE15C /* GVRBoardSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoardSpec.m; sourceTree = "<group>"; };
+		85F48FA11E1B2307004FD8D1 /* NSArray+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+GVRExtensions.h"; sourceTree = "<group>"; };
+		85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GVRExtensions.m"; sourceTree = "<group>"; };
+		85F6A8AB1E22574100FE07A1 /* NSError+GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVRTrajectory.h"; sourceTree = "<group>"; };
+		85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GVRTrajectory.m"; sourceTree = "<group>"; };
+		85F6A8AF1E22B35300FE07A1 /* NSArray+GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+GVRTrajectory.h"; sourceTree = "<group>"; };
+		85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GVRTrajectory.m"; sourceTree = "<group>"; };
+		85F6A8B41E23109C00FE07A1 /* NSValue+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+GVRExtensions.h"; sourceTree = "<group>"; };
+		85F6A8B51E23109C00FE07A1 /* NSValue+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+GVRExtensions.m"; sourceTree = "<group>"; };
+		85F9161F1E1E493400F78545 /* NSError+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVRExtensions.h"; sourceTree = "<group>"; };
+		85F916201E1E493400F78545 /* NSError+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GVRExtensions.m"; sourceTree = "<group>"; };
+		BADAC0206DD4740F4AA0FC2D /* Pods-CheckersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CheckersTests/Pods-CheckersTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,19 +112,110 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9D0929CCAA2161E4297CCB8 /* libPods-Checkers.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		859CD12B1E195967004BE15C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B30D883B0E8AC2615AD1412 /* libPods-CheckersTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0715F77AA0B0DEF973EB925B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2F14723392F3B5A9D28B8168 /* Pods-Checkers.debug.xcconfig */,
+				55E2266F6134EA6CB511DB17 /* Pods-Checkers.release.xcconfig */,
+				BADAC0206DD4740F4AA0FC2D /* Pods-CheckersTests.debug.xcconfig */,
+				085130B305A50ED5598EFA6C /* Pods-CheckersTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		678F662CC1DAB0A41C334AD9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4A09053FF374A36068D554CD /* libPods-Checkers.a */,
+				35F0A1BC67157B0A29F86F09 /* libPods-CheckersTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		855F96461E1BA46000FC6F1F /* GVRTrajectory */ = {
+			isa = PBXGroup;
+			children = (
+				855F964B1E1BA7F400FC6F1F /* Private */,
+				855F96471E1BA49200FC6F1F /* GVRTrajectory.h */,
+				855F96481E1BA49200FC6F1F /* GVRTrajectory.m */,
+			);
+			path = GVRTrajectory;
+			sourceTree = "<group>";
+		};
+		855F964B1E1BA7F400FC6F1F /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				855F964C1E1BAB2C00FC6F1F /* GVRManTrajectory.h */,
+				855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */,
+				855F96501E1BAB3F00FC6F1F /* GVRKingTrajectory.h */,
+				855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */,
+				85F6A8AB1E22574100FE07A1 /* NSError+GVRTrajectory.h */,
+				85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */,
+				85F6A8AF1E22B35300FE07A1 /* NSArray+GVRTrajectory.h */,
+				85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		8567AC7C1E1A61AD0036A95F /* Utilites */ = {
+			isa = PBXGroup;
+			children = (
+				8567AC871E1A624F0036A95F /* GVRCompilerMacros */,
+				8567AC821E1A62060036A95F /* GVRMacros */,
+				8567AC7D1E1A61AD0036A95F /* GVRBlockMacros */,
+			);
+			path = Utilites;
+			sourceTree = "<group>";
+		};
+		8567AC7D1E1A61AD0036A95F /* GVRBlockMacros */ = {
+			isa = PBXGroup;
+			children = (
+				8567AC7E1E1A61AD0036A95F /* GVRBlockMacros.h */,
+			);
+			path = GVRBlockMacros;
+			sourceTree = "<group>";
+		};
+		8567AC821E1A62060036A95F /* GVRMacros */ = {
+			isa = PBXGroup;
+			children = (
+				8567AC831E1A62060036A95F /* GVRMacros.h */,
+			);
+			path = GVRMacros;
+			sourceTree = "<group>";
+		};
+		8567AC871E1A624F0036A95F /* GVRCompilerMacros */ = {
+			isa = PBXGroup;
+			children = (
+				8567AC881E1A624F0036A95F /* GVRCompilerMacros.h */,
+			);
+			path = GVRCompilerMacros;
+			sourceTree = "<group>";
+		};
 		858F5B8E1E17CCE000DB6D13 = {
 			isa = PBXGroup;
 			children = (
 				858F5BB71E17CEA600DB6D13 /* Sources */,
 				858F5BB11E17CEA600DB6D13 /* Resources */,
 				858F5B991E17CCE100DB6D13 /* Checkers */,
+				859CD12F1E195967004BE15C /* CheckersTests */,
 				858F5B981E17CCE100DB6D13 /* Products */,
+				0715F77AA0B0DEF973EB925B /* Pods */,
+				678F662CC1DAB0A41C334AD9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				858F5B971E17CCE100DB6D13 /* Checkers.app */,
+				859CD12E1E195967004BE15C /* CheckersTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,10 +272,8 @@
 		858F5BB81E17CEA600DB6D13 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				858F5BCB1E17FDD700DB6D13 /* GVRBoard */,
-				858F5BC71E17F7B100DB6D13 /* GVRBoardPosition */,
-				858F5BC21E17F61200DB6D13 /* GVRChecker */,
-				858F5BBE1E17CFB400DB6D13 /* GVRGame */,
+				85F48F9D1E1B2307004FD8D1 /* Categories */,
+				8567AC7C1E1A61AD0036A95F /* Utilites */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -124,6 +281,11 @@
 		858F5BB91E17CEA600DB6D13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				859CD1391E195AF9004BE15C /* GVRBoard */,
+				859CD13C1E195AF9004BE15C /* GVRBoardPosition */,
+				859CD13F1E195AF9004BE15C /* GVRChecker */,
+				855F96461E1BA46000FC6F1F /* GVRTrajectory */,
+				859CD1421E195AF9004BE15C /* GVRGame */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -135,40 +297,97 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		858F5BBE1E17CFB400DB6D13 /* GVRGame */ = {
+		859CD12F1E195967004BE15C /* CheckersTests */ = {
 			isa = PBXGroup;
 			children = (
-				858F5BBF1E17CFC000DB6D13 /* GVRGame.h */,
-				858F5BC01E17CFC000DB6D13 /* GVRGame.m */,
+				859CD1381E1959C8004BE15C /* Specs */,
+				859CD1321E195967004BE15C /* Info.plist */,
 			);
-			path = GVRGame;
+			path = CheckersTests;
 			sourceTree = "<group>";
 		};
-		858F5BC21E17F61200DB6D13 /* GVRChecker */ = {
+		859CD1381E1959C8004BE15C /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				858F5BC31E17F61F00DB6D13 /* GVRChecker.h */,
-				858F5BC41E17F61F00DB6D13 /* GVRChecker.m */,
+				859CD14D1E195C17004BE15C /* GVRBoardSpec.m */,
+				8567AC7A1E1A60700036A95F /* GVRGameSpec.m */,
+				85611E271E1F2A780029EB41 /* GVRManTrajectorySpec.m */,
+				85611E291E1F2B030029EB41 /* GVRKingTrajectorySpec.m */,
 			);
-			path = GVRChecker;
+			path = Specs;
 			sourceTree = "<group>";
 		};
-		858F5BC71E17F7B100DB6D13 /* GVRBoardPosition */ = {
+		859CD1391E195AF9004BE15C /* GVRBoard */ = {
 			isa = PBXGroup;
 			children = (
-				858F5BC81E17F7C000DB6D13 /* GVRBoardPosition.h */,
-				858F5BC91E17F7C000DB6D13 /* GVRBoardPosition.m */,
+				859CD13A1E195AF9004BE15C /* GVRBoard.h */,
+				859CD13B1E195AF9004BE15C /* GVRBoard.m */,
+			);
+			path = GVRBoard;
+			sourceTree = "<group>";
+		};
+		859CD13C1E195AF9004BE15C /* GVRBoardPosition */ = {
+			isa = PBXGroup;
+			children = (
+				85F6A8B31E23108700FE07A1 /* Private */,
+				859CD13D1E195AF9004BE15C /* GVRBoardPosition.h */,
+				859CD13E1E195AF9004BE15C /* GVRBoardPosition.m */,
 			);
 			path = GVRBoardPosition;
 			sourceTree = "<group>";
 		};
-		858F5BCB1E17FDD700DB6D13 /* GVRBoard */ = {
+		859CD13F1E195AF9004BE15C /* GVRChecker */ = {
 			isa = PBXGroup;
 			children = (
-				858F5BCC1E17FF8000DB6D13 /* GVRBoard.h */,
-				858F5BCD1E17FF8000DB6D13 /* GVRBoard.m */,
+				859CD1401E195AF9004BE15C /* GVRChecker.h */,
+				859CD1411E195AF9004BE15C /* GVRChecker.m */,
 			);
-			path = GVRBoard;
+			path = GVRChecker;
+			sourceTree = "<group>";
+		};
+		859CD1421E195AF9004BE15C /* GVRGame */ = {
+			isa = PBXGroup;
+			children = (
+				859CD1431E195AF9004BE15C /* GVRGame.h */,
+				859CD1441E195AF9004BE15C /* GVRGame.m */,
+			);
+			path = GVRGame;
+			sourceTree = "<group>";
+		};
+		85F48F9D1E1B2307004FD8D1 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				85F9161D1E1E48FE00F78545 /* NSError */,
+				85F48F9E1E1B2307004FD8D1 /* NSArray */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		85F48F9E1E1B2307004FD8D1 /* NSArray */ = {
+			isa = PBXGroup;
+			children = (
+				85F48FA11E1B2307004FD8D1 /* NSArray+GVRExtensions.h */,
+				85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */,
+			);
+			path = NSArray;
+			sourceTree = "<group>";
+		};
+		85F6A8B31E23108700FE07A1 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				85F6A8B41E23109C00FE07A1 /* NSValue+GVRExtensions.h */,
+				85F6A8B51E23109C00FE07A1 /* NSValue+GVRExtensions.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		85F9161D1E1E48FE00F78545 /* NSError */ = {
+			isa = PBXGroup;
+			children = (
+				85F9161F1E1E493400F78545 /* NSError+GVRExtensions.h */,
+				85F916201E1E493400F78545 /* NSError+GVRExtensions.m */,
+			);
+			path = NSError;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,9 +397,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 858F5BAE1E17CCE100DB6D13 /* Build configuration list for PBXNativeTarget "Checkers" */;
 			buildPhases = (
+				BF289CC71614E41C71BF97DE /* [CP] Check Pods Manifest.lock */,
 				858F5B931E17CCE000DB6D13 /* Sources */,
 				858F5B941E17CCE000DB6D13 /* Frameworks */,
 				858F5B951E17CCE000DB6D13 /* Resources */,
+				CD61B3AB4FB953A450C0F51F /* [CP] Embed Pods Frameworks */,
+				A231319B0D46E1006BEB35E8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -190,6 +412,27 @@
 			productName = Checkers;
 			productReference = 858F5B971E17CCE100DB6D13 /* Checkers.app */;
 			productType = "com.apple.product-type.application";
+		};
+		859CD12D1E195967004BE15C /* CheckersTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 859CD1351E195967004BE15C /* Build configuration list for PBXNativeTarget "CheckersTests" */;
+			buildPhases = (
+				1D7DC71F90BEFCF6724A021A /* [CP] Check Pods Manifest.lock */,
+				859CD12A1E195967004BE15C /* Sources */,
+				859CD12B1E195967004BE15C /* Frameworks */,
+				859CD12C1E195967004BE15C /* Resources */,
+				F30B15BFE79BF356A369DA0E /* [CP] Embed Pods Frameworks */,
+				59E930064FCA8384F04BD577 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				859CD1341E195967004BE15C /* PBXTargetDependency */,
+			);
+			name = CheckersTests;
+			productName = CheckersTests;
+			productReference = 859CD12E1E195967004BE15C /* CheckersTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -203,6 +446,11 @@
 					858F5B961E17CCE000DB6D13 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
+					};
+					859CD12D1E195967004BE15C = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 858F5B961E17CCE000DB6D13;
 					};
 				};
 			};
@@ -220,6 +468,7 @@
 			projectRoot = "";
 			targets = (
 				858F5B961E17CCE000DB6D13 /* Checkers */,
+				859CD12D1E195967004BE15C /* CheckersTests */,
 			);
 		};
 /* End PBXProject section */
@@ -235,24 +484,163 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		859CD12C1E195967004BE15C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D7DC71F90BEFCF6724A021A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		59E930064FCA8384F04BD577 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CheckersTests/Pods-CheckersTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A231319B0D46E1006BEB35E8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Checkers/Pods-Checkers-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF289CC71614E41C71BF97DE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CD61B3AB4FB953A450C0F51F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Checkers/Pods-Checkers-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F30B15BFE79BF356A369DA0E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CheckersTests/Pods-CheckersTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		858F5B931E17CCE000DB6D13 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				859CD1471E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
+				859CD14B1E195AF9004BE15C /* GVRGame.m in Sources */,
+				85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */,
+				855F96521E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */,
+				859CD1451E195AF9004BE15C /* GVRBoard.m in Sources */,
 				858F5BA21E17CCE100DB6D13 /* ViewController.m in Sources */,
-				858F5BC51E17F61F00DB6D13 /* GVRChecker.m in Sources */,
-				858F5BC11E17CFC000DB6D13 /* GVRGame.m in Sources */,
+				85F6A8B61E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */,
+				859CD1491E195AF9004BE15C /* GVRChecker.m in Sources */,
+				85F6A8AD1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,
+				85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */,
 				858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */,
+				855F964E1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
+				855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
 				858F5B9C1E17CCE100DB6D13 /* main.m in Sources */,
-				858F5BCE1E17FF8000DB6D13 /* GVRBoard.m in Sources */,
-				858F5BCA1E17F7C000DB6D13 /* GVRBoardPosition.m in Sources */,
+				85F6A8B11E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		859CD12A1E195967004BE15C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85F6A8B21E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */,
+				8567AC7B1E1A60700036A95F /* GVRGameSpec.m in Sources */,
+				859CD14C1E195AF9004BE15C /* GVRGame.m in Sources */,
+				85611E281E1F2A780029EB41 /* GVRManTrajectorySpec.m in Sources */,
+				85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */,
+				85611E2A1E1F2B030029EB41 /* GVRKingTrajectorySpec.m in Sources */,
+				855F96531E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */,
+				859CD14E1E195C17004BE15C /* GVRBoardSpec.m in Sources */,
+				859CD1461E195AF9004BE15C /* GVRBoard.m in Sources */,
+				85F916221E1E493400F78545 /* NSError+GVRExtensions.m in Sources */,
+				85F6A8B71E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */,
+				859CD1481E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
+				855F964F1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
+				855F964A1E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
+				85F6A8AE1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,
+				859CD14A1E195AF9004BE15C /* GVRChecker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		859CD1341E195967004BE15C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 858F5B961E17CCE000DB6D13 /* Checkers */;
+			targetProxy = 859CD1331E195967004BE15C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		858F5BB31E17CEA600DB6D13 /* LaunchScreen.storyboard */ = {
@@ -366,6 +754,7 @@
 		};
 		858F5BAF1E17CCE100DB6D13 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F14723392F3B5A9D28B8168 /* Pods-Checkers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Checkers/Info.plist;
@@ -377,12 +766,39 @@
 		};
 		858F5BB01E17CCE100DB6D13 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55E2266F6134EA6CB511DB17 /* Pods-Checkers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Checkers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.irapptional.Checkers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		859CD1361E195967004BE15C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BADAC0206DD4740F4AA0FC2D /* Pods-CheckersTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CheckersTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.irapptional.CheckersTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Checkers.app/Checkers";
+			};
+			name = Debug;
+		};
+		859CD1371E195967004BE15C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 085130B305A50ED5598EFA6C /* Pods-CheckersTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CheckersTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.irapptional.CheckersTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Checkers.app/Checkers";
 			};
 			name = Release;
 		};
@@ -405,6 +821,16 @@
 				858F5BB01E17CCE100DB6D13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		859CD1351E195967004BE15C /* Build configuration list for PBXNativeTarget "CheckersTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				859CD1361E195967004BE15C /* Debug */,
+				859CD1371E195967004BE15C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
