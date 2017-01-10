@@ -34,7 +34,9 @@ GVRBoardDirection GVRBoardDirectionUsingCells(GVRBoardCell fromCell,
     NSInteger deltaRow = toCell.row - fromCell.row;
     NSInteger deltaColumn = toCell.column - fromCell.column;
     
-    return GVRBoardDirectionMake(deltaRow/labs(deltaColumn), deltaColumn/labs(deltaColumn));
+    return 0 == deltaColumn || 0 == deltaRow
+        ? GVRBoardDirectionMake(0, 0)
+        : GVRBoardDirectionMake(deltaRow/labs(deltaColumn), deltaColumn/labs(deltaColumn));
 }
 
 GVRBoardCell GVRBoardCellShift(GVRBoardCell cell,
@@ -76,7 +78,7 @@ GVRBoardCell GVREdgeCellMake(NSUInteger size,
     }
     
     toCell.row = fromCell.row + direction.rowDirection * minDistance;
-    toCell.column = fromCell.row + direction.columnDirection * minDistance;
+    toCell.column = fromCell.column + direction.columnDirection * minDistance;
     
     return toCell;
 }

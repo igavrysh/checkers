@@ -377,12 +377,11 @@ context(@"when board is initialized", ^{
             
             __block BOOL checkerMoved = YES;
             
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:initialCell];
-            [board addChecker:[GVRChecker checkerWithType:GVRCheckerTypeMan color:GVRCheckerColorWhite]
-                       atCell:finalCell];
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            [board addChecker:[GVRChecker whiteMan] atCell:finalCell];
             
-            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            NSArray *path = @[[NSValue valueWithCell:initialCell],
+                              [NSValue valueWithCell:finalCell]];
             [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
