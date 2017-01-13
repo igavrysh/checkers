@@ -8,15 +8,30 @@
 
 #import "AppDelegate.h"
 
+#import "GVRGameViewController.h"
+
+#import "UIWindow+GVRExtensions.h"
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)            application:(UIApplication *)application
+  didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    UIWindow *window = [UIWindow window];
+    self.window = window;
+    
+    GVRGameViewController *gameViewController = [GVRGameViewController new];
+    
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:gameViewController];
+    
+    window.rootViewController = controller;
+    
+    [window makeKeyAndVisible];
+    
     return YES;
 }
 
