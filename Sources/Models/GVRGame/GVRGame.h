@@ -11,11 +11,14 @@
 @class GVRBoard;
 
 typedef enum : NSUInteger {
+    GVRPlayerNone,
     GVRPlayerWhiteCheckers,
     GVRPlayerBlackCheckers
 } GVRPlayer;
 
 @interface GVRGame : NSObject
+@property (nonatomic, readonly) GVRBoard    *board;
+@property (nonatomic, readonly) GVRPlayer   activePlayer;
 
 - (void)begin:(void(^)(BOOL success))block;
 

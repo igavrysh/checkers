@@ -8,9 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+#import "GVRGame.h"
+
 @class GVRBoard;
 
+typedef enum {
+    GVRSubViewTagBlackCell,
+    GVRSubViewTagWhiteCell,
+    GVRSubViewTagChecker,
+    GVRSubViewTagBoard
+} GVRSubViewTag;
+
 @interface GVRBoardView : UIView
-@property (nonatomic, strong)   GVRBoard    *board;
+@property (nonatomic, strong)           GVRBoard        *board;
+@property (nonatomic, weak, readonly)   UIView          *baseBoardView;
+@property (nonatomic, assign)           GVRPlayer       activePlayer;
+@property (nonatomic, readonly)         NSHashTable     *checkers;
+@property (nonatomic, readonly)         NSHashTable     *cells;
+@property (nonatomic, assign, readonly) float           boardSize;
+
+- (CGPoint)locationInBaseBoardViewForTouch:(UITouch *)touch;
 
 @end

@@ -69,6 +69,11 @@
         NSLog(@"Error: %@", error);
     }
     
+    if (result) {
+        self.activePlayer = GVRPlayerWhiteCheckers == self.activePlayer
+            ? GVRPlayerBlackCheckers : GVRPlayerWhiteCheckers;
+    }
+    
     GVRBlockPerform(block, result);
 }
 

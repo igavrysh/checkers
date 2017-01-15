@@ -8,31 +8,23 @@
 
 #import "GVRBoardView.h"
 
+#import "GVRCellView.h"
+#import "GVRCheckerView.h"
 #import "GVRBoard.h"
 #import "GVRBoardPosition.h"
 
-typedef enum {
-    GVRSubViewTagBlackCell,
-    GVRSubViewTagWhiteCell,
-    GVRSubViewTagChecker,
-    GVRSubViewTagBoard
-} GVRSubViewTag;
-
 @interface GVRBoardView ()
-@property (nonatomic, strong)           UIView  *boardView;
-@property (nonatomic, assign, readonly) float   side;
-@property (nonatomic, assign, readonly) float   leftMargin;
-@property (nonatomic, assign, readonly) float   topMargin;
+@property (nonatomic, weak)             UIView      *baseBoardView;
+@property (nonatomic, assign, readonly) float       leftMargin;
+@property (nonatomic, assign, readonly) float       topMargin;
+@property (nonatomic, strong)           NSHashTable *checkers;
+@property (nonatomic, strong)           NSHashTable *cells;
 
-- (void)drawBoard;
+- (void)initBoard;
 
-- (UIColor *)colorForBoardPositionColor:(GVRBoardPositionColor)color;
-
-- (UIColor *)colorForCheckerWithCheckerColor:(GVRCheckerColor)color;
-
-- (GVRSubViewTag)tagForBoardPositionColor:(GVRBoardPositionColor)color;
-
-- (void)drawCheckerOnView:(UIView *)view row:(NSUInteger)row column:(NSUInteger)column;
+- (void)initCheckerAtRow:(NSUInteger)row
+                  column:(NSUInteger)column
+            withCellSize:(float)cellSize;
 
 - (UIView *)createBoardWithFrame:(CGRect)frame
                            color:(UIColor*)color
@@ -43,7 +35,7 @@ typedef enum {
 
 @implementation GVRBoardView
 
-@dynamic side;
+@dynamic boardSize;
 @dynamic leftMargin;
 @dynamic topMargin;
 
@@ -54,7 +46,15 @@ typedef enum {
     if (_board != board) {
         _board = board;
         
-        [self drawBoard];
+        [self initBoard];
+    }
+}
+
+- (void)setActivePlayer:(GVRPlayer)activePlayer {
+    if (_activePlayer != activePlayer) {
+        _activePlayer = activePlayer;
+        
+        [self initBoard];
     }
 }
 
@@ -67,112 +67,100 @@ typedef enum {
 - (float)topMargin {
     CGRect bounds = self.bounds;
     
-    return MAX(CGRectGetMaxX(bounds), CGRectGetMaxY(bounds)) / 2.0 - self.board.size / 2 * self.side;
+    return MAX(CGRectGetMaxX(bounds), CGRectGetMaxY(bounds)) / 2.f - self.boardSize / 2.f;
 }
 
-- (float)side {
+- (float)boardSize {
     CGRect bounds = self.bounds;
     
-    return (MIN(CGRectGetMaxX(bounds), CGRectGetMaxY(bounds)) - self.leftMargin * 2 ) / self.board.size;
+    return (MIN(CGRectGetMaxX(bounds), CGRectGetMaxY(bounds)) - self.leftMargin * 2.f );
+}
+
+#pragma mark -
+#pragma mark Public Methods
+
+- (CGPoint)locationInBaseBoardViewForTouch:(UITouch *)touch {
+    return [touch locationInView:self.baseBoardView];
 }
 
 #pragma mark - 
 #pragma mark Private Methods
 
-- (UIColor *)colorForBoardPositionColor:(GVRBoardPositionColor)color {
-    return color == GVRBoardPositionColorWhite ? [UIColor lightGrayColor] : [UIColor darkGrayColor];
-}
-
-- (UIColor *)colorForCheckerWithCheckerColor:(GVRCheckerColor)color {
-    return color == GVRCheckerColorWhite ? [UIColor whiteColor] :
-    color == GVRCheckerColorBlack ? [UIColor blackColor] : [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-}
-
-- (GVRSubViewTag)tagForBoardPositionColor:(GVRBoardPositionColor)color {
-    return color == GVRBoardPositionColorWhite ? GVRSubViewTagWhiteCell : GVRSubViewTagBlackCell;
-}
-
-- (void)drawBoard {
-    [self drawBoardBase];
+- (void)initBoard {
+    [self initBoardBase];
     
-    [self drawCells];
+    [self initCells];
+    
+    NSInteger multiplier = self.activePlayer == GVRPlayerWhiteCheckers ? -1 : 1;
+    
+    self.baseBoardView.transform = CGAffineTransformRotate(self.baseBoardView.transform, multiplier * M_PI / 2);
 }
 
-- (void)drawBoardBase {
-    NSUInteger size = self.board.size;
-    float leftMargin = self.leftMargin / 2;
-    float side = self.side;
-    float topMargin = self.topMargin - leftMargin;
-    float boardSize = leftMargin + size * side;
+- (void)initBoardBase {
+    float leftMargin = self.leftMargin;
+    float boardSize = self.boardSize;
+    float topMargin = self.topMargin;
     
     CGRect boardFrame = CGRectMake(leftMargin, topMargin, boardSize, boardSize);
     
-    UIView *boardView = [self createBoardWithFrame:boardFrame
-                                             color:[UIColor brownColor]
-                                            parent:self
-                                               tag:GVRSubViewTagBoard];
+    UIView *boardBaseView = [self createBoardWithFrame:boardFrame
+                                                 color:[UIColor brownColor]
+                                                parent:self
+                                                   tag:GVRSubViewTagBoard];
     
-    boardView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
+    boardBaseView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
         | UIViewAutoresizingFlexibleTopMargin
         | UIViewAutoresizingFlexibleBottomMargin
         | UIViewAutoresizingFlexibleRightMargin;
     
-    [self addSubview:boardView];
+    [self addSubview:boardBaseView];
     
-    self.boardView = boardView;
+    self.baseBoardView = boardBaseView;
 }
 
-- (void)drawCells {
-    NSUInteger size = self.board.size;
+- (void)initCells {
+    self.cells = [NSHashTable weakObjectsHashTable];
+    self.checkers = [NSHashTable weakObjectsHashTable];
     
+    NSUInteger size = self.board.size;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            GVRBoardCell cell = GVRBoardCellMake(i, j);
+            GVRCellView *cellView = [GVRCellView cellWithCell:GVRBoardCellMake(i, j)
+                                                        board:self.board
+                                                    boardView:self];
             
-            float side = self.side;
-            float origin = self.leftMargin / 2 + i * side;
-            
-            CGRect frame = CGRectMake(origin,origin, side, side);
-            
-            GVRBoardPositionColor positionColor = [[self.board positionForCell:cell] color];
-            UIColor *color = [self colorForBoardPositionColor:positionColor];
-            GVRSubViewTag tag = [self tagForBoardPositionColor:positionColor];
-            UIView *view = [self createBoardWithFrame:frame color:color parent:self.boardView tag:tag];
-            
-            view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
-                | UIViewAutoresizingFlexibleTopMargin
-                | UIViewAutoresizingFlexibleBottomMargin
-                | UIViewAutoresizingFlexibleRightMargin;
-            
-            [self drawCheckerOnView:view row:i column:j];
+            if (cellView) {
+                [self.baseBoardView addSubview:cellView];
+                
+                [self.cells addObject:cellView];
+                
+                [self initCheckerAtRow:i column:j withCellSize:cellView.cellSize];
+            }
         }
     }
 }
 
-- (void)drawCheckerOnView:(UIView *)view row:(NSUInteger)row column:(NSUInteger)column {
+- (void)initCheckerAtRow:(NSUInteger)row
+                  column:(NSUInteger)column
+            withCellSize:(float)cellSize
+{
     GVRBoardCell cell = GVRBoardCellMake(row, column);
     GVRBoardPosition *position = [self.board positionForCell:cell];
     if (!position.isFilled) {
         return;
     }
     
-    UIColor *checkerColor = [self colorForCheckerWithCheckerColor:position.checker.color];
+    GVRCheckerView *checker = [GVRCheckerView checkerOnCell:cell
+                                                   cellSize:cellSize
+                                                      board:self.board
+                                                  boardView:self];
     
-    NSInteger cellSize = view.bounds.size.width;
-    
-    float checkerCellRatio = 0.4;
-    
-    NSUInteger checkerSize = cellSize * 0.4;
-    NSUInteger checkerOrigin = (cellSize * (1 - checkerCellRatio)) / 2;
-    
-    CGRect checkerRect = CGRectMake(checkerOrigin, checkerOrigin, checkerSize, checkerSize);
-    
-    [self createBoardWithFrame:checkerRect
-                         color:checkerColor
-                        parent:self.boardView
-                           tag:GVRSubViewTagChecker];
+    if (checker) {
+        [self.baseBoardView addSubview:checker];
+        [self.checkers addObject:checker];
+    }
 }
-
+ 
 - (UIView *)createBoardWithFrame:(CGRect)frame
                            color:(UIColor*)color
                           parent:(UIView *)parent
@@ -185,6 +173,5 @@ typedef enum {
     
     return view;
 }
-
 
 @end

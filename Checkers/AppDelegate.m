@@ -25,8 +25,11 @@
     self.window = window;
     
     GVRGameViewController *gameViewController = [GVRGameViewController new];
+    gameViewController.edgesForExtendedLayout = UIRectEdgeNone;
     
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:gameViewController];
+    
+    //[controller setAutomaticallyAdjustsScrollViewInsets:YES];
     
     window.rootViewController = controller;
     

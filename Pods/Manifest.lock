@@ -1,12 +1,34 @@
 PODS:
   - Kiwi (2.4.0)
+  - ReactiveCocoa (2.1.8):
+    - ReactiveCocoa/Core (= 2.1.8)
+    - ReactiveCocoa/no-arc (= 2.1.8)
+  - ReactiveCocoa/Core (2.1.8):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.1.8)
+  - ReactiveViewModel (0.1.1):
+    - ReactiveCocoa (~> 2.1)
 
 DEPENDENCIES:
   - Kiwi
+  - ReactiveCocoa (= 2.1.8)
+  - ReactiveViewModel (from `https://github.com/ashfurrow/ReactiveViewModel.git`, tag `0.1.2`)
+
+EXTERNAL SOURCES:
+  ReactiveViewModel:
+    :git: https://github.com/ashfurrow/ReactiveViewModel.git
+    :tag: 0.1.2
+
+CHECKOUT OPTIONS:
+  ReactiveViewModel:
+    :git: https://github.com/ashfurrow/ReactiveViewModel.git
+    :tag: 0.1.2
 
 SPEC CHECKSUMS:
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  ReactiveCocoa: f89f2e009a87951b50321bf9feb958823fcc617e
+  ReactiveViewModel: 5d852269482387abd4e343cff4c05004967a0707
 
-PODFILE CHECKSUM: b0c62b865e2b3fce3b859ee60c014b9dcb8b9783
+PODFILE CHECKSUM: 822dee7e5eace9d060abe4687987fe567ec4edae
 
 COCOAPODS: 1.0.1

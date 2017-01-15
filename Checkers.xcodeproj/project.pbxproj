@@ -10,6 +10,10 @@
 		0B30D883B0E8AC2615AD1412 /* libPods-CheckersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F0A1BC67157B0A29F86F09 /* libPods-CheckersTests.a */; };
 		852E95431E25A31B00662EEE /* GVRBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 852E95421E25A31B00662EEE /* GVRBoardView.m */; };
 		852E95441E25A31B00662EEE /* GVRBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 852E95421E25A31B00662EEE /* GVRBoardView.m */; };
+		853D3C421E2B9DA1001FA2F6 /* GVRCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D3C411E2B9DA1001FA2F6 /* GVRCellView.m */; };
+		853D3C431E2B9DA1001FA2F6 /* GVRCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D3C411E2B9DA1001FA2F6 /* GVRCellView.m */; };
+		853D3C471E2C1078001FA2F6 /* GVRCheckerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D3C461E2C1078001FA2F6 /* GVRCheckerView.m */; };
+		853D3C481E2C1078001FA2F6 /* GVRCheckerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D3C461E2C1078001FA2F6 /* GVRCheckerView.m */; };
 		855010D11E28553500F4A4C8 /* UIWindow+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 855010D01E28553500F4A4C8 /* UIWindow+GVRExtensions.m */; };
 		855010D21E28553500F4A4C8 /* UIWindow+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 855010D01E28553500F4A4C8 /* UIWindow+GVRExtensions.m */; };
 		855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96481E1BA49200FC6F1F /* GVRTrajectory.m */; };
@@ -75,6 +79,10 @@
 		55E2266F6134EA6CB511DB17 /* Pods-Checkers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Checkers.release.xcconfig"; path = "Pods/Target Support Files/Pods-Checkers/Pods-Checkers.release.xcconfig"; sourceTree = "<group>"; };
 		852E95411E25A31B00662EEE /* GVRBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBoardView.h; sourceTree = "<group>"; };
 		852E95421E25A31B00662EEE /* GVRBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoardView.m; sourceTree = "<group>"; };
+		853D3C401E2B9DA1001FA2F6 /* GVRCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRCellView.h; sourceTree = "<group>"; };
+		853D3C411E2B9DA1001FA2F6 /* GVRCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRCellView.m; sourceTree = "<group>"; };
+		853D3C451E2C1078001FA2F6 /* GVRCheckerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRCheckerView.h; sourceTree = "<group>"; };
+		853D3C461E2C1078001FA2F6 /* GVRCheckerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRCheckerView.m; sourceTree = "<group>"; };
 		855010CF1E28553500F4A4C8 /* UIWindow+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+GVRExtensions.h"; sourceTree = "<group>"; };
 		855010D01E28553500F4A4C8 /* UIWindow+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+GVRExtensions.m"; sourceTree = "<group>"; };
 		855F96471E1BA49200FC6F1F /* GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRTrajectory.h; sourceTree = "<group>"; };
@@ -175,6 +183,8 @@
 			children = (
 				85B05A3D1E2703CD006429FE /* GVRGameView */,
 				852E95401E25A30600662EEE /* GVRBoardView */,
+				853D3C441E2C1062001FA2F6 /* GVRCheckerView */,
+				853D3C3F1E2B9D94001FA2F6 /* GVRCellView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -186,6 +196,24 @@
 				852E95421E25A31B00662EEE /* GVRBoardView.m */,
 			);
 			path = GVRBoardView;
+			sourceTree = "<group>";
+		};
+		853D3C3F1E2B9D94001FA2F6 /* GVRCellView */ = {
+			isa = PBXGroup;
+			children = (
+				853D3C401E2B9DA1001FA2F6 /* GVRCellView.h */,
+				853D3C411E2B9DA1001FA2F6 /* GVRCellView.m */,
+			);
+			path = GVRCellView;
+			sourceTree = "<group>";
+		};
+		853D3C441E2C1062001FA2F6 /* GVRCheckerView */ = {
+			isa = PBXGroup;
+			children = (
+				853D3C451E2C1078001FA2F6 /* GVRCheckerView.h */,
+				853D3C461E2C1078001FA2F6 /* GVRCheckerView.m */,
+			);
+			path = GVRCheckerView;
 			sourceTree = "<group>";
 		};
 		855010CE1E28553500F4A4C8 /* UIWindow */ = {
@@ -677,6 +705,7 @@
 			files = (
 				859CD1471E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
 				859CD14B1E195AF9004BE15C /* GVRGame.m in Sources */,
+				853D3C421E2B9DA1001FA2F6 /* GVRCellView.m in Sources */,
 				85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */,
 				855F96521E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */,
 				85B05A4D1E2706E2006429FE /* GVRGameView.m in Sources */,
@@ -686,6 +715,7 @@
 				859CD1491E195AF9004BE15C /* GVRChecker.m in Sources */,
 				85F6A8AD1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,
 				85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */,
+				853D3C471E2C1078001FA2F6 /* GVRCheckerView.m in Sources */,
 				858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */,
 				852E95431E25A31B00662EEE /* GVRBoardView.m in Sources */,
 				855010D11E28553500F4A4C8 /* UIWindow+GVRExtensions.m in Sources */,
@@ -702,11 +732,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				853D3C431E2B9DA1001FA2F6 /* GVRCellView.m in Sources */,
 				85B05A421E27046D006429FE /* GVRGameViewController.m in Sources */,
 				85F6A8B21E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */,
 				855010D21E28553500F4A4C8 /* UIWindow+GVRExtensions.m in Sources */,
 				852E95441E25A31B00662EEE /* GVRBoardView.m in Sources */,
 				8567AC7B1E1A60700036A95F /* GVRGameSpec.m in Sources */,
+				853D3C481E2C1078001FA2F6 /* GVRCheckerView.m in Sources */,
 				859CD14C1E195AF9004BE15C /* GVRGame.m in Sources */,
 				85611E281E1F2A780029EB41 /* GVRManTrajectorySpec.m in Sources */,
 				85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */,
