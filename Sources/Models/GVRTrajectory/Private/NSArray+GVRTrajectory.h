@@ -14,4 +14,6 @@
 
 - (GVRBoardCell)cellAtIndex:(NSUInteger)index;
 
+- (NSString *)cellsDescription;
+
 @end

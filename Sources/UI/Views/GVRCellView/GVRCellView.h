@@ -13,9 +13,11 @@
 #import "GVRBoardPosition.h"
 
 @interface GVRCellView : UIView
-@property (nonatomic, assign, readonly) NSUInteger  row;
-@property (nonatomic, assign, readonly) NSUInteger  column;
-@property (nonatomic, assign, readonly) float       cellSize;
+@property (nonatomic, assign, readonly) NSUInteger      row;
+@property (nonatomic, assign, readonly) NSUInteger      column;
+@property (nonatomic, assign, readonly) float           cellSize;
+@property (nonatomic, assign, readonly) GVRBoardCell    boardCell;
+
 
 + (instancetype)cellWithCell:(GVRBoardCell)cell
                        board:(GVRBoard *)board
@@ -25,5 +27,8 @@
 - (instancetype)initWithCell:(GVRBoardCell)cell
                        board:(GVRBoard *)board
                    boardView:(GVRBoardView *)boardView;
+
+
+
 
 @end

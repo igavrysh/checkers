@@ -11,6 +11,7 @@
 #import "GVRGame.h"
 
 @class GVRBoard;
+@class GVRCellView;
 
 typedef enum {
     GVRSubViewTagBlackCell,
@@ -28,5 +29,7 @@ typedef enum {
 @property (nonatomic, assign, readonly) float           boardSize;
 
 - (CGPoint)locationInBaseBoardViewForTouch:(UITouch *)touch;
+
+- (GVRCellView *)cellForInBoardTouch:(UITouch *)touch;
 
 @end

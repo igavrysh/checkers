@@ -48,6 +48,8 @@
 		85B05A4A1E2704EB006429FE /* UIViewController+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B05A481E2704EB006429FE /* UIViewController+GVRExtensions.m */; };
 		85B05A4D1E2706E2006429FE /* GVRGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B05A4C1E2706E2006429FE /* GVRGameView.m */; };
 		85B05A4E1E2706E2006429FE /* GVRGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B05A4C1E2706E2006429FE /* GVRGameView.m */; };
+		85D399DD1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D399DC1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m */; };
+		85D399DE1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D399DC1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m */; };
 		85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
 		85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
 		85F6A8AD1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */; };
@@ -125,6 +127,8 @@
 		85B05A481E2704EB006429FE /* UIViewController+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GVRExtensions.m"; sourceTree = "<group>"; };
 		85B05A4B1E2706E2006429FE /* GVRGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRGameView.h; sourceTree = "<group>"; };
 		85B05A4C1E2706E2006429FE /* GVRGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRGameView.m; sourceTree = "<group>"; };
+		85D399DB1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+GVRTrajectory.h"; sourceTree = "<group>"; };
+		85D399DC1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+GVRTrajectory.m"; sourceTree = "<group>"; };
 		85F48FA11E1B2307004FD8D1 /* NSArray+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+GVRExtensions.h"; sourceTree = "<group>"; };
 		85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GVRExtensions.m"; sourceTree = "<group>"; };
 		85F6A8AB1E22574100FE07A1 /* NSError+GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVRTrajectory.h"; sourceTree = "<group>"; };
@@ -246,6 +250,8 @@
 				85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */,
 				85F6A8AF1E22B35300FE07A1 /* NSArray+GVRTrajectory.h */,
 				85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */,
+				85D399DB1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.h */,
+				85D399DC1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -717,6 +723,7 @@
 				85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */,
 				853D3C471E2C1078001FA2F6 /* GVRCheckerView.m in Sources */,
 				858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */,
+				85D399DD1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m in Sources */,
 				852E95431E25A31B00662EEE /* GVRBoardView.m in Sources */,
 				855010D11E28553500F4A4C8 /* UIWindow+GVRExtensions.m in Sources */,
 				85B05A491E2704EB006429FE /* UIViewController+GVRExtensions.m in Sources */,
@@ -736,6 +743,7 @@
 				85B05A421E27046D006429FE /* GVRGameViewController.m in Sources */,
 				85F6A8B21E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */,
 				855010D21E28553500F4A4C8 /* UIWindow+GVRExtensions.m in Sources */,
+				85D399DE1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m in Sources */,
 				852E95441E25A31B00662EEE /* GVRBoardView.m in Sources */,
 				8567AC7B1E1A60700036A95F /* GVRGameSpec.m in Sources */,
 				853D3C481E2C1078001FA2F6 /* GVRCheckerView.m in Sources */,

@@ -83,6 +83,17 @@
     return [touch locationInView:self.baseBoardView];
 }
 
+- (GVRCellView *)cellForInBoardTouch:(UITouch *)touch {
+    CGPoint point = [self locationInBaseBoardViewForTouch:touch];
+    for (GVRCellView *cell in self.cells) {
+        if (CGRectContainsPoint(cell.frame, point)) {
+            return cell;
+        }
+    }
+    
+    return nil;
+}
+
 #pragma mark - 
 #pragma mark Private Methods
 

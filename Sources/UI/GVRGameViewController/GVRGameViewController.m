@@ -12,8 +12,11 @@
 
 #import "GVRGame.h"
 #import "GVRGameView.h"
+#import "GVRCellView.h"
 
 #import "UIViewController+GVRExtensions.h"
+#import "NSMutableArray+GVRTrajectory.h"
+#import "NSArray+GVRTrajectory.h"
 
 #import "GVRMacros.h"
 #import "GVRCompilerMacros.h"
@@ -22,11 +25,13 @@ kGVRStringVariableDefinition(GVRPlayer1Name, @"Player 1");
 kGVRStringVariableDefinition(GVRPlayer2Name, @"Player 2");
 
 @interface GVRGameViewController ()
-@property (nonatomic, strong)   GVRGame     *game;
-@property (nonatomic, assign)   GVRPlayer   activePlayer;
-@property (nonatomic, readonly) NSString    *activePlayerName;
-@property (nonatomic, strong)   UIView      *draggingChecker;
-@property (nonatomic, assign)   CGPoint     touchOffset;
+@property (nonatomic, strong)   GVRGame         *game;
+@property (nonatomic, assign)   GVRPlayer       activePlayer;
+@property (nonatomic, readonly) NSString        *activePlayerName;
+@property (nonatomic, strong)   UIView          *draggingChecker;
+@property (nonatomic, assign)   CGPoint         touchOffset;
+@property (nonatomic, strong)   NSMutableArray  *trajectory;
+@property (nonatomic, assign)   GVRBoardCell    initialCell;
 
 @end
 
@@ -82,9 +87,13 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
 #pragma mark -
 #pragma mark Touches
 
+- (UIView *)viewWithTouch:(UITouch *)touch event:(UIEvent *)event {
+    return [self.view hitTest:[touch locationInView:self.gameView] withEvent:event];
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
-    UIView *hitView = [self.view hitTest:[touch locationInView:self.gameView] withEvent:event];
+    UIView *hitView = [self viewWithTouch:touch event:event];
     
     if (GVRSubViewTagChecker != hitView.tag) {
         self.draggingChecker = nil;
@@ -92,10 +101,19 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
         return;
     }
     
+    self.trajectory = [NSMutableArray new];
+    
     if ([self.gameView.boardView.checkers containsObject:hitView]) {
+        GVRCellView *cellView = [self.gameView.boardView cellForInBoardTouch:touch];
+        if (cellView) {
+            self.initialCell = cellView.boardCell;
+            
+            [self.trajectory addCell:self.initialCell];
+        }
+        
         self.draggingChecker = hitView;
         
-        [self.gameView.boardView bringSubviewToFront:hitView];
+        [self.gameView.boardView.baseBoardView bringSubviewToFront:hitView];
         
         CGPoint touchPoint = [touch locationInView:hitView];
         
@@ -105,10 +123,12 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
                                        CGRectGetMidY(checkerBounds) - touchPoint.y);
         
         [UIView animateWithDuration:0.3
-                         animations:^{
-                             self.draggingChecker.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
-                             self.draggingChecker.alpha = 0.3f;
-                         }];
+                         animations:
+         ^{
+             self.draggingChecker.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
+             self.draggingChecker.alpha = 0.8f;
+         }];
+        
         return;
     } else {
         self.draggingChecker = nil;
@@ -116,15 +136,53 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.draggingChecker) {
-        UITouch *touch = [touches anyObject];
+    if (!self.draggingChecker) {
+        return;
+    }
+    
+    UITouch *touch = [touches anyObject];
+    
+    CGPoint pointOnMainView = [self.gameView.boardView locationInBaseBoardViewForTouch:touch];
+    
+    CGPoint correction = CGPointMake(pointOnMainView.x + self.touchOffset.x,
+                                     pointOnMainView.y + self.touchOffset.y);
+    
+    self.draggingChecker.center = correction;
+    
+    GVRCellView *cellView = [self.gameView.boardView cellForInBoardTouch:touch];
+    
+    NSMutableArray *trajectory = self.trajectory;
+    
+    if (cellView) {
+        GVRBoardCell cell = cellView.boardCell;
+
+        GVRBoardPosition *position = [self.game.board positionForCell:cell];
         
-        CGPoint pointOnMainView = [self.gameView.boardView locationInBaseBoardViewForTouch:touch];
+        if (position.isFilled || GVRBoardPositionColorWhite == position.color) {
+            return;
+        }
         
-        CGPoint correction = CGPointMake(pointOnMainView.x + self.touchOffset.x,
-                                         pointOnMainView.y + self.touchOffset.y);
+        NSUInteger cellCount = trajectory.count;
+        if (cellCount >= 1
+            && GVRBoardCellIsEqualToBoardCell([trajectory cellAtIndex:cellCount - 1], cell))
+        {
+            return;
+        }
         
-        self.draggingChecker.center = correction;
+        GVRBoardDirection oldDirection = GVRBoardDirectionMake(0, 0);
+        GVRBoardDirection newDirection = GVRBoardDirectionMake(1, 1);
+        if (cellCount >= 2) {
+            GVRBoardCell lastCell = [trajectory cellAtIndex:cellCount - 1];
+            GVRBoardCell last2Cell = [trajectory cellAtIndex:cellCount - 2];
+            oldDirection = GVRBoardDirectionUsingCells(last2Cell, lastCell);
+            newDirection = GVRBoardDirectionUsingCells(lastCell, cell);
+        }
+        
+        if (GVRBoardDirectionIsEqualToBoardDirection(oldDirection, newDirection)) {
+            [trajectory setCell:cell atIndex:cellCount - 1];
+        } else {
+            [self.trajectory addCell:cell];
+        }
     }
 }
 
@@ -135,71 +193,16 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
     
     UITouch *touch = [touches anyObject];
     
-    /*
-    UIView *closestCell = nil;
-    double closestDistance = 0;
-    
-    for (UIView* cell in self.gameView.boardView.checkers) {
-        if (GVRSubViewTagBlackCell == cell.tag) {
-            if ([self isFilledCell:cell]) {
-                continue;
-            }
-            
-            double newDistnance = [self distanceBetweenPoint:cell.center andPoint:self.draggingChecker.center];
-            if (closestCell == nil) {
-                closestCell = cell;
-                closestDistance = newDistnance;
-            } else {
-                if (newDistnance < closestDistance) {
-                    closestDistance = newDistnance;
-                    closestCell = cell;
-                }
-            }
-        }
-    }
-    
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         self.draggingChecker.center = closestCell.center;
-                         self.draggingChecker.transform = CGAffineTransformIdentity;
-                         self.draggingChecker.alpha = 1.f;
-                     }];
-    
-    self.draggingChecker = nil;
-    */
+    [self.game moveChekerBySteps:self.trajectory
+                       forPlayer:self.activePlayer
+           withCompletionHandler:^(BOOL success)
+    {
+        
+    }];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    
 }
-
-#pragma mark - Helper function
-
-- (double)distanceBetweenPoint:(CGPoint)point1 andPoint:(CGPoint)point2 {
-    return sqrt(pow(point1.x-point2.x,2) + pow(point1.y-point2.y,2));
-}
-
-- (BOOL)isEqualPoint:(CGPoint)point1 toPoint:(CGPoint)point2 {
-    return point1.x == point2.x && point1.y == point2.y;
-}
-
-/*
-
-- (BOOL)isFilledCell:(UIView *)cell {
-    for (UIView* view in self.board.subviews) {
-        
-        if (view.tag == ASSubViewTagCheckers  && ![view isEqual:self.draggingView]) {
-            
-            if ([self distanceBetweenPoint:view.center andPoint:cell.center] < cell.bounds.size.width / 2) {
-                
-                return YES;
-            }
-        }
-    }
-    return NO;
-}
- 
- */
 
 @end

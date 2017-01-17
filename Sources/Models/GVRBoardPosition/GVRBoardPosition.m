@@ -36,7 +36,7 @@ GVRBoardDirection GVRBoardDirectionUsingCells(GVRBoardCell fromCell,
     
     return 0 == deltaColumn || 0 == deltaRow
         ? GVRBoardDirectionMake(0, 0)
-        : GVRBoardDirectionMake(deltaRow/labs(deltaColumn), deltaColumn/labs(deltaColumn));
+        : GVRBoardDirectionMake(deltaRow/labs(deltaRow), deltaColumn/labs(deltaColumn));
 }
 
 GVRBoardCell GVRBoardCellShift(GVRBoardCell cell,
@@ -49,10 +49,25 @@ GVRBoardCell GVRBoardCellShift(GVRBoardCell cell,
     return shiftedCell;
 }
 
+NSUInteger GVRRowDistanceBetweenCells(GVRBoardCell cell1, GVRBoardCell cell2) {
+    return ABS(cell1.row - cell2.row);
+}
+
 BOOL GVRIsDiagonalDistance(GVRBoardCell cell1, GVRBoardCell cell2) {
     return labs((NSInteger)cell1.row - (NSInteger)cell2.row)
         == labs((NSInteger)cell1.column - (NSInteger)cell2.column)
             ? YES : NO;
+}
+
+BOOL GVRBoardCellIsEqualToBoardCell(GVRBoardCell cell1, GVRBoardCell cell2) {
+    return cell1.row == cell2.row && cell2.column == cell2.column ? YES : NO;
+}
+
+BOOL GVRBoardDirectionIsEqualToBoardDirection(GVRBoardDirection direction1,
+                                              GVRBoardDirection direction2)
+{
+    return direction1.rowDirection == direction2.rowDirection
+        && direction1.columnDirection == direction2.columnDirection;
 }
 
 GVRBoardCell GVREdgeCellMake(NSUInteger size,

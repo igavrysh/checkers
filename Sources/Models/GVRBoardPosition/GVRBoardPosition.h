@@ -39,6 +39,8 @@ extern GVRBoardDirection GVRBoardDirectionMake(NSInteger rowDirectin,
 extern GVRBoardDirection GVRBoardDirectionUsingCells(GVRBoardCell fromCell,
                                                      GVRBoardCell toCell);
 
+extern NSUInteger GVRRowDistanceBetweenCells(GVRBoardCell cell1, GVRBoardCell cell2);
+
 extern BOOL GVRIsDiagonalDistance(GVRBoardCell cell1, GVRBoardCell cell2);
 
 extern GVRBoardCell GVRBoardCellShift(GVRBoardCell cell, GVRBoardDirection direction, NSInteger delta);
@@ -46,6 +48,11 @@ extern GVRBoardCell GVRBoardCellShift(GVRBoardCell cell, GVRBoardDirection direc
 extern GVRBoardCell GVREdgeCellMake(NSUInteger size,
                                     GVRBoardCell fromCell,
                                     GVRBoardDirection direction);
+
+extern BOOL GVRBoardCellIsEqualToBoardCell(GVRBoardCell cell1, GVRBoardCell cell2);
+
+extern BOOL GVRBoardDirectionIsEqualToBoardDirection(GVRBoardDirection direction1,
+                                                     GVRBoardDirection direction2);
 
 @interface GVRBoardPosition : NSObject
 @property (nonatomic, readonly)         NSUInteger              row;

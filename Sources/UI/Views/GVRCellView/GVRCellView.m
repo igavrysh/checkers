@@ -25,6 +25,7 @@
 @dynamic color;
 @dynamic tag;
 @dynamic position;
+@dynamic boardCell;
 
 #pragma mark -
 #pragma mark Class Methods
@@ -96,5 +97,8 @@
         : position.color == GVRBoardPositionColorWhite ? GVRSubViewTagWhiteCell : GVRSubViewTagBlackCell;
 }
 
+- (GVRBoardCell)boardCell {
+    return GVRBoardCellMake(self.row, self.column);
+}
 
 @end
