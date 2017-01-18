@@ -102,7 +102,7 @@
     
     [self initCells];
     
-    NSInteger multiplier = self.activePlayer == GVRPlayerWhiteCheckers ? -1 : 1;
+    NSInteger multiplier = -1; // self.activePlayer == GVRPlayerWhiteCheckers ? -1 : 1;
     
     self.baseBoardView.transform = CGAffineTransformRotate(self.baseBoardView.transform, multiplier * M_PI / 2);
 }

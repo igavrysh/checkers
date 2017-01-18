@@ -85,10 +85,10 @@ GVRBoardCell GVREdgeCellMake(NSUInteger size,
             minDistance = MIN(size - fromCell.row - 1, fromCell.column);
         }
     } else if (direction.rowDirection == -1) {
-        if (direction.columnDirection == 1) {
-            minDistance = MIN(fromCell.row, fromCell.column);
-        } else if (direction.columnDirection == 1) {
+        if (direction.columnDirection == 1)  {
             minDistance = MIN(fromCell.row, size - fromCell.column - 1);
+        } else if (direction.columnDirection == -1) {
+            minDistance = MIN(fromCell.row, fromCell.column);
         }
     }
     

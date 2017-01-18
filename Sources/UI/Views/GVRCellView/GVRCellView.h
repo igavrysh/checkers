@@ -28,7 +28,4 @@
                        board:(GVRBoard *)board
                    boardView:(GVRBoardView *)boardView;
 
-
-
-
 @end

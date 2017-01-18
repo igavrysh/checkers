@@ -28,6 +28,8 @@ typedef enum {
 @property (nonatomic, readonly)         NSHashTable     *cells;
 @property (nonatomic, assign, readonly) float           boardSize;
 
+- (void)initBoard;
+
 - (CGPoint)locationInBaseBoardViewForTouch:(UITouch *)touch;
 
 - (GVRCellView *)cellForInBoardTouch:(UITouch *)touch;

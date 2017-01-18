@@ -25,7 +25,9 @@ enum {
     GVRTrajectoryBackwardsMove,
     GVRTrajectoryLongJump,
     GVRTrajectoryJumpOverFriendlyChecker,
-    GVRTrajectoryMissRequiredJump
+    GVRTrajectoryMissRequiredJump,
+    GVRTrajectoryIncorrectFormat,
+    GVRTrajectoryNoStepsInTrajectory
 };
 
 @interface GVRTrajectory : NSObject

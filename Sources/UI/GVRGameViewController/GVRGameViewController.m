@@ -191,13 +191,13 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
         return;
     }
     
-    UITouch *touch = [touches anyObject];
-    
     [self.game moveChekerBySteps:self.trajectory
                        forPlayer:self.activePlayer
            withCompletionHandler:^(BOOL success)
     {
+        self.activePlayer = self.game.activePlayer;
         
+        [self.gameView.boardView initBoard];
     }];
 }
 
