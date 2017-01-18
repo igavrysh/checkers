@@ -49,8 +49,8 @@ GVRBoardCell GVRBoardCellShift(GVRBoardCell cell,
     return shiftedCell;
 }
 
-NSUInteger GVRRowDistanceBetweenCells(GVRBoardCell cell1, GVRBoardCell cell2) {
-    return ABS(cell1.row - cell2.row);
+NSInteger GVRRowDistanceBetweenCells(GVRBoardCell fromCell, GVRBoardCell toCell) {
+    return (NSInteger)toCell.row - (NSInteger)fromCell.row;
 }
 
 BOOL GVRIsDiagonalDistance(GVRBoardCell cell1, GVRBoardCell cell2) {
@@ -109,6 +109,7 @@ GVRBoardCell GVREdgeCellMake(NSUInteger size,
 
 @dynamic color;
 @dynamic isFilled;
+@dynamic cell;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -136,6 +137,14 @@ GVRBoardCell GVREdgeCellMake(NSUInteger size,
 
 - (BOOL)isFilled {
     return self.checker;
+}
+
+- (GVRBoardCell)cell {
+    GVRBoardCell cell;
+    cell.row = self.row;
+    cell.column = self.column;
+    
+    return cell;
 }
 
 #pragma mark -
@@ -189,14 +198,6 @@ GVRBoardCell GVREdgeCellMake(NSUInteger size,
     direction.columnDirection = [self columnDirectionToPosition:position];
     
     return direction;
-}
-
-- (GVRBoardCell)cell {
-    GVRBoardCell cell;
-    cell.row = self.row;
-    cell.column = self.column;
-    
-    return cell;
 }
 
 @end

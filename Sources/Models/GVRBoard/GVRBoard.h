@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 #import "GVRBoardPosition.h"
+#import "GVRGame.h"
 
 @class GVRChecker;
 @class GVRBoardPosition;
+@class GVRTrajectory;
 
 static const NSUInteger GVRBoardSize = 10;
 
@@ -58,5 +60,27 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 - (void)iterateDiagonallyFromCell:(GVRBoardCell)fromCell
                            toCell:(GVRBoardCell)toCell
                         withBlock:(void (^)(GVRBoardPosition *position, BOOL *stop))block;
+
+
+- (GVRBoardPosition *)victimPositionWithTrajectory:(GVRTrajectory *)trajectory
+                                          fromCell:(GVRBoardCell)fromCell
+                                         direction:(GVRBoardDirection)direction
+                                         forPlayer:(GVRPlayer)player
+                                             error:(NSError **)error;
+
+- (GVRBoardPosition *)victimPositionWithTrajectory:(GVRTrajectory *)trajectory
+                                          fromCell:(GVRBoardCell)fromCell
+                                            toCell:(GVRBoardCell)toCell
+                                         forPlayer:(GVRPlayer)player
+                                             error:(NSError **)error;
+
+- (BOOL)isReqFirstMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
+                                      fromCell:(GVRBoardCell)cell
+                                        player:(GVRPlayer)player;
+
+- (BOOL)isReqMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
+                                 fromCell:(GVRBoardCell)fromCell
+                                direction:(GVRBoardDirection)direction
+                                   player:(GVRPlayer)player;
 
 @end

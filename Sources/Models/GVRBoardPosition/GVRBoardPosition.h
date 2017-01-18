@@ -39,7 +39,7 @@ extern GVRBoardDirection GVRBoardDirectionMake(NSInteger rowDirectin,
 extern GVRBoardDirection GVRBoardDirectionUsingCells(GVRBoardCell fromCell,
                                                      GVRBoardCell toCell);
 
-extern NSUInteger GVRRowDistanceBetweenCells(GVRBoardCell cell1, GVRBoardCell cell2);
+extern NSInteger GVRRowDistanceBetweenCells(GVRBoardCell fromCell, GVRBoardCell toCell);
 
 extern BOOL GVRIsDiagonalDistance(GVRBoardCell cell1, GVRBoardCell cell2);
 
@@ -61,6 +61,7 @@ extern BOOL GVRBoardDirectionIsEqualToBoardDirection(GVRBoardDirection direction
 @property (nonatomic, weak, readonly)   GVRBoard                *board;
 @property (nonatomic, readonly)         GVRBoardPositionColor   color;
 @property (nonatomic, readonly, getter=isFilled)    BOOL        isFilled;
+@property (nonatomic, assign, readonly) GVRBoardCell            cell;
 
 - (instancetype)initWithRow:(NSUInteger)row column:(NSUInteger)column board:(GVRBoard *)board;
 
@@ -79,7 +80,5 @@ extern BOOL GVRBoardDirectionIsEqualToBoardDirection(GVRBoardDirection direction
 - (NSInteger)columnDirectionToPosition:(GVRBoardPosition *)position;
 
 - (GVRBoardDirection)directionToPosition:(GVRBoardPosition *)position;
-
-- (GVRBoardCell)cell;
 
 @end

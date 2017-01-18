@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "GVRGame.h"
+#import "GVRBoardPosition.h"
 
 @class GVRBoard;
 
@@ -43,7 +44,13 @@ enum {
 
 - (BOOL)isAllowedDistanceToVictim:(NSInteger)distance;
 
+- (BOOL)isAllowedDistanceToVictimFromCell:(GVRBoardCell)fromCell
+                                   toCell:(GVRBoardCell)toCell;
+
 - (BOOL)isAllowedSingleJumpDistance:(NSInteger)distance;
+
+- (BOOL)isAllowedSingleJumpDistanceFromCell:(GVRBoardCell)fromCell
+                                     toCell:(GVRBoardCell)toCell;
 
 - (BOOL)applyForBoard:(GVRBoard *)board
                player:(GVRPlayer)player
