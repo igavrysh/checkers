@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "GVRChecker.h"
+
 @class GVRBoard;
 
 typedef enum : NSUInteger {
@@ -15,6 +17,8 @@ typedef enum : NSUInteger {
     GVRPlayerWhiteCheckers,
     GVRPlayerBlackCheckers
 } GVRPlayer;
+
+extern GVRCheckerColor GVRCheckerColorForPlayer(GVRPlayer player);
 
 @interface GVRGame : NSObject
 @property (nonatomic, readonly) GVRBoard    *board;

@@ -267,26 +267,23 @@
 }
 
 
-- (GVRBoardPosition *)victimPositionWithTrajectory:(GVRTrajectory *)trajectory
-                                          fromCell:(GVRBoardCell)fromCell
-                                         direction:(GVRBoardDirection)direction
-                                         forPlayer:(GVRPlayer)player
-                                             error:(NSError **)error
+- (GVRBoardPosition *)victimPositionFromCell:(GVRBoardCell)fromCell
+                                   direction:(GVRBoardDirection)direction
+                                   forPlayer:(GVRPlayer)player
+                                       error:(NSError **)error
 {
     GVRBoardCell toCell = GVREdgeCellMake(self.size, fromCell, direction);
     
-    return [self victimPositionWithTrajectory:trajectory
-                                    fromCell:fromCell
-                                       toCell:toCell
-                                    forPlayer:player
-                                        error:error];
+    return [self victimPositionFromCell:fromCell
+                                 toCell:toCell
+                              forPlayer:player
+                                  error:error];
 }
 
-- (GVRBoardPosition *)victimPositionWithTrajectory:(GVRTrajectory *)trajectory
-                                          fromCell:(GVRBoardCell)fromCell
-                                            toCell:(GVRBoardCell)toCell
-                                         forPlayer:(GVRPlayer)player
-                                             error:(NSError **)error
+- (GVRBoardPosition *)victimPositionFromCell:(GVRBoardCell)fromCell
+                                      toCell:(GVRBoardCell)toCell
+                                   forPlayer:(GVRPlayer)player
+                                       error:(NSError **)error
 {
     __block GVRBoardPosition *victimPosition = nil;
     
@@ -296,14 +293,6 @@
                              toCell:toCell
                           withBlock:^(GVRBoardPosition *position, BOOL *stop)
     {
-        if (![trajectory isAllowedDistanceToVictim:position.row - fromCell.row])
-            //|| ![self isAllowedDistanceToVictim:toCell.row - position.row])
-        {
-            *stop = YES;
-            
-            return;
-        }
-        
         if (position.isFilled && !position.checker.isMarkedForRemoval) {
             *stop = YES;
             
@@ -339,6 +328,42 @@
     return victimPosition;
 }
 
+- (BOOL)isReqFirstMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
+                                     forPlayer:(GVRPlayer)player
+{
+    GVRCheckerColor color = GVRCheckerColorForPlayer(player);
+    
+    for (GVRBoardPosition *position in self.positions) {
+        if (position.isFilled && color == position.checker.color) {
+            if ([self isReqFirstMoveAvailalbleWithTrajectory:trajectory
+                                                    fromCell:position.cell
+                                                      player:player])
+            {
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
+}
+
+- (BOOL)isReqFirstMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
+                                      fromCell:(GVRBoardCell)cell
+                                        player:(GVRPlayer)player
+{
+    BOOL (^isReqMoveAvailalbleWithDirection)(GVRBoardDirection) = ^BOOL(GVRBoardDirection direction) {
+        return [self isReqMoveAvailalbleWithTrajectory:trajectory
+                                              fromCell:cell
+                                             direction:direction
+                                                player:player];
+    };
+    
+    return isReqMoveAvailalbleWithDirection(GVRBoardDirectionMake(+1, +1))
+    || isReqMoveAvailalbleWithDirection(GVRBoardDirectionMake(+1, -1))
+    || isReqMoveAvailalbleWithDirection(GVRBoardDirectionMake(-1, +1))
+    || isReqMoveAvailalbleWithDirection(GVRBoardDirectionMake(-1, -1));
+}
+
 - (BOOL)isReqMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
                                  fromCell:(GVRBoardCell)fromCell
                                 direction:(GVRBoardDirection)direction
@@ -347,11 +372,10 @@
     BOOL (^isVictimPresent)(GVRBoardCell, GVRBoardDirection, GVRPlayer)
     = ^BOOL(GVRBoardCell cell, GVRBoardDirection direction, GVRPlayer player)
     {
-        GVRBoardPosition *victimPosition = [self victimPositionWithTrajectory:trajectory
-                                                                     fromCell:cell
-                                                                    direction:direction
-                                                                    forPlayer:player
-                                                                        error:nil];
+        GVRBoardPosition *victimPosition = [self victimPositionFromCell:cell
+                                                              direction:direction
+                                                              forPlayer:player
+                                                                  error:nil];
         
         return (victimPosition) && [trajectory isAllowedDistanceToVictimFromCell:cell toCell:victimPosition.cell];
     };
@@ -392,24 +416,6 @@
     
     return isTrajectoryAvailable;
 }
-
-- (BOOL)isReqFirstMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
-                                      fromCell:(GVRBoardCell)cell
-                                        player:(GVRPlayer)player
-{
-    BOOL (^isReqMoveAvailalbleWithDirection)(GVRBoardDirection) = ^BOOL(GVRBoardDirection direction) {
-        return [self isReqMoveAvailalbleWithTrajectory:trajectory
-                                              fromCell:cell
-                                             direction:direction
-                                                player:player];
-    };
-    
-    return isReqMoveAvailalbleWithDirection(GVRBoardDirectionMake(+1, +1))
-        || isReqMoveAvailalbleWithDirection(GVRBoardDirectionMake(+1, -1))
-        || isReqMoveAvailalbleWithDirection(GVRBoardDirectionMake(-1, +1))
-        || isReqMoveAvailalbleWithDirection(GVRBoardDirectionMake(-1, -1));
-}
-
 
 #pragma mark -
 #pragma mark Private Methods

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0B30D883B0E8AC2615AD1412 /* libPods-CheckersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F0A1BC67157B0A29F86F09 /* libPods-CheckersTests.a */; };
+		851BF2D21E3190EB0081CB7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 851BF2D01E3190EB0081CB7F /* Main.storyboard */; };
+		851BF2D51E3191000081CB7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 851BF2D41E3191000081CB7F /* ViewController.m */; };
+		851BF2D61E3191000081CB7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 851BF2D41E3191000081CB7F /* ViewController.m */; };
 		852E95431E25A31B00662EEE /* GVRBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 852E95421E25A31B00662EEE /* GVRBoardView.m */; };
 		852E95441E25A31B00662EEE /* GVRBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 852E95421E25A31B00662EEE /* GVRBoardView.m */; };
 		853D3C421E2B9DA1001FA2F6 /* GVRCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D3C411E2B9DA1001FA2F6 /* GVRCellView.m */; };
@@ -27,10 +30,8 @@
 		8567AC7B1E1A60700036A95F /* GVRGameSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 8567AC7A1E1A60700036A95F /* GVRGameSpec.m */; };
 		858F5B9C1E17CCE100DB6D13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5B9B1E17CCE100DB6D13 /* main.m */; };
 		858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5B9E1E17CCE100DB6D13 /* AppDelegate.m */; };
-		858F5BA21E17CCE100DB6D13 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5BA11E17CCE100DB6D13 /* ViewController.m */; };
 		858F5BBB1E17CEA600DB6D13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 858F5BB21E17CEA600DB6D13 /* Assets.xcassets */; };
 		858F5BBC1E17CEA600DB6D13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 858F5BB31E17CEA600DB6D13 /* LaunchScreen.storyboard */; };
-		858F5BBD1E17CEA600DB6D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 858F5BB51E17CEA600DB6D13 /* Main.storyboard */; };
 		859CD1451E195AF9004BE15C /* GVRBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD13B1E195AF9004BE15C /* GVRBoard.m */; };
 		859CD1461E195AF9004BE15C /* GVRBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD13B1E195AF9004BE15C /* GVRBoard.m */; };
 		859CD1471E195AF9004BE15C /* GVRBoardPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 859CD13E1E195AF9004BE15C /* GVRBoardPosition.m */; };
@@ -79,6 +80,9 @@
 		35F0A1BC67157B0A29F86F09 /* libPods-CheckersTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CheckersTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A09053FF374A36068D554CD /* libPods-Checkers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Checkers.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E2266F6134EA6CB511DB17 /* Pods-Checkers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Checkers.release.xcconfig"; path = "Pods/Target Support Files/Pods-Checkers/Pods-Checkers.release.xcconfig"; sourceTree = "<group>"; };
+		851BF2D11E3190EB0081CB7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		851BF2D31E3191000081CB7F /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		851BF2D41E3191000081CB7F /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		852E95411E25A31B00662EEE /* GVRBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBoardView.h; sourceTree = "<group>"; };
 		852E95421E25A31B00662EEE /* GVRBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoardView.m; sourceTree = "<group>"; };
 		853D3C401E2B9DA1001FA2F6 /* GVRCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRCellView.h; sourceTree = "<group>"; };
@@ -103,12 +107,9 @@
 		858F5B9B1E17CCE100DB6D13 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		858F5B9D1E17CCE100DB6D13 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		858F5B9E1E17CCE100DB6D13 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		858F5BA01E17CCE100DB6D13 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		858F5BA11E17CCE100DB6D13 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		858F5BAB1E17CCE100DB6D13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		858F5BB21E17CEA600DB6D13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		858F5BB41E17CEA600DB6D13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		858F5BB61E17CEA600DB6D13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		859CD12E1E195967004BE15C /* CheckersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		859CD1321E195967004BE15C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		859CD13A1E195AF9004BE15C /* GVRBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBoard.h; sourceTree = "<group>"; };
@@ -315,10 +316,10 @@
 		858F5B991E17CCE100DB6D13 /* Checkers */ = {
 			isa = PBXGroup;
 			children = (
+				851BF2D31E3191000081CB7F /* ViewController.h */,
+				851BF2D41E3191000081CB7F /* ViewController.m */,
 				858F5B9D1E17CCE100DB6D13 /* AppDelegate.h */,
 				858F5B9E1E17CCE100DB6D13 /* AppDelegate.m */,
-				858F5BA01E17CCE100DB6D13 /* ViewController.h */,
-				858F5BA11E17CCE100DB6D13 /* ViewController.m */,
 				858F5BAB1E17CCE100DB6D13 /* Info.plist */,
 				858F5B9A1E17CCE100DB6D13 /* Supporting Files */,
 			);
@@ -337,8 +338,8 @@
 			isa = PBXGroup;
 			children = (
 				858F5BB21E17CEA600DB6D13 /* Assets.xcassets */,
+				851BF2D01E3190EB0081CB7F /* Main.storyboard */,
 				858F5BB31E17CEA600DB6D13 /* LaunchScreen.storyboard */,
-				858F5BB51E17CEA600DB6D13 /* Main.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -594,10 +595,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				858F5BBD1E17CEA600DB6D13 /* Main.storyboard in Resources */,
 				858F5BBB1E17CEA600DB6D13 /* Assets.xcassets in Resources */,
 				85B05A441E270487006429FE /* GVRGameViewController.xib in Resources */,
 				858F5BBC1E17CEA600DB6D13 /* LaunchScreen.storyboard in Resources */,
+				851BF2D21E3190EB0081CB7F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,7 +717,6 @@
 				855F96521E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */,
 				85B05A4D1E2706E2006429FE /* GVRGameView.m in Sources */,
 				859CD1451E195AF9004BE15C /* GVRBoard.m in Sources */,
-				858F5BA21E17CCE100DB6D13 /* ViewController.m in Sources */,
 				85F6A8B61E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */,
 				859CD1491E195AF9004BE15C /* GVRChecker.m in Sources */,
 				85F6A8AD1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,
@@ -730,6 +730,7 @@
 				85B05A411E27046D006429FE /* GVRGameViewController.m in Sources */,
 				855F964E1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
 				855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
+				851BF2D51E3191000081CB7F /* ViewController.m in Sources */,
 				858F5B9C1E17CCE100DB6D13 /* main.m in Sources */,
 				85F6A8B11E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */,
 			);
@@ -763,6 +764,7 @@
 				85B05A4A1E2704EB006429FE /* UIViewController+GVRExtensions.m in Sources */,
 				85F6A8AE1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,
 				859CD14A1E195AF9004BE15C /* GVRChecker.m in Sources */,
+				851BF2D61E3191000081CB7F /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,20 +779,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		851BF2D01E3190EB0081CB7F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				851BF2D11E3190EB0081CB7F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		858F5BB31E17CEA600DB6D13 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				858F5BB41E17CEA600DB6D13 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		858F5BB51E17CEA600DB6D13 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				858F5BB61E17CEA600DB6D13 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -14,6 +14,17 @@
 
 #import "GVRBlockMacros.h"
 
+GVRCheckerColor GVRCheckerColorForPlayer(GVRPlayer player) {
+    GVRCheckerColor color = GVRCheckerColorNone;
+    if (GVRPlayerWhiteCheckers == player) {
+        color = GVRCheckerColorWhite;
+    } else if (GVRPlayerBlackCheckers == player) {
+        color = GVRCheckerColorBlack;
+    }
+    
+    return color;
+}
+
 @interface GVRGame()
 @property (nonatomic, strong)   GVRBoard        *board;
 @property (nonatomic, assign)   GVRPlayer       activePlayer;

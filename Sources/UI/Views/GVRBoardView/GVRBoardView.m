@@ -14,11 +14,11 @@
 #import "GVRBoardPosition.h"
 
 @interface GVRBoardView ()
-@property (nonatomic, weak)             UIView      *baseBoardView;
-@property (nonatomic, assign, readonly) float       leftMargin;
-@property (nonatomic, assign, readonly) float       topMargin;
-@property (nonatomic, strong)           NSHashTable *checkers;
-@property (nonatomic, strong)           NSHashTable *cells;
+@property (nonatomic, weak)             UIView          *baseBoardView;
+@property (nonatomic, assign, readonly) float           leftMargin;
+@property (nonatomic, assign, readonly) float           topMargin;
+@property (nonatomic, strong)           NSMutableArray  *checkers;
+@property (nonatomic, strong)           NSMutableArray  *cells;
 
 - (void)initBoard;
 
@@ -30,6 +30,10 @@
                            color:(UIColor*)color
                           parent:(UIView *)parent
                              tag:(GVRSubViewTag)tag;
+
+- (NSUInteger)indexForRow:(NSUInteger)row column:(NSUInteger)column;
+
+- (void)iterateBoardWithBlock:(void (^)(NSUInteger row, NSUInteger column))block;
 
 @end
 
@@ -79,6 +83,22 @@
 #pragma mark -
 #pragma mark Public Methods
 
+- (GVRCellView *)cellViewForRow:(NSUInteger)row column:(NSUInteger)column {
+    NSUInteger index = [self indexForRow:row column:column];
+    
+    return index < self.cells.count ? self.cells[index] : nil;
+}
+
+- (GVRCheckerView *)checkerViewForRow:(NSUInteger)row column:(NSUInteger)column {
+    for (GVRCheckerView *checkerView in self.checkers) {
+        if (checkerView.row == row && checkerView.column == column) {
+            return checkerView;
+        }
+    }
+    
+    return nil;
+}
+
 - (CGPoint)locationInBaseBoardViewForTouch:(UITouch *)touch {
     return [touch locationInView:self.baseBoardView];
 }
@@ -94,9 +114,6 @@
     return nil;
 }
 
-#pragma mark - 
-#pragma mark Private Methods
-
 - (void)initBoard {
     [self initBoardBase];
     
@@ -105,6 +122,30 @@
     NSInteger multiplier = -1; // self.activePlayer == GVRPlayerWhiteCheckers ? -1 : 1;
     
     self.baseBoardView.transform = CGAffineTransformRotate(self.baseBoardView.transform, multiplier * M_PI / 2);
+}
+
+- (void)updateCheckers {
+    for (GVRCheckerView *checkerView in self.checkers) {
+        [checkerView removeFromSuperview];
+    }
+    
+    [self iterateBoardWithBlock:^(NSUInteger row, NSUInteger column) {
+        GVRCellView *cellView = [self cellViewForRow:row column:column];
+        
+        GVRCheckerView *checkerView = [self checkerViewForRow:row column:column];
+        if (checkerView) {
+            [checkerView removeFromSuperview];
+        }
+        
+        [self initCheckerAtRow:row column:column withCellSize:cellView.cellSize];
+    }];
+}
+
+#pragma mark - 
+#pragma mark Private Methods
+
+- (NSUInteger)indexForRow:(NSUInteger)row column:(NSUInteger)column {
+    return self.board.size * row + column;
 }
 
 - (void)initBoardBase {
@@ -129,26 +170,35 @@
     self.baseBoardView = boardBaseView;
 }
 
-- (void)initCells {
-    self.cells = [NSHashTable weakObjectsHashTable];
-    self.checkers = [NSHashTable weakObjectsHashTable];
+- (void)iterateBoardWithBlock:(void (^)(NSUInteger row, NSUInteger column))block {
+    if (!block) {
+        return;
+    }
     
     NSUInteger size = self.board.size;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            GVRCellView *cellView = [GVRCellView cellWithCell:GVRBoardCellMake(i, j)
-                                                        board:self.board
-                                                    boardView:self];
-            
-            if (cellView) {
-                [self.baseBoardView addSubview:cellView];
-                
-                [self.cells addObject:cellView];
-                
-                [self initCheckerAtRow:i column:j withCellSize:cellView.cellSize];
-            }
+            block(i, j);
         }
     }
+}
+
+- (void)initCells {
+    self.cells = [NSMutableArray new];
+    self.checkers = [NSMutableArray new];
+    
+    [self iterateBoardWithBlock:^(NSUInteger row, NSUInteger column) {
+        GVRCellView *cellView = [GVRCellView cellWithCell:GVRBoardCellMake(row, column)
+                                                    board:self.board
+                                                boardView:self];
+        if (cellView) {
+            [self.baseBoardView addSubview:cellView];
+            
+            [self.cells addObject:cellView];
+            
+            [self initCheckerAtRow:row column:column withCellSize:cellView.cellSize];
+        }
+    }];
 }
 
 - (void)initCheckerAtRow:(NSUInteger)row

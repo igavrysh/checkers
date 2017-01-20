@@ -14,6 +14,9 @@
 
 @interface GVRCheckerView : UIView
 
+@property (nonatomic, readonly)   NSUInteger          row;
+@property (nonatomic, readonly)   NSUInteger          column;
+
 + (instancetype)checkerOnCell:(GVRBoardCell)cell
                      cellSize:(float)cellSize
                         board:(GVRBoard *)board

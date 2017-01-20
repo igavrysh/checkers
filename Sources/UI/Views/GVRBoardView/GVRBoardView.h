@@ -24,11 +24,13 @@ typedef enum {
 @property (nonatomic, strong)           GVRBoard        *board;
 @property (nonatomic, weak, readonly)   UIView          *baseBoardView;
 @property (nonatomic, assign)           GVRPlayer       activePlayer;
-@property (nonatomic, readonly)         NSHashTable     *checkers;
-@property (nonatomic, readonly)         NSHashTable     *cells;
+@property (nonatomic, readonly)         NSMutableArray  *checkers;
+@property (nonatomic, readonly)         NSMutableArray  *cells;
 @property (nonatomic, assign, readonly) float           boardSize;
 
 - (void)initBoard;
+
+- (void)updateCheckers;
 
 - (CGPoint)locationInBaseBoardViewForTouch:(UITouch *)touch;
 

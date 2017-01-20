@@ -78,8 +78,8 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
         //@strongify(self)
         
         if (success) {
-            self.gameView.boardView.board = self.game.board;
             self.activePlayer = self.game.activePlayer;
+            self.gameView.boardView.board = self.game.board;
         }
     }];
 }
@@ -163,25 +163,23 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
         }
         
         NSUInteger cellCount = trajectory.count;
+        GVRBoardCell lastCell = [trajectory cellAtIndex:cellCount - 1];
+        
         if (cellCount >= 1
-            && GVRBoardCellIsEqualToBoardCell([trajectory cellAtIndex:cellCount - 1], cell))
+            && GVRBoardCellIsEqualToBoardCell(lastCell, cell))
         {
             return;
         }
         
-        GVRBoardDirection oldDirection = GVRBoardDirectionMake(0, 0);
-        GVRBoardDirection newDirection = GVRBoardDirectionMake(1, 1);
-        if (cellCount >= 2) {
-            GVRBoardCell lastCell = [trajectory cellAtIndex:cellCount - 1];
-            GVRBoardCell last2Cell = [trajectory cellAtIndex:cellCount - 2];
-            oldDirection = GVRBoardDirectionUsingCells(last2Cell, lastCell);
-            newDirection = GVRBoardDirectionUsingCells(lastCell, cell);
-        }
-        
-        if (GVRBoardDirectionIsEqualToBoardDirection(oldDirection, newDirection)) {
-            [trajectory setCell:cell atIndex:cellCount - 1];
-        } else {
+        if ([self.game.board victimPositionFromCell:lastCell
+                                             toCell:cell
+                                          forPlayer:self.activePlayer
+                                              error:nil]
+            || 1 == cellCount)
+        {
             [self.trajectory addCell:cell];
+        } else {
+            [trajectory setCell:cell atIndex:cellCount - 1];
         }
     }
 }
@@ -197,12 +195,12 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
     {
         self.activePlayer = self.game.activePlayer;
         
-        [self.gameView.boardView initBoard];
+        [self.gameView.boardView updateCheckers];
     }];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    
+    [self.gameView.boardView updateCheckers];
 }
 
 @end

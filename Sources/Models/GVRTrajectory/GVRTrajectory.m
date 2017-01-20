@@ -207,12 +207,20 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
         return NO;
     }
     
-    GVRBoardPosition *victimPosition = [board victimPositionWithTrajectory:self
-                                                                  fromCell:previousCell
-                                                                    toCell:cell
-                                                                 forPlayer:player
-                                                                     error:error];
+    GVRBoardPosition *victimPosition = [board victimPositionFromCell:previousCell
+                                                              toCell:cell
+                                                           forPlayer:player
+                                                               error:error];
     if (*error) {
+        return NO;
+    }
+    
+    if (victimPosition &&
+        (![self isAllowedDistanceToVictim:victimPosition.row - previousCell.row]
+        || ![self isAllowedDistanceToVictim:victimPosition.row - cell.row]))
+    {
+        *error = [NSError trajectoryErrorWithCode:GVRTrajectoryLongJump];
+        
         return NO;
     }
     
@@ -264,7 +272,7 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
             return NO;
         }
         
-        if (![board isReqFirstMoveAvailalbleWithTrajectory:self fromCell:previousCell player:player]) {
+        if (![board isReqFirstMoveAvailalbleWithTrajectory:self forPlayer:player]) {
             [board moveCheckerFromCell:initialCell toCell:cell];
             
             result = YES;

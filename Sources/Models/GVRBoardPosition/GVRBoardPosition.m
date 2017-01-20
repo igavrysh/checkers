@@ -99,9 +99,9 @@ GVRBoardCell GVREdgeCellMake(NSUInteger size,
 }
 
 @interface GVRBoardPosition ()
-@property (nonatomic, assign)   NSUInteger               row;
-@property (nonatomic, assign)   NSUInteger               column;
-@property (nonatomic, weak)     GVRBoard                *board;
+@property (nonatomic, assign)   NSUInteger  row;
+@property (nonatomic, assign)   NSUInteger  column;
+@property (nonatomic, weak)     GVRBoard    *board;
 
 @end
 

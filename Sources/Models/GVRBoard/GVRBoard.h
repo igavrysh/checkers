@@ -62,21 +62,22 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
                         withBlock:(void (^)(GVRBoardPosition *position, BOOL *stop))block;
 
 
-- (GVRBoardPosition *)victimPositionWithTrajectory:(GVRTrajectory *)trajectory
-                                          fromCell:(GVRBoardCell)fromCell
-                                         direction:(GVRBoardDirection)direction
-                                         forPlayer:(GVRPlayer)player
-                                             error:(NSError **)error;
+- (GVRBoardPosition *)victimPositionFromCell:(GVRBoardCell)fromCell
+                                   direction:(GVRBoardDirection)direction
+                                   forPlayer:(GVRPlayer)player
+                                       error:(NSError **)error;
 
-- (GVRBoardPosition *)victimPositionWithTrajectory:(GVRTrajectory *)trajectory
-                                          fromCell:(GVRBoardCell)fromCell
-                                            toCell:(GVRBoardCell)toCell
-                                         forPlayer:(GVRPlayer)player
-                                             error:(NSError **)error;
+- (GVRBoardPosition *)victimPositionFromCell:(GVRBoardCell)fromCell
+                                      toCell:(GVRBoardCell)toCell
+                                   forPlayer:(GVRPlayer)player
+                                       error:(NSError **)error;
 
 - (BOOL)isReqFirstMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
                                       fromCell:(GVRBoardCell)cell
                                         player:(GVRPlayer)player;
+
+- (BOOL)isReqFirstMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
+                                     forPlayer:(GVRPlayer)player;
 
 - (BOOL)isReqMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
                                  fromCell:(GVRBoardCell)fromCell
