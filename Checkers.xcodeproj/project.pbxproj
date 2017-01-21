@@ -13,6 +13,8 @@
 		851BF2D61E3191000081CB7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 851BF2D41E3191000081CB7F /* ViewController.m */; };
 		852E95431E25A31B00662EEE /* GVRBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 852E95421E25A31B00662EEE /* GVRBoardView.m */; };
 		852E95441E25A31B00662EEE /* GVRBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 852E95421E25A31B00662EEE /* GVRBoardView.m */; };
+		853C0D151E33B79400EC0E08 /* GVRGCDQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 853C0D141E33B79400EC0E08 /* GVRGCDQueue.m */; };
+		853C0D161E33B79400EC0E08 /* GVRGCDQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 853C0D141E33B79400EC0E08 /* GVRGCDQueue.m */; };
 		853D3C421E2B9DA1001FA2F6 /* GVRCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D3C411E2B9DA1001FA2F6 /* GVRCellView.m */; };
 		853D3C431E2B9DA1001FA2F6 /* GVRCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D3C411E2B9DA1001FA2F6 /* GVRCellView.m */; };
 		853D3C471E2C1078001FA2F6 /* GVRCheckerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D3C461E2C1078001FA2F6 /* GVRCheckerView.m */; };
@@ -85,6 +87,8 @@
 		851BF2D41E3191000081CB7F /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		852E95411E25A31B00662EEE /* GVRBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBoardView.h; sourceTree = "<group>"; };
 		852E95421E25A31B00662EEE /* GVRBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRBoardView.m; sourceTree = "<group>"; };
+		853C0D131E33B79400EC0E08 /* GVRGCDQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRGCDQueue.h; sourceTree = "<group>"; };
+		853C0D141E33B79400EC0E08 /* GVRGCDQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRGCDQueue.m; sourceTree = "<group>"; };
 		853D3C401E2B9DA1001FA2F6 /* GVRCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRCellView.h; sourceTree = "<group>"; };
 		853D3C411E2B9DA1001FA2F6 /* GVRCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRCellView.m; sourceTree = "<group>"; };
 		853D3C451E2C1078001FA2F6 /* GVRCheckerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRCheckerView.h; sourceTree = "<group>"; };
@@ -201,6 +205,23 @@
 				852E95421E25A31B00662EEE /* GVRBoardView.m */,
 			);
 			path = GVRBoardView;
+			sourceTree = "<group>";
+		};
+		853C0D111E33B79400EC0E08 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				853C0D121E33B79400EC0E08 /* GVRGCDQueue */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		853C0D121E33B79400EC0E08 /* GVRGCDQueue */ = {
+			isa = PBXGroup;
+			children = (
+				853C0D131E33B79400EC0E08 /* GVRGCDQueue.h */,
+				853C0D141E33B79400EC0E08 /* GVRGCDQueue.m */,
+			);
+			path = GVRGCDQueue;
 			sourceTree = "<group>";
 		};
 		853D3C3F1E2B9D94001FA2F6 /* GVRCellView */ = {
@@ -357,6 +378,7 @@
 		858F5BB81E17CEA600DB6D13 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				853C0D111E33B79400EC0E08 /* Classes */,
 				85F48F9D1E1B2307004FD8D1 /* Categories */,
 				8567AC7C1E1A61AD0036A95F /* Utilites */,
 			);
@@ -720,6 +742,7 @@
 				85F6A8B61E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */,
 				859CD1491E195AF9004BE15C /* GVRChecker.m in Sources */,
 				85F6A8AD1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,
+				853C0D151E33B79400EC0E08 /* GVRGCDQueue.m in Sources */,
 				85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */,
 				853D3C471E2C1078001FA2F6 /* GVRCheckerView.m in Sources */,
 				858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */,
@@ -760,6 +783,7 @@
 				85F6A8B71E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */,
 				859CD1481E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
 				855F964F1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
+				853C0D161E33B79400EC0E08 /* GVRGCDQueue.m in Sources */,
 				855F964A1E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
 				85B05A4A1E2704EB006429FE /* UIViewController+GVRExtensions.m in Sources */,
 				85F6A8AE1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,

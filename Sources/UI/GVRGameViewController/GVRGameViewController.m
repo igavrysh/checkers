@@ -13,6 +13,7 @@
 #import "GVRGame.h"
 #import "GVRGameView.h"
 #import "GVRCellView.h"
+#import "GVRGCDQueue.h"
 
 #import "UIViewController+GVRExtensions.h"
 #import "NSMutableArray+GVRTrajectory.h"
@@ -51,6 +52,7 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
     return self;
 }
 
+
 #pragma mark -
 #pragma mark Accessors
 
@@ -76,11 +78,13 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
     //@weakify(self)
     [self.game begin:^(BOOL success) {
         //@strongify(self)
-        
-        if (success) {
-            self.activePlayer = self.game.activePlayer;
-            self.gameView.boardView.board = self.game.board;
-        }
+
+        GVRAsyncPerformInMainQueue(^{
+            if (success) {
+                self.activePlayer = self.game.activePlayer;
+                self.gameView.boardView.board = self.game.board;
+            }
+        });
     }];
 }
 
