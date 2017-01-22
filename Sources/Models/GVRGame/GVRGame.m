@@ -70,7 +70,7 @@ GVRCheckerColor GVRCheckerColorForPlayer(GVRPlayer player) {
                 forPlayer:(GVRPlayer)player
     withCompletionHandler:(void(^)(BOOL success))block
 {
-    GVRTrajectory *trajectory = [GVRTrajectory trajectoryWithSteps:steps board:self.board];
+    GVRTrajectory *trajectory = [GVRTrajectory trajectoryWithSteps:steps];
     
     NSError *error = nil;
     

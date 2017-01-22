@@ -423,6 +423,96 @@ context(@"when board is initialized", ^{
         });
     });
     
+    context(@"when two black men are located in a row, and white king moves in the opposite direction", ^{
+        it(@"should set success variable to true", ^{
+            GVRBoardCell initialCell = GVRBoardCellMake(9, 3);
+            GVRBoardCell finalCell = GVRBoardCellMake(6, 0);
+            GVRBoardCell opponent1Cell = GVRBoardCellMake(8, 4);
+            GVRBoardCell opponent2Cell = GVRBoardCellMake(7, 5);
+            GVRBoardCell opponent3Cell = GVRBoardCellMake(6, 2);
+            
+            [board addChecker:[GVRChecker whiteKing] atCell:initialCell];
+            [board addChecker:[GVRChecker blackKing] atCell:opponent1Cell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent2Cell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent3Cell];
+            
+            __block BOOL checkerMoved = NO;
+            NSArray *path = @[[NSValue valueWithCell:initialCell], [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponent1Cell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:opponent2Cell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:opponent3Cell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
+                 
+                 [[theValue([board positionForCell:finalCell].checker.type) should] equal:theValue(GVRCheckerTypeKing)];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:opponent1Cell];
+                 [board removeCheckerAtCell:opponent2Cell];
+                 [board removeCheckerAtCell:opponent3Cell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
+            
+        });
+    });
+    
+    context(@"when white king is located on diagonal with black men, and one men is aside", ^{
+        it(@"should set success variable to true", ^{
+            GVRBoardCell initialCell = GVRBoardCellMake(9, 1);
+            GVRBoardCell interimCell = GVRBoardCellMake(5, 5);
+            GVRBoardCell finalCell = GVRBoardCellMake(3, 7);
+            GVRBoardCell opponent1Cell = GVRBoardCellMake(6, 4);
+            GVRBoardCell opponent2Cell = GVRBoardCellMake(4, 6);
+            GVRBoardCell opponent3Cell = GVRBoardCellMake(8, 8);
+            
+            [board addChecker:[GVRChecker whiteKing] atCell:initialCell];
+            [board addChecker:[GVRChecker blackKing] atCell:opponent1Cell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent2Cell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent3Cell];
+            
+            __block BOOL checkerMoved = NO;
+            NSArray *path = @[[NSValue valueWithCell:initialCell],
+                              [NSValue valueWithCell:interimCell],
+                              [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponent1Cell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponent2Cell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponent3Cell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
+                 
+                 [[theValue([board positionForCell:finalCell].checker.type) should] equal:theValue(GVRCheckerTypeKing)];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:opponent1Cell];
+                 [board removeCheckerAtCell:opponent2Cell];
+                 [board removeCheckerAtCell:opponent3Cell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
+            
+        });
+    });
 });
 
 SPEC_END

@@ -169,19 +169,33 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
         NSUInteger cellCount = trajectory.count;
         GVRBoardCell lastCell = [trajectory cellAtIndex:cellCount - 1];
         
+        if (cellCount == 1) {
+            [self.trajectory addCell:cell];
+            
+            return;
+        }
+        
+        
         if (cellCount >= 1
             && GVRBoardCellIsEqualToBoardCell(lastCell, cell))
         {
             return;
         }
         
-        if ([self.game.board victimPositionFromCell:lastCell
-                                             toCell:cell
-                                          forPlayer:self.activePlayer
-                                              error:nil]
-            || 1 == cellCount)
+        
+        GVRBoardCell previousCell = [trajectory cellAtIndex:cellCount - 2];
+        GVRBoardDirection direction = GVRBoardDirectionUsingCells(lastCell, cell);
+        GVRBoardDirection previousDirection = GVRBoardDirectionUsingCells(previousCell, lastCell);
+        
+        GVRBoardPosition *victimPosition = [self.game.board victimPositionFromCell:lastCell
+                                                                            toCell:cell
+                                                                         forPlayer:self.activePlayer
+                                                                             error:nil];
+        if (victimPosition
+            || !GVRBoardDirectionIsEqualToBoardDirection(direction, previousDirection))
         {
-            [self.trajectory addCell:cell];
+            [trajectory addCell:cell];
+            
         } else {
             [trajectory setCell:cell atIndex:cellCount - 1];
         }

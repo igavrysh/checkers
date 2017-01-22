@@ -20,6 +20,8 @@ typedef enum : NSUInteger {
     GVRCheckerColorBlack
 } GVRCheckerColor;
 
+typedef struct GVRBoardCell GVRBoardCell;
+
 @interface GVRChecker : NSObject <NSCopying>
 @property (nonatomic, readonly)                             GVRCheckerType  type;
 @property (nonatomic, readonly)                             GVRCheckerColor color;
@@ -40,5 +42,16 @@ typedef enum : NSUInteger {
                        color:(GVRCheckerColor)color;
 
 - (void)promoteCheckerType;
+
+- (BOOL)isAllowedDistanceToVictim:(NSInteger)distance;
+
+- (BOOL)isAllowedDistanceToVictimFromCell:(GVRBoardCell)fromCell
+                                   toCell:(GVRBoardCell)toCell;
+
+- (BOOL)isAllowedSingleJumpDistance:(NSInteger)distance;
+
+- (BOOL)isAllowedSingleJumpDistanceFromCell:(GVRBoardCell)fromCell
+                                     toCell:(GVRBoardCell)toCell;
+
 
 @end

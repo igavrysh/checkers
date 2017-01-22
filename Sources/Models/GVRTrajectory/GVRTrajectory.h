@@ -34,23 +34,9 @@ enum {
 @interface GVRTrajectory : NSObject
 @property (nonatomic, readonly)         NSArray     *steps;
 
-+ (instancetype)trajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board;
++ (instancetype)trajectoryWithSteps:(NSArray *)steps;
 
-+ (instancetype)manTrajectoryWithSteps:(NSArray *)steps;
-
-+ (instancetype)kingTrajectoryWithSteps:(NSArray *)steps;
-
-- (instancetype)initWithSteps:(NSArray *)steps board:(GVRBoard *)board;
-
-- (BOOL)isAllowedDistanceToVictim:(NSInteger)distance;
-
-- (BOOL)isAllowedDistanceToVictimFromCell:(GVRBoardCell)fromCell
-                                   toCell:(GVRBoardCell)toCell;
-
-- (BOOL)isAllowedSingleJumpDistance:(NSInteger)distance;
-
-- (BOOL)isAllowedSingleJumpDistanceFromCell:(GVRBoardCell)fromCell
-                                     toCell:(GVRBoardCell)toCell;
+- (instancetype)initWithSteps:(NSArray *)steps;
 
 - (BOOL)applyForBoard:(GVRBoard *)board
                player:(GVRPlayer)player

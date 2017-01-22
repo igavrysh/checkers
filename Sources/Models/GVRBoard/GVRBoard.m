@@ -328,16 +328,15 @@
     return victimPosition;
 }
 
-- (BOOL)isReqFirstMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
-                                     forPlayer:(GVRPlayer)player
-{
+- (BOOL)isReqFirstMoveAvailalbleForPlayer:(GVRPlayer)player {
     GVRCheckerColor color = GVRCheckerColorForPlayer(player);
     
     for (GVRBoardPosition *position in self.positions) {
-        if (position.isFilled && color == position.checker.color) {
-            if ([self isReqFirstMoveAvailalbleWithTrajectory:trajectory
-                                                    fromCell:position.cell
-                                                      player:player])
+        GVRChecker *candidateChecker = position.checker;
+        if (position.isFilled && color == candidateChecker.color) {
+            if ([self isReqFirstMoveAvailalbleForChecker:candidateChecker
+                                                fromCell:position.cell
+                                                  player:player])
             {
                 return YES;
             }
@@ -347,15 +346,16 @@
     return NO;
 }
 
-- (BOOL)isReqFirstMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
-                                      fromCell:(GVRBoardCell)cell
-                                        player:(GVRPlayer)player
+- (BOOL)isReqFirstMoveAvailalbleForChecker:(GVRChecker *)checker
+                                  fromCell:(GVRBoardCell)cell
+                                    player:(GVRPlayer)player
 {
     BOOL (^isReqMoveAvailalbleWithDirection)(GVRBoardDirection) = ^BOOL(GVRBoardDirection direction) {
-        return [self isReqMoveAvailalbleWithTrajectory:trajectory
-                                              fromCell:cell
-                                             direction:direction
-                                                player:player];
+        return [self isReqMoveAvailalbleForChecker:checker
+                                          fromCell:cell
+                                         direction:direction
+                                            player:player
+                                       isFirstMove:YES];
     };
     
     return isReqMoveAvailalbleWithDirection(GVRBoardDirectionMake(+1, +1))
@@ -364,10 +364,11 @@
     || isReqMoveAvailalbleWithDirection(GVRBoardDirectionMake(-1, -1));
 }
 
-- (BOOL)isReqMoveAvailalbleWithTrajectory:(GVRTrajectory *)trajectory
-                                 fromCell:(GVRBoardCell)fromCell
-                                direction:(GVRBoardDirection)direction
-                                   player:(GVRPlayer)player
+- (BOOL)isReqMoveAvailalbleForChecker:(GVRChecker *)checker
+                             fromCell:(GVRBoardCell)fromCell
+                            direction:(GVRBoardDirection)direction
+                               player:(GVRPlayer)player
+                          isFirstMove:(BOOL)isFirstMove
 {
     BOOL (^isVictimPresent)(GVRBoardCell, GVRBoardDirection, GVRPlayer)
     = ^BOOL(GVRBoardCell cell, GVRBoardDirection direction, GVRPlayer player)
@@ -377,7 +378,7 @@
                                                               forPlayer:player
                                                                   error:nil];
         
-        return (victimPosition) && [trajectory isAllowedDistanceToVictimFromCell:cell toCell:victimPosition.cell];
+        return (victimPosition) && [checker isAllowedDistanceToVictimFromCell:cell toCell:victimPosition.cell];
     };
     
     GVRBoardDirection direction1 = direction.rowDirection != direction.columnDirection
@@ -392,10 +393,23 @@
         return isTrajectoryAvailable;
     }
     
+    if (isFirstMove) {
+        return isTrajectoryAvailable;
+    }
+    
+    
     [self iterateDiagonallyFromCell:fromCell
                       withDirection:direction
                               block:^(GVRBoardPosition *position, BOOL *stop)
      {
+         
+         if (position.isFilled && !position.checker.markedForRemoval) {
+             *stop = YES;
+             isTrajectoryAvailable = NO;
+             
+             return;
+         }
+         
          GVRBoardCell candidateCell = [position cell];
          if (isVictimPresent(candidateCell, direction1, player)
              || isVictimPresent(candidateCell, direction2, player))
@@ -406,11 +420,11 @@
              return;
          }
          
-         if (![trajectory isAllowedDistanceToVictimFromCell:fromCell toCell:position.cell]
-             || (position.isFilled && !position.checker.markedForRemoval))
-         {
+         if (![checker isAllowedDistanceToVictimFromCell:fromCell toCell:position.cell]) {
              *stop = YES;
              isTrajectoryAvailable = NO;
+             
+             return;
          }
      }];
     

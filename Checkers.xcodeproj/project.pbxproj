@@ -23,10 +23,6 @@
 		855010D21E28553500F4A4C8 /* UIWindow+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 855010D01E28553500F4A4C8 /* UIWindow+GVRExtensions.m */; };
 		855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96481E1BA49200FC6F1F /* GVRTrajectory.m */; };
 		855F964A1E1BA49200FC6F1F /* GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96481E1BA49200FC6F1F /* GVRTrajectory.m */; };
-		855F964E1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */; };
-		855F964F1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */; };
-		855F96521E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */; };
-		855F96531E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */; };
 		85611E281E1F2A780029EB41 /* GVRManTrajectorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 85611E271E1F2A780029EB41 /* GVRManTrajectorySpec.m */; };
 		85611E2A1E1F2B030029EB41 /* GVRKingTrajectorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 85611E291E1F2B030029EB41 /* GVRKingTrajectorySpec.m */; };
 		8567AC7B1E1A60700036A95F /* GVRGameSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 8567AC7A1E1A60700036A95F /* GVRGameSpec.m */; };
@@ -97,10 +93,6 @@
 		855010D01E28553500F4A4C8 /* UIWindow+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+GVRExtensions.m"; sourceTree = "<group>"; };
 		855F96471E1BA49200FC6F1F /* GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRTrajectory.h; sourceTree = "<group>"; };
 		855F96481E1BA49200FC6F1F /* GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRTrajectory.m; sourceTree = "<group>"; };
-		855F964C1E1BAB2C00FC6F1F /* GVRManTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRManTrajectory.h; sourceTree = "<group>"; };
-		855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRManTrajectory.m; sourceTree = "<group>"; };
-		855F96501E1BAB3F00FC6F1F /* GVRKingTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRKingTrajectory.h; sourceTree = "<group>"; };
-		855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRKingTrajectory.m; sourceTree = "<group>"; };
 		85611E271E1F2A780029EB41 /* GVRManTrajectorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRManTrajectorySpec.m; sourceTree = "<group>"; };
 		85611E291E1F2B030029EB41 /* GVRKingTrajectorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRKingTrajectorySpec.m; sourceTree = "<group>"; };
 		8567AC7A1E1A60700036A95F /* GVRGameSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRGameSpec.m; sourceTree = "<group>"; };
@@ -264,10 +256,6 @@
 		855F964B1E1BA7F400FC6F1F /* Private */ = {
 			isa = PBXGroup;
 			children = (
-				855F964C1E1BAB2C00FC6F1F /* GVRManTrajectory.h */,
-				855F964D1E1BAB2C00FC6F1F /* GVRManTrajectory.m */,
-				855F96501E1BAB3F00FC6F1F /* GVRKingTrajectory.h */,
-				855F96511E1BAB3F00FC6F1F /* GVRKingTrajectory.m */,
 				85F6A8AB1E22574100FE07A1 /* NSError+GVRTrajectory.h */,
 				85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */,
 				85F6A8AF1E22B35300FE07A1 /* NSArray+GVRTrajectory.h */,
@@ -736,7 +724,6 @@
 				859CD14B1E195AF9004BE15C /* GVRGame.m in Sources */,
 				853D3C421E2B9DA1001FA2F6 /* GVRCellView.m in Sources */,
 				85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */,
-				855F96521E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */,
 				85B05A4D1E2706E2006429FE /* GVRGameView.m in Sources */,
 				859CD1451E195AF9004BE15C /* GVRBoard.m in Sources */,
 				85F6A8B61E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */,
@@ -751,7 +738,6 @@
 				855010D11E28553500F4A4C8 /* UIWindow+GVRExtensions.m in Sources */,
 				85B05A491E2704EB006429FE /* UIViewController+GVRExtensions.m in Sources */,
 				85B05A411E27046D006429FE /* GVRGameViewController.m in Sources */,
-				855F964E1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
 				855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
 				851BF2D51E3191000081CB7F /* ViewController.m in Sources */,
 				858F5B9C1E17CCE100DB6D13 /* main.m in Sources */,
@@ -775,14 +761,12 @@
 				85611E281E1F2A780029EB41 /* GVRManTrajectorySpec.m in Sources */,
 				85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */,
 				85611E2A1E1F2B030029EB41 /* GVRKingTrajectorySpec.m in Sources */,
-				855F96531E1BAB3F00FC6F1F /* GVRKingTrajectory.m in Sources */,
 				859CD14E1E195C17004BE15C /* GVRBoardSpec.m in Sources */,
 				859CD1461E195AF9004BE15C /* GVRBoard.m in Sources */,
 				85F916221E1E493400F78545 /* NSError+GVRExtensions.m in Sources */,
 				85B05A4E1E2706E2006429FE /* GVRGameView.m in Sources */,
 				85F6A8B71E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */,
 				859CD1481E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
-				855F964F1E1BAB2C00FC6F1F /* GVRManTrajectory.m in Sources */,
 				853C0D161E33B79400EC0E08 /* GVRGCDQueue.m in Sources */,
 				855F964A1E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
 				85B05A4A1E2704EB006429FE /* UIViewController+GVRExtensions.m in Sources */,
