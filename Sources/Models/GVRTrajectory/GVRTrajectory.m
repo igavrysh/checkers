@@ -217,8 +217,9 @@ NSString *const GVRTrajectoryErrorDomain = @"com.gavrysh.checkers.trajectoryerro
                 
                 GVRBoardCell victimCell = [victimPosition cell];
                 GVRBoardDirection dir = GVRBoardDirectionUsingCells(victimCell, cell);
+                GVRBoardCell nextToVictimCell = GVRBoardCellShift(victimCell, dir, 1);
                 result = ![board isReqMoveAvailalbleForChecker:checker
-                                                      fromCell:cell
+                                                      fromCell:nextToVictimCell
                                                      direction:dir
                                                         player:player
                                                    isFirstMove:NO];
