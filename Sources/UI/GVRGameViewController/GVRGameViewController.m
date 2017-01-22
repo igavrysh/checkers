@@ -19,6 +19,7 @@
 #import "NSMutableArray+GVRTrajectory.h"
 #import "NSArray+GVRTrajectory.h"
 
+
 #import "GVRMacros.h"
 #import "GVRCompilerMacros.h"
 
@@ -195,10 +196,20 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
             || !GVRBoardDirectionIsEqualToBoardDirection(direction, previousDirection))
         {
             [trajectory addCell:cell];
-            
         } else {
             [trajectory setCell:cell atIndex:cellCount - 1];
         }
+        
+        if (self.trajectory.count > 2 &&
+            ![self.game.board victimPositionFromCell:[self.trajectory cellAtIndex:0]
+                                             toCell:[self.trajectory cellAtIndex:1]
+                                          forPlayer:self.activePlayer
+                                              error:nil])
+        {
+            [self.trajectory removeObjectAtIndex:1];
+        }
+        
+        
     }
 }
 

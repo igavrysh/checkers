@@ -307,8 +307,19 @@
                 return;
             }
             
-            GVRBoardPosition *nextPosition = [position positionShiftedByDirection:GVRBoardDirectionUsingCells(fromCell, toCell)
+            GVRBoardDirection direction = GVRBoardDirectionUsingCells(fromCell, toCell);
+            
+            GVRBoardPosition *nextPosition = [position positionShiftedByDirection:direction
                                                                          distance:1];
+            
+            if (!nextPosition) {
+                if (error) {
+                    *error = [NSError trajectoryErrorWithCode:GVRTrajectoryCannotFindTheSpaceToLand];
+                }
+                
+                return;
+            }
+            
             if (nextPosition.isFilled && !nextPosition.checker.isMarkedForRemoval) {
                 if (error) {
                     *error = [NSError trajectoryErrorWithCode:GVRTrajectoryLongJump];
@@ -429,6 +440,15 @@
      }];
     
     return isTrajectoryAvailable;
+}
+
+- (void)removeAllCheckers {
+    NSUInteger size = self.size;
+    for (NSUInteger row = 0; row < size; row++) {
+        for (NSUInteger column = 0; column < size; column++) {
+            [self removeCheckerAtRow:row column:column];
+        }
+    }
 }
 
 #pragma mark -

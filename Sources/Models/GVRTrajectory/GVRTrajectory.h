@@ -28,7 +28,8 @@ enum {
     GVRTrajectoryJumpOverFriendlyChecker        = 1010,
     GVRTrajectoryMissRequiredJump               = 1011,
     GVRTrajectoryIncorrectFormat                = 1012,
-    GVRTrajectoryNoStepsInTrajectory            = 1013
+    GVRTrajectoryNoStepsInTrajectory            = 1013,
+    GVRTrajectoryCannotFindTheSpaceToLand       = 1014
 };
 
 @interface GVRTrajectory : NSObject

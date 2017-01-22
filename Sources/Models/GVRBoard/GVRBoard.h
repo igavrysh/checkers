@@ -36,6 +36,7 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 
 - (void)removeCheckerAtRow:(NSUInteger)row column:(NSUInteger)column;
 - (void)removeCheckerAtCell:(GVRBoardCell)cell;
+- (void)removeAllCheckers;
 
 - (void)moveCheckerFromCell:(GVRBoardCell)fromCell toCell:(GVRBoardCell)toCell;
 - (void)moveCheckerFromRow:(NSUInteger)fromRow
