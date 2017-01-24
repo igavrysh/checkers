@@ -12,8 +12,15 @@
 
 #import "UIImage+GVRNegativeImage.h"
 
-NSString * const GVRBlackKingImageKey = @"GVRBlackKingImageKey";
-NSString * const GVRWhiteKingImageKey = @"GVRWhiteKingImageKey";
+#import "GVRMacros.h"
+
+kGVRStringVariableDefinition(GVRBlackKingImageKey, @"GVRBlackKingImageKey");
+kGVRStringVariableDefinition(GVRWhiteKingImageKey, @"GVRWhiteKingImageKey");
+kGVRStringVariableDefinition(GVRBlackKingFileName, @"king_black_icon.png");
+kGVRStringVariableDefinition(GVRWhiteKingFileName, @"king_white_icon.png");
+
+const float checkerToCellRatio = 0.8;
+const float rectToImageRatio = 0.6;
 
 @interface GVRCheckerView ()
 @property (nonatomic, assign)   NSUInteger          row;
@@ -75,10 +82,8 @@ NSString * const GVRWhiteKingImageKey = @"GVRWhiteKingImageKey";
 - (void)initChecker {
     float cellSize = self.cellSize;
     
-    float checkerCellRatio = 0.8;
-    
-    float size = cellSize * checkerCellRatio;
-    float origin = (cellSize * (1 - checkerCellRatio)) / 2.f;
+    float size = cellSize * checkerToCellRatio;
+    float origin = (cellSize * (1 - checkerToCellRatio)) / 2.f;
     float originX = self.row * cellSize + origin;
     float originY = self.column * cellSize + origin;
     
@@ -88,7 +93,6 @@ NSString * const GVRWhiteKingImageKey = @"GVRWhiteKingImageKey";
     
     self.backgroundColor = self.color;
     self.tag = GVRSubViewTagChecker;
-    
     
     self.layer.cornerRadius = size / 2.f;
     
@@ -122,8 +126,6 @@ NSString * const GVRWhiteKingImageKey = @"GVRWhiteKingImageKey";
 #pragma mark Private Methods
 
 - (void)addKingSign {
-    float rectToImageRatio = 0.6;
-    
     float width = self.bounds.size.width;
     float size = width * rectToImageRatio;
     CGRect imageRect = CGRectMake(width * (1 - rectToImageRatio) / 2.f,
@@ -148,11 +150,11 @@ NSString * const GVRWhiteKingImageKey = @"GVRWhiteKingImageKey";
     
     if (GVRCheckerColorWhite == checker.color) {
         imageKey = GVRWhiteKingImageKey;
-        fileName = @"king_white_icon.png";
+        fileName = GVRWhiteKingFileName;
         
     } else if (GVRCheckerColorBlack == checker.color) {
         imageKey = GVRBlackKingImageKey;
-        fileName = @"king_black_icon.png";
+        fileName = GVRBlackKingFileName;
     }
     
     image = [cache objectForKey:imageKey];

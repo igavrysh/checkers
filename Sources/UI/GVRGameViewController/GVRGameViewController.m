@@ -19,12 +19,15 @@
 #import "NSMutableArray+GVRTrajectory.h"
 #import "NSArray+GVRTrajectory.h"
 
-
 #import "GVRMacros.h"
 #import "GVRCompilerMacros.h"
 
 kGVRStringVariableDefinition(GVRPlayer1Name, @"Player 1");
 kGVRStringVariableDefinition(GVRPlayer2Name, @"Player 2");
+kGVRStringVariableDefinition(GVRAlertTitle, @"New Game");
+kGVRStringVariableDefinition(GVRAlertTitleMessage, @"the Checkers game is about to start");
+kGVRStringVariableDefinition(GVRAlertStartGame, @"Start Game");
+kGVRStringVariableDefinition(GVRAlertEnterNames, @"Enter Players Names");
 
 @interface GVRGameViewController ()
 @property (nonatomic, strong)   GVRGame         *game;
@@ -76,17 +79,37 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //@weakify(self)
-    [self.game begin:^(BOOL success) {
-        //@strongify(self)
-
-        GVRAsyncPerformInMainQueue(^{
-            if (success) {
-                self.activePlayer = self.game.activePlayer;
-                self.gameView.boardView.board = self.game.board;
-            }
-        });
+    UIAlertController *alert
+        = [UIAlertController alertControllerWithTitle:GVRAlertTitle
+                                              message:GVRAlertTitleMessage
+                                       preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:GVRAlertStartGame
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * action)
+    {
+        //@weakify(self)
+        [self.game begin:^(BOOL success) {
+            //@strongify(self)
+            
+            GVRAsyncPerformInMainQueue(^{
+                if (success) {
+                    self.activePlayer = self.game.activePlayer;
+                    self.gameView.boardView.board = self.game.board;
+                }
+            });
+        }];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:GVRAlertEnterNames
+                                              style:UIAlertActionStyleDefault
+                                            handler:nil]];
+    
+    // show the alert
+    [self presentViewController:alert animated:YES completion:^{
+    
     }];
+    
+    
 }
 
 #pragma mark -
@@ -208,8 +231,6 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
         {
             [self.trajectory removeObjectAtIndex:1];
         }
-        
-        
     }
 }
 
@@ -218,14 +239,18 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
         return;
     }
     
-    [self.game moveChekerBySteps:self.trajectory
-                       forPlayer:self.activePlayer
-           withCompletionHandler:^(BOOL success)
-    {
-        self.activePlayer = self.game.activePlayer;
-        
-        [self.gameView.boardView updateCheckers];
-    }];
+    GVRAsyncPerformInBackgroundQueue(^{
+        [self.game moveChekerBySteps:self.trajectory
+                           forPlayer:self.activePlayer
+               withCompletionHandler:^(BOOL success)
+         {
+             GVRAsyncPerformInMainQueue(^{
+                 self.activePlayer = self.game.activePlayer;
+                 
+                 [self.gameView.boardView updateCheckers];
+             });
+         }];
+    });
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {

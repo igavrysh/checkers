@@ -39,7 +39,6 @@ GVRCheckerColor GVRCheckerColorForPlayer(GVRPlayer player) {
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
     }
     
     return self;
@@ -62,7 +61,6 @@ GVRCheckerColor GVRCheckerColorForPlayer(GVRPlayer player) {
 }
 
 - (void)end:(void(^)(BOOL success))block {
-    
     GVRBlockPerform(block, TRUE);
 }
 
