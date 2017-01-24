@@ -5,7 +5,8 @@ target 'Checkers' do
   
   pod 'ReactiveCocoa', '2.1.8'
   pod 'ReactiveViewModel', tag: '0.1.2', git: 'https://github.com/ashfurrow/ReactiveViewModel.git'
-
+  pod 'RACAlertAction'
+  pod 'libextobjc'
 
 end
 

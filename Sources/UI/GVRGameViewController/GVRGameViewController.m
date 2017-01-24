@@ -6,7 +6,9 @@
 //  Copyright © 2017 Gavrysh. All rights reserved.
 //
 
-//#import <libextobjc/extobjc.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <RACAlertAction/RACAlertAction.h>
+#import <libextobjc/extobjc.h>
 
 #import "GVRGameViewController.h"
 
@@ -28,6 +30,8 @@ kGVRStringVariableDefinition(GVRAlertTitle, @"New Game");
 kGVRStringVariableDefinition(GVRAlertTitleMessage, @"the Checkers game is about to start");
 kGVRStringVariableDefinition(GVRAlertStartGame, @"Start Game");
 kGVRStringVariableDefinition(GVRAlertEnterNames, @"Enter Players Names");
+kGVRStringVariableDefinition(GVRAlertTitleFirstName, @"First Player Name");
+kGVRStringVariableDefinition(GVRAlertMessageFirstName, @"The name of white checkers player which is used during the game");
 
 @interface GVRGameViewController ()
 @property (nonatomic, strong)   GVRGame         *game;
@@ -79,12 +83,41 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIAlertController *alert
+    UIAlertController *alertController
         = [UIAlertController alertControllerWithTitle:GVRAlertTitle
                                               message:GVRAlertTitleMessage
                                        preferredStyle:UIAlertControllerStyleActionSheet];
-    [alert addAction:[UIAlertAction actionWithTitle:GVRAlertStartGame
-                                              style:UIAlertActionStyleDefault
+    
+    
+    RACAlertAction *alertAction = [RACAlertAction actionWithTitle:GVRAlertStartGame style:UIAlertActionStyleDefault];
+    
+    [alertController addAction:alertAction];
+    
+    @weakify(self)
+    alertAction.command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            @strongify(self)
+            
+            [self.game begin:^(BOOL success) {
+                @strongify(self)
+
+                GVRAsyncPerformInMainQueue(^{
+                    if (success) {
+                        self.activePlayer = self.game.activePlayer;
+                        self.gameView.boardView.board = self.game.board;
+                    }
+                });
+            }];
+            
+            return nil;
+        }];
+    }];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    /*
+    [alert addAction:[UIAlertAction actionWithTitle:
+                                              style:
                                             handler:^(UIAlertAction * action)
     {
         //@weakify(self)
@@ -102,14 +135,46 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
     
     [alert addAction:[UIAlertAction actionWithTitle:GVRAlertEnterNames
                                               style:UIAlertActionStyleDefault
-                                            handler:nil]];
+                                            handler:^(UIAlertAction *action)
+    {
+        UIAlertController *enterNameController
+            = [UIAlertController alertControllerWithTitle:GVRAlertTitleFirstName
+                                                  message:GVRAlertMessageFirstName
+                                           preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"Next"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction *action)
+        {
+            NSLog(@"Next button tapped!");
+            NSLog(@"Textfield text - %@", enterNameController.textFields.firstObject.text);
+        }];
+        
+        UIAlertAction *backAction = [UIAlertAction actionWithTitle:@"Back"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction *action)
+        {
+            NSLog(@"Next button tapped!");
+            NSLog(@"Textfield text - %@", enterNameController.textFields.firstObject.text);
+        }];
+        
+        [enterNameController addAction:backAction];
+        [enterNameController addAction:alertAction];
+        
+        [enterNameController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = @"Enter First Player Name";
+            //textField.textColor = [UIColor redColor];
+        }];
+        
+        [self presentViewController:enterNameController animated:YES completion:nil];
+    }]];
     
     // show the alert
     [self presentViewController:alert animated:YES completion:^{
     
     }];
-    
-    
+     
+     */
 }
 
 #pragma mark -
@@ -239,11 +304,13 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
         return;
     }
     
+    @weakify(self)
     GVRAsyncPerformInBackgroundQueue(^{
         [self.game moveChekerBySteps:self.trajectory
                            forPlayer:self.activePlayer
                withCompletionHandler:^(BOOL success)
          {
+             @strongify(self)
              GVRAsyncPerformInMainQueue(^{
                  self.activePlayer = self.game.activePlayer;
                  
