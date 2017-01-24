@@ -8,6 +8,13 @@
 
 #import "GVRCheckerView.h"
 
+#import "GVRObjectsCache.h"
+
+#import "UIImage+GVRNegativeImage.h"
+
+NSString * const GVRBlackKingImageKey = @"GVRBlackKingImageKey";
+NSString * const GVRWhiteKingImageKey = @"GVRWhiteKingImageKey";
+
 @interface GVRCheckerView ()
 @property (nonatomic, assign)   NSUInteger          row;
 @property (nonatomic, assign)   NSUInteger          column;
@@ -15,6 +22,11 @@
 @property (nonatomic, weak)     GVRBoard            *board;
 @property (nonatomic, weak)     GVRBoardView        *boardView;
 @property (nonatomic, assign)   float               cellSize;
+@property (nonatomic, strong)   UIImage             *kingImage;
+
+- (void)addKingSign;
+
+- (UIImage *)checkerKingImage;
 
 @end
 
@@ -30,7 +42,10 @@
                         board:(GVRBoard *)board
                     boardView:(GVRBoardView *)boardView
 {
-    return [[self alloc] initWithCell:cell cellSize:cellSize board:board boardView:boardView];
+    return [[self alloc] initWithCell:cell
+                             cellSize:cellSize
+                                board:board
+                            boardView:boardView];
 }
 
 #pragma mark -
@@ -49,6 +64,8 @@
         self.boardView = boardView;
         self.cellSize = cellSize;
         
+        self.kingImage = [self checkerKingImage];
+        
         [self initChecker];
     }
     
@@ -58,18 +75,30 @@
 - (void)initChecker {
     float cellSize = self.cellSize;
     
-    float checkerCellRatio = 0.5;
+    float checkerCellRatio = 0.8;
     
-    float checkerSize = cellSize * checkerCellRatio;
-    float checkerOrigin = (cellSize * (1 - checkerCellRatio)) / 2.f;
-    float checkerOriginX = self.row * cellSize + checkerOrigin;
-    float checkerOriginY = self.column * cellSize + checkerOrigin;
+    float size = cellSize * checkerCellRatio;
+    float origin = (cellSize * (1 - checkerCellRatio)) / 2.f;
+    float originX = self.row * cellSize + origin;
+    float originY = self.column * cellSize + origin;
     
-    CGRect checkerRect = CGRectMake(checkerOriginX, checkerOriginY, checkerSize, checkerSize);
+    CGRect checkerRect = CGRectMake(originX, originY, size, size);
     
     [self setFrame:checkerRect];
+    
     self.backgroundColor = self.color;
     self.tag = GVRSubViewTagChecker;
+    
+    
+    self.layer.cornerRadius = size / 2.f;
+    
+    GVRChecker *checker = self.position.checker;
+    
+    if (GVRCheckerTypeMan == checker.type) {
+        
+    } else if (GVRCheckerTypeKing == checker.type) {
+        [self addKingSign];
+    }
 }
 
 #pragma mark -
@@ -78,12 +107,73 @@
 - (UIColor *)color {
     GVRCheckerColor color = self.position.checker.color;
     
-    return color == GVRCheckerColorWhite ? [UIColor whiteColor] :
-        color == GVRCheckerColorBlack ? [UIColor blackColor] : [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    return color == GVRCheckerColorWhite
+        ? [UIColor whiteColor]
+        : color == GVRCheckerColorBlack
+            ? [UIColor blackColor]
+            : [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
 }
 
 - (GVRBoardPosition *)position {
     return [self.board positionForCell:GVRBoardCellMake(self.row, self.column)];
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (void)addKingSign {
+    float rectToImageRatio = 0.6;
+    
+    float width = self.bounds.size.width;
+    float size = width * rectToImageRatio;
+    CGRect imageRect = CGRectMake(width * (1 - rectToImageRatio) / 2.f,
+                                  width * (1 - rectToImageRatio) / 2.f,
+                                  size,
+                                  size);
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageRect];
+    imageView.image = self.kingImage;
+    
+    [self addSubview:imageView];
+}
+
+- (UIImage *)checkerKingImage {
+    GVRObjectsCache *cache = [GVRObjectsCache cache];
+    
+    UIImage *image = nil;
+    
+    GVRChecker *checker = self.position.checker;
+    NSString *imageKey;
+    NSString *fileName;
+    
+    if (GVRCheckerColorWhite == checker.color) {
+        imageKey = GVRWhiteKingImageKey;
+        fileName = @"king_white_icon.png";
+        
+    } else if (GVRCheckerColorBlack == checker.color) {
+        imageKey = GVRBlackKingImageKey;
+        fileName = @"king_black_icon.png";
+    }
+    
+    image = [cache objectForKey:imageKey];
+    
+    if (image) {
+        return image;
+    }
+    
+    image = [UIImage imageNamed:fileName];
+    
+    if (GVRCheckerColorBlack == checker.color) {
+        image = [image negativeImage];
+    }
+    
+    image = [[UIImage alloc] initWithCGImage:image.CGImage
+                                       scale:0.8
+                                 orientation:UIImageOrientationRight];
+    
+    [cache setObject:image forKey:imageKey];
+    
+    return image;
 }
 
 @end

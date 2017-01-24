@@ -49,6 +49,8 @@
 		85B05A4E1E2706E2006429FE /* GVRGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B05A4C1E2706E2006429FE /* GVRGameView.m */; };
 		85D399DD1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D399DC1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m */; };
 		85D399DE1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D399DC1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m */; };
+		85EA74431E35677D00F28EF2 /* king_white_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 85EA74401E35677D00F28EF2 /* king_white_icon.png */; };
+		85EA74441E35677D00F28EF2 /* king_white_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 85EA74401E35677D00F28EF2 /* king_white_icon.png */; };
 		85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
 		85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
 		85F6A8AD1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8AC1E22574100FE07A1 /* NSError+GVRTrajectory.m */; };
@@ -57,6 +59,14 @@
 		85F6A8B21E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */; };
 		85F6A8B61E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8B51E23109C00FE07A1 /* NSValue+GVRExtensions.m */; };
 		85F6A8B71E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6A8B51E23109C00FE07A1 /* NSValue+GVRExtensions.m */; };
+		85F6B5451E36B6E100C25C37 /* king_black_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 85F6B5441E36B6E100C25C37 /* king_black_icon.png */; };
+		85F6B5461E36B6E100C25C37 /* king_black_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 85F6B5441E36B6E100C25C37 /* king_black_icon.png */; };
+		85F6B54A1E36C3E100C25C37 /* UIImage+GVRNegativeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6B5491E36C3E100C25C37 /* UIImage+GVRNegativeImage.m */; };
+		85F6B54B1E36C3E100C25C37 /* UIImage+GVRNegativeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6B5491E36C3E100C25C37 /* UIImage+GVRNegativeImage.m */; };
+		85F6B54F1E36CA2400C25C37 /* GVRObjectsCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6B54E1E36CA2400C25C37 /* GVRObjectsCache.m */; };
+		85F6B5501E36CA2400C25C37 /* GVRObjectsCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6B54E1E36CA2400C25C37 /* GVRObjectsCache.m */; };
+		85F6B5541E36CF7D00C25C37 /* GVRDispatchMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6B5531E36CF7D00C25C37 /* GVRDispatchMacros.m */; };
+		85F6B5551E36CF7D00C25C37 /* GVRDispatchMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F6B5531E36CF7D00C25C37 /* GVRDispatchMacros.m */; };
 		85F916211E1E493400F78545 /* NSError+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F916201E1E493400F78545 /* NSError+GVRExtensions.m */; };
 		85F916221E1E493400F78545 /* NSError+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F916201E1E493400F78545 /* NSError+GVRExtensions.m */; };
 		C9D0929CCAA2161E4297CCB8 /* libPods-Checkers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A09053FF374A36068D554CD /* libPods-Checkers.a */; };
@@ -126,6 +136,7 @@
 		85B05A4C1E2706E2006429FE /* GVRGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRGameView.m; sourceTree = "<group>"; };
 		85D399DB1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+GVRTrajectory.h"; sourceTree = "<group>"; };
 		85D399DC1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+GVRTrajectory.m"; sourceTree = "<group>"; };
+		85EA74401E35677D00F28EF2 /* king_white_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = king_white_icon.png; sourceTree = "<group>"; };
 		85F48FA11E1B2307004FD8D1 /* NSArray+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+GVRExtensions.h"; sourceTree = "<group>"; };
 		85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GVRExtensions.m"; sourceTree = "<group>"; };
 		85F6A8AB1E22574100FE07A1 /* NSError+GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVRTrajectory.h"; sourceTree = "<group>"; };
@@ -134,6 +145,13 @@
 		85F6A8B01E22B35300FE07A1 /* NSArray+GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GVRTrajectory.m"; sourceTree = "<group>"; };
 		85F6A8B41E23109C00FE07A1 /* NSValue+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+GVRExtensions.h"; sourceTree = "<group>"; };
 		85F6A8B51E23109C00FE07A1 /* NSValue+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+GVRExtensions.m"; sourceTree = "<group>"; };
+		85F6B5441E36B6E100C25C37 /* king_black_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = king_black_icon.png; sourceTree = "<group>"; };
+		85F6B5481E36C3E100C25C37 /* UIImage+GVRNegativeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GVRNegativeImage.h"; sourceTree = "<group>"; };
+		85F6B5491E36C3E100C25C37 /* UIImage+GVRNegativeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GVRNegativeImage.m"; sourceTree = "<group>"; };
+		85F6B54D1E36CA2400C25C37 /* GVRObjectsCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRObjectsCache.h; sourceTree = "<group>"; };
+		85F6B54E1E36CA2400C25C37 /* GVRObjectsCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRObjectsCache.m; sourceTree = "<group>"; };
+		85F6B5521E36CF7D00C25C37 /* GVRDispatchMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRDispatchMacros.h; sourceTree = "<group>"; };
+		85F6B5531E36CF7D00C25C37 /* GVRDispatchMacros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRDispatchMacros.m; sourceTree = "<group>"; };
 		85F9161F1E1E493400F78545 /* NSError+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVRExtensions.h"; sourceTree = "<group>"; };
 		85F916201E1E493400F78545 /* NSError+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+GVRExtensions.m"; sourceTree = "<group>"; };
 		BADAC0206DD4740F4AA0FC2D /* Pods-CheckersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckersTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CheckersTests/Pods-CheckersTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -184,8 +202,8 @@
 			children = (
 				85B05A3D1E2703CD006429FE /* GVRGameView */,
 				852E95401E25A30600662EEE /* GVRBoardView */,
-				853D3C441E2C1062001FA2F6 /* GVRCheckerView */,
 				853D3C3F1E2B9D94001FA2F6 /* GVRCellView */,
+				853D3C441E2C1062001FA2F6 /* GVRCheckerView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,6 +220,7 @@
 		853C0D111E33B79400EC0E08 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				85F6B54C1E36CA2400C25C37 /* GVRObjectsCache */,
 				853C0D121E33B79400EC0E08 /* GVRGCDQueue */,
 			);
 			path = Classes;
@@ -269,6 +288,7 @@
 		8567AC7C1E1A61AD0036A95F /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				85F6B5511E36CF7D00C25C37 /* GVRDispatchMacros */,
 				8567AC871E1A624F0036A95F /* GVRCompilerMacros */,
 				8567AC821E1A62060036A95F /* GVRMacros */,
 				8567AC7D1E1A61AD0036A95F /* GVRBlockMacros */,
@@ -346,6 +366,7 @@
 		858F5BB11E17CEA600DB6D13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				85EA743E1E35677D00F28EF2 /* Images */,
 				858F5BB21E17CEA600DB6D13 /* Assets.xcassets */,
 				851BF2D01E3190EB0081CB7F /* Main.storyboard */,
 				858F5BB31E17CEA600DB6D13 /* LaunchScreen.storyboard */,
@@ -479,9 +500,19 @@
 			path = UIViewController;
 			sourceTree = "<group>";
 		};
+		85EA743E1E35677D00F28EF2 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				85F6B5441E36B6E100C25C37 /* king_black_icon.png */,
+				85EA74401E35677D00F28EF2 /* king_white_icon.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		85F48F9D1E1B2307004FD8D1 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				85F6B5471E36C3C900C25C37 /* UIImage */,
 				855010CE1E28553500F4A4C8 /* UIWindow */,
 				85B05A461E2704EB006429FE /* UIViewController */,
 				85F9161D1E1E48FE00F78545 /* NSError */,
@@ -506,6 +537,33 @@
 				85F6A8B51E23109C00FE07A1 /* NSValue+GVRExtensions.m */,
 			);
 			path = Private;
+			sourceTree = "<group>";
+		};
+		85F6B5471E36C3C900C25C37 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				85F6B5481E36C3E100C25C37 /* UIImage+GVRNegativeImage.h */,
+				85F6B5491E36C3E100C25C37 /* UIImage+GVRNegativeImage.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		85F6B54C1E36CA2400C25C37 /* GVRObjectsCache */ = {
+			isa = PBXGroup;
+			children = (
+				85F6B54D1E36CA2400C25C37 /* GVRObjectsCache.h */,
+				85F6B54E1E36CA2400C25C37 /* GVRObjectsCache.m */,
+			);
+			path = GVRObjectsCache;
+			sourceTree = "<group>";
+		};
+		85F6B5511E36CF7D00C25C37 /* GVRDispatchMacros */ = {
+			isa = PBXGroup;
+			children = (
+				85F6B5521E36CF7D00C25C37 /* GVRDispatchMacros.h */,
+				85F6B5531E36CF7D00C25C37 /* GVRDispatchMacros.m */,
+			);
+			path = GVRDispatchMacros;
 			sourceTree = "<group>";
 		};
 		85F9161D1E1E48FE00F78545 /* NSError */ = {
@@ -606,6 +664,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				858F5BBB1E17CEA600DB6D13 /* Assets.xcassets in Resources */,
+				85F6B5451E36B6E100C25C37 /* king_black_icon.png in Resources */,
+				85EA74431E35677D00F28EF2 /* king_white_icon.png in Resources */,
 				85B05A441E270487006429FE /* GVRGameViewController.xib in Resources */,
 				858F5BBC1E17CEA600DB6D13 /* LaunchScreen.storyboard in Resources */,
 				851BF2D21E3190EB0081CB7F /* Main.storyboard in Resources */,
@@ -616,7 +676,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85F6B5461E36B6E100C25C37 /* king_black_icon.png in Resources */,
 				85B05A451E270487006429FE /* GVRGameViewController.xib in Resources */,
+				85EA74441E35677D00F28EF2 /* king_white_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,10 +797,13 @@
 				858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */,
 				85D399DD1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m in Sources */,
 				852E95431E25A31B00662EEE /* GVRBoardView.m in Sources */,
+				85F6B54F1E36CA2400C25C37 /* GVRObjectsCache.m in Sources */,
 				855010D11E28553500F4A4C8 /* UIWindow+GVRExtensions.m in Sources */,
+				85F6B5541E36CF7D00C25C37 /* GVRDispatchMacros.m in Sources */,
 				85B05A491E2704EB006429FE /* UIViewController+GVRExtensions.m in Sources */,
 				85B05A411E27046D006429FE /* GVRGameViewController.m in Sources */,
 				855F96491E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
+				85F6B54A1E36C3E100C25C37 /* UIImage+GVRNegativeImage.m in Sources */,
 				851BF2D51E3191000081CB7F /* ViewController.m in Sources */,
 				858F5B9C1E17CCE100DB6D13 /* main.m in Sources */,
 				85F6A8B11E22B35300FE07A1 /* NSArray+GVRTrajectory.m in Sources */,
@@ -761,7 +826,9 @@
 				85611E281E1F2A780029EB41 /* GVRManTrajectorySpec.m in Sources */,
 				85F48FA61E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */,
 				85611E2A1E1F2B030029EB41 /* GVRKingTrajectorySpec.m in Sources */,
+				85F6B5551E36CF7D00C25C37 /* GVRDispatchMacros.m in Sources */,
 				859CD14E1E195C17004BE15C /* GVRBoardSpec.m in Sources */,
+				85F6B5501E36CA2400C25C37 /* GVRObjectsCache.m in Sources */,
 				859CD1461E195AF9004BE15C /* GVRBoard.m in Sources */,
 				85F916221E1E493400F78545 /* NSError+GVRExtensions.m in Sources */,
 				85B05A4E1E2706E2006429FE /* GVRGameView.m in Sources */,
@@ -773,6 +840,7 @@
 				85F6A8AE1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,
 				859CD14A1E195AF9004BE15C /* GVRChecker.m in Sources */,
 				851BF2D61E3191000081CB7F /* ViewController.m in Sources */,
+				85F6B54B1E36C3E100C25C37 /* UIImage+GVRNegativeImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
