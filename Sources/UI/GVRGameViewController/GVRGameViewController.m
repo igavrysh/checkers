@@ -32,6 +32,9 @@ kGVRStringVariableDefinition(GVRAlertStartGame, @"Start Game");
 kGVRStringVariableDefinition(GVRAlertEnterNames, @"Enter Players Names");
 kGVRStringVariableDefinition(GVRAlertTitleFirstName, @"First Player Name");
 kGVRStringVariableDefinition(GVRAlertMessageFirstName, @"The name of white checkers player which is used during the game");
+kGVRStringVariableDefinition(GVRAlertEnterSecondName, @"Second Player Name");
+kGVRStringVariableDefinition(GVRAlertBack, @"Back");
+
 
 @interface GVRGameViewController ()
 @property (nonatomic, strong)   GVRGame         *game;
@@ -41,6 +44,9 @@ kGVRStringVariableDefinition(GVRAlertMessageFirstName, @"The name of white check
 @property (nonatomic, assign)   CGPoint         touchOffset;
 @property (nonatomic, strong)   NSMutableArray  *trajectory;
 @property (nonatomic, assign)   GVRBoardCell    initialCell;
+
+@property (nonatomic, strong) UIAlertController *alertController;
+@property (nonatomic, strong) UIAlertController *enterNameController;
 
 @end
 
@@ -82,22 +88,29 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    @weakify(self)
     
-    UIAlertController *alertController
+    self.enterNameController
+    = [UIAlertController alertControllerWithTitle:GVRAlertTitleFirstName
+                                          message:GVRAlertMessageFirstName
+                                   preferredStyle:UIAlertControllerStyleAlert];
+    
+    [self.enterNameController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Enter First Player Name";
+        //textField.textColor = [UIColor redColor];
+    }];
+    
+    
+    self.alertController
         = [UIAlertController alertControllerWithTitle:GVRAlertTitle
                                               message:GVRAlertTitleMessage
                                        preferredStyle:UIAlertControllerStyleActionSheet];
     
-    
-    RACAlertAction *alertAction = [RACAlertAction actionWithTitle:GVRAlertStartGame style:UIAlertActionStyleDefault];
-    
-    [alertController addAction:alertAction];
-    
-    @weakify(self)
-    alertAction.command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+    RACAlertAction *newGameAction = [RACAlertAction actionWithTitle:GVRAlertStartGame style:UIAlertActionStyleDefault];
+
+    newGameAction.command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-            @strongify(self)
-            
             [self.game begin:^(BOOL success) {
                 @strongify(self)
 
@@ -112,8 +125,46 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
             return nil;
         }];
     }];
+    [self.alertController addAction:newGameAction];
     
-    [self presentViewController:alertController animated:YES completion:nil];
+    RACAlertAction *enterNameAction = [RACAlertAction actionWithTitle:GVRAlertEnterNames style:UIAlertActionStyleDefault];
+    enterNameAction.command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            @strongify(self)
+            [self presentViewController:self.enterNameController animated:YES completion:nil];
+            
+            return nil;
+        }];
+    }];
+    [self.alertController addAction:enterNameAction];
+    
+    
+    RACAlertAction *nextPlayerAction = [RACAlertAction actionWithTitle:GVRAlertEnterSecondName style:UIAlertActionStyleDefault];
+    nextPlayerAction.command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            @strongify(self)
+            [self presentViewController:self.enterNameController animated:YES completion:nil];
+            
+            return nil;
+        }];
+    }];
+    [self.enterNameController addAction:nextPlayerAction];
+    
+    RACAlertAction *backAction = [RACAlertAction actionWithTitle:GVRAlertBack style:UIAlertActionStyleDefault];
+    backAction.command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            @strongify(self)
+            [self.enterNameController dismissViewControllerAnimated:NO completion:nil];
+            
+            [self presentViewController:self.alertController animated:YES completion:nil];
+            
+            return nil;
+        }];
+    }];
+    [self.enterNameController addAction:backAction];
+    
+    
+    [self presentViewController:self.alertController animated:YES completion:nil];
     
     /*
     [alert addAction:[UIAlertAction actionWithTitle:

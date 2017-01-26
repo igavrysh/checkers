@@ -26,6 +26,12 @@
 		85611E281E1F2A780029EB41 /* GVRManTrajectorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 85611E271E1F2A780029EB41 /* GVRManTrajectorySpec.m */; };
 		85611E2A1E1F2B030029EB41 /* GVRKingTrajectorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 85611E291E1F2B030029EB41 /* GVRKingTrajectorySpec.m */; };
 		8567AC7B1E1A60700036A95F /* GVRGameSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 8567AC7A1E1A60700036A95F /* GVRGameSpec.m */; };
+		8589F56B1E38887500673C82 /* GVRNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8589F56A1E38887500673C82 /* GVRNameViewController.m */; };
+		8589F56C1E38887500673C82 /* GVRNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8589F56A1E38887500673C82 /* GVRNameViewController.m */; };
+		8589F56E1E388B0800673C82 /* GVRNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8589F56D1E388B0800673C82 /* GVRNameViewController.xib */; };
+		8589F56F1E388B0800673C82 /* GVRNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8589F56D1E388B0800673C82 /* GVRNameViewController.xib */; };
+		8589F5731E388B3600673C82 /* GVRNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8589F5721E388B3600673C82 /* GVRNameView.m */; };
+		8589F5741E388B3600673C82 /* GVRNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8589F5721E388B3600673C82 /* GVRNameView.m */; };
 		858F5B9C1E17CCE100DB6D13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5B9B1E17CCE100DB6D13 /* main.m */; };
 		858F5B9F1E17CCE100DB6D13 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F5B9E1E17CCE100DB6D13 /* AppDelegate.m */; };
 		858F5BBB1E17CEA600DB6D13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 858F5BB21E17CEA600DB6D13 /* Assets.xcassets */; };
@@ -49,8 +55,6 @@
 		85B05A4E1E2706E2006429FE /* GVRGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B05A4C1E2706E2006429FE /* GVRGameView.m */; };
 		85D399DD1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D399DC1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m */; };
 		85D399DE1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D399DC1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m */; };
-		85DB29FD1E37B5FD007F54E8 /* GVRPlayerNameAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB29FC1E37B5FD007F54E8 /* GVRPlayerNameAlertController.m */; };
-		85DB29FE1E37B5FD007F54E8 /* GVRPlayerNameAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB29FC1E37B5FD007F54E8 /* GVRPlayerNameAlertController.m */; };
 		85EA74431E35677D00F28EF2 /* king_white_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 85EA74401E35677D00F28EF2 /* king_white_icon.png */; };
 		85EA74441E35677D00F28EF2 /* king_white_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 85EA74401E35677D00F28EF2 /* king_white_icon.png */; };
 		85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */; };
@@ -111,6 +115,11 @@
 		8567AC7E1E1A61AD0036A95F /* GVRBlockMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRBlockMacros.h; sourceTree = "<group>"; };
 		8567AC831E1A62060036A95F /* GVRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRMacros.h; sourceTree = "<group>"; };
 		8567AC881E1A624F0036A95F /* GVRCompilerMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRCompilerMacros.h; sourceTree = "<group>"; };
+		8589F5691E38887500673C82 /* GVRNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRNameViewController.h; sourceTree = "<group>"; };
+		8589F56A1E38887500673C82 /* GVRNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRNameViewController.m; sourceTree = "<group>"; };
+		8589F56D1E388B0800673C82 /* GVRNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GVRNameViewController.xib; sourceTree = "<group>"; };
+		8589F5711E388B3600673C82 /* GVRNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRNameView.h; sourceTree = "<group>"; };
+		8589F5721E388B3600673C82 /* GVRNameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRNameView.m; sourceTree = "<group>"; };
 		858F5B971E17CCE100DB6D13 /* Checkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		858F5B9B1E17CCE100DB6D13 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		858F5B9D1E17CCE100DB6D13 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -138,8 +147,6 @@
 		85B05A4C1E2706E2006429FE /* GVRGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRGameView.m; sourceTree = "<group>"; };
 		85D399DB1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+GVRTrajectory.h"; sourceTree = "<group>"; };
 		85D399DC1E2D7389008EF25C /* NSMutableArray+GVRTrajectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+GVRTrajectory.m"; sourceTree = "<group>"; };
-		85DB29FB1E37B5FD007F54E8 /* GVRPlayerNameAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVRPlayerNameAlertController.h; sourceTree = "<group>"; };
-		85DB29FC1E37B5FD007F54E8 /* GVRPlayerNameAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVRPlayerNameAlertController.m; sourceTree = "<group>"; };
 		85EA74401E35677D00F28EF2 /* king_white_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = king_white_icon.png; sourceTree = "<group>"; };
 		85F48FA11E1B2307004FD8D1 /* NSArray+GVRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+GVRExtensions.h"; sourceTree = "<group>"; };
 		85F48FA21E1B2307004FD8D1 /* NSArray+GVRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GVRExtensions.m"; sourceTree = "<group>"; };
@@ -204,6 +211,7 @@
 		852E953F1E25A2F400662EEE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8589F5701E388B2000673C82 /* GVRNameView */,
 				85B05A3D1E2703CD006429FE /* GVRGameView */,
 				852E95401E25A30600662EEE /* GVRBoardView */,
 				853D3C3F1E2B9D94001FA2F6 /* GVRCellView */,
@@ -324,6 +332,25 @@
 			path = GVRCompilerMacros;
 			sourceTree = "<group>";
 		};
+		8589F5681E38885D00673C82 /* GVRNameViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8589F5691E38887500673C82 /* GVRNameViewController.h */,
+				8589F56A1E38887500673C82 /* GVRNameViewController.m */,
+				8589F56D1E388B0800673C82 /* GVRNameViewController.xib */,
+			);
+			path = GVRNameViewController;
+			sourceTree = "<group>";
+		};
+		8589F5701E388B2000673C82 /* GVRNameView */ = {
+			isa = PBXGroup;
+			children = (
+				8589F5711E388B3600673C82 /* GVRNameView.h */,
+				8589F5721E388B3600673C82 /* GVRNameView.m */,
+			);
+			path = GVRNameView;
+			sourceTree = "<group>";
+		};
 		858F5B8E1E17CCE000DB6D13 = {
 			isa = PBXGroup;
 			children = (
@@ -413,8 +440,8 @@
 		858F5BBA1E17CEA600DB6D13 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				85DB29FA1E37B56D007F54E8 /* GVRPlayerNameAlertController */,
 				85B05A3E1E2703D4006429FE /* GVRGameViewController */,
+				8589F5681E38885D00673C82 /* GVRNameViewController */,
 				852E953F1E25A2F400662EEE /* Views */,
 			);
 			path = UI;
@@ -503,15 +530,6 @@
 				85B05A481E2704EB006429FE /* UIViewController+GVRExtensions.m */,
 			);
 			path = UIViewController;
-			sourceTree = "<group>";
-		};
-		85DB29FA1E37B56D007F54E8 /* GVRPlayerNameAlertController */ = {
-			isa = PBXGroup;
-			children = (
-				85DB29FB1E37B5FD007F54E8 /* GVRPlayerNameAlertController.h */,
-				85DB29FC1E37B5FD007F54E8 /* GVRPlayerNameAlertController.m */,
-			);
-			path = GVRPlayerNameAlertController;
 			sourceTree = "<group>";
 		};
 		85EA743E1E35677D00F28EF2 /* Images */ = {
@@ -681,6 +699,7 @@
 				85F6B5451E36B6E100C25C37 /* king_black_icon.png in Resources */,
 				85EA74431E35677D00F28EF2 /* king_white_icon.png in Resources */,
 				85B05A441E270487006429FE /* GVRGameViewController.xib in Resources */,
+				8589F56E1E388B0800673C82 /* GVRNameViewController.xib in Resources */,
 				858F5BBC1E17CEA600DB6D13 /* LaunchScreen.storyboard in Resources */,
 				851BF2D21E3190EB0081CB7F /* Main.storyboard in Resources */,
 			);
@@ -691,6 +710,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85F6B5461E36B6E100C25C37 /* king_black_icon.png in Resources */,
+				8589F56F1E388B0800673C82 /* GVRNameViewController.xib in Resources */,
 				85B05A451E270487006429FE /* GVRGameViewController.xib in Resources */,
 				85EA74441E35677D00F28EF2 /* king_white_icon.png in Resources */,
 			);
@@ -796,11 +816,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8589F5731E388B3600673C82 /* GVRNameView.m in Sources */,
 				859CD1471E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
 				859CD14B1E195AF9004BE15C /* GVRGame.m in Sources */,
 				853D3C421E2B9DA1001FA2F6 /* GVRCellView.m in Sources */,
 				85F48FA51E1B2307004FD8D1 /* NSArray+GVRExtensions.m in Sources */,
-				85DB29FD1E37B5FD007F54E8 /* GVRPlayerNameAlertController.m in Sources */,
 				85B05A4D1E2706E2006429FE /* GVRGameView.m in Sources */,
 				859CD1451E195AF9004BE15C /* GVRBoard.m in Sources */,
 				85F6A8B61E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */,
@@ -814,6 +834,7 @@
 				852E95431E25A31B00662EEE /* GVRBoardView.m in Sources */,
 				85F6B54F1E36CA2400C25C37 /* GVRObjectsCache.m in Sources */,
 				855010D11E28553500F4A4C8 /* UIWindow+GVRExtensions.m in Sources */,
+				8589F56B1E38887500673C82 /* GVRNameViewController.m in Sources */,
 				85F6B5541E36CF7D00C25C37 /* GVRDispatchMacros.m in Sources */,
 				85B05A491E2704EB006429FE /* UIViewController+GVRExtensions.m in Sources */,
 				85B05A411E27046D006429FE /* GVRGameViewController.m in Sources */,
@@ -850,12 +871,13 @@
 				85F6A8B71E23109C00FE07A1 /* NSValue+GVRExtensions.m in Sources */,
 				859CD1481E195AF9004BE15C /* GVRBoardPosition.m in Sources */,
 				853C0D161E33B79400EC0E08 /* GVRGCDQueue.m in Sources */,
+				8589F56C1E38887500673C82 /* GVRNameViewController.m in Sources */,
 				855F964A1E1BA49200FC6F1F /* GVRTrajectory.m in Sources */,
-				85DB29FE1E37B5FD007F54E8 /* GVRPlayerNameAlertController.m in Sources */,
 				85B05A4A1E2704EB006429FE /* UIViewController+GVRExtensions.m in Sources */,
 				85F6A8AE1E22574100FE07A1 /* NSError+GVRTrajectory.m in Sources */,
 				859CD14A1E195AF9004BE15C /* GVRChecker.m in Sources */,
 				851BF2D61E3191000081CB7F /* ViewController.m in Sources */,
+				8589F5741E388B3600673C82 /* GVRNameView.m in Sources */,
 				85F6B54B1E36C3E100C25C37 /* UIImage+GVRNegativeImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

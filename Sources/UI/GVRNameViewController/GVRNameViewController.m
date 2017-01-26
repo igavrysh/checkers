@@ -1,22 +1,35 @@
 //
-//  GVRPlayerNameAlertController.m
+//  GVRNameViewController.m
 //  Checkers
 //
-//  Created by Ievgen on 1/24/17.
+//  Created by Ievgen on 1/25/17.
 //  Copyright © 2017 Gavrysh. All rights reserved.
 //
 
-#import "GVRPlayerNameAlertController.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
-@interface GVRPlayerNameAlertController ()
+#import "GVRNameViewController.h"
+
+#import "GVRNameView.h"
+
+#import "GVRMacros.h"
+
+@interface GVRNameViewController ()
 
 @end
 
-@implementation GVRPlayerNameAlertController
+GVRViewControllerBaseViewProperty(GVRNameViewController, GVRNameView, nameView)
+
+@implementation GVRNameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    RAC(self, firstPlayerName) = [[self.nameView.textField rac_textSignal] map:^id(NSString *firstPlayerName) {
+        NSLog(@"fistPlayerName %@", self.firstPlayerName);
+        
+        return firstPlayerName;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
