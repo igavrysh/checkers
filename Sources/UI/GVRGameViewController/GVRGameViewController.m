@@ -11,7 +11,7 @@
 #import <libextobjc/extobjc.h>
 
 #import "GVRGameViewController.h"
-
+#import "GVRNameViewController.h"
 #import "GVRGame.h"
 #import "GVRGameView.h"
 #import "GVRCellView.h"
@@ -37,16 +37,17 @@ kGVRStringVariableDefinition(GVRAlertBack, @"Back");
 
 
 @interface GVRGameViewController ()
-@property (nonatomic, strong)   GVRGame         *game;
-@property (nonatomic, assign)   GVRPlayer       activePlayer;
-@property (nonatomic, readonly) NSString        *activePlayerName;
-@property (nonatomic, strong)   UIView          *draggingChecker;
-@property (nonatomic, assign)   CGPoint         touchOffset;
-@property (nonatomic, strong)   NSMutableArray  *trajectory;
-@property (nonatomic, assign)   GVRBoardCell    initialCell;
+@property (nonatomic, strong)   GVRGame             *game;
+@property (nonatomic, assign)   GVRPlayer           activePlayer;
+@property (nonatomic, readonly) NSString            *activePlayerName;
+@property (nonatomic, strong)   UIView              *draggingChecker;
+@property (nonatomic, assign)   CGPoint             touchOffset;
+@property (nonatomic, strong)   NSMutableArray      *trajectory;
+@property (nonatomic, assign)   GVRBoardCell        initialCell;
 
-@property (nonatomic, strong) UIAlertController *alertController;
-@property (nonatomic, strong) UIAlertController *enterNameController;
+@property (nonatomic, strong) UIAlertController     *alertController;
+@property (nonatomic, strong) UIAlertController     *enterNameController;
+@property (nonatomic, strong) GVRNameViewController *nameViewController;
 
 @end
 
@@ -131,7 +132,12 @@ GVRViewControllerBaseViewProperty(GVRGameViewController, GVRGameView, gameView)
     enterNameAction.command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
             @strongify(self)
-            [self presentViewController:self.enterNameController animated:YES completion:nil];
+            
+            self.nameViewController = [GVRNameViewController new];
+            
+            [self.navigationController pushViewController:self.nameViewController animated:YES];
+            
+            //[self presentViewController:self.enterNameController animated:YES completion:nil];
             
             return nil;
         }];

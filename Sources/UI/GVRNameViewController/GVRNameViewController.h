@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GVRNameViewController : UIViewController
-@property (nonatomic, strong)   NSString    *firstPlayerName;
+typedef NS_ENUM(NSInteger, GVRNameViewControllerDialogType) {
+    GVRNameViewControllerDialogTypeFirst,
+    GVRNameViewControllerDialogTypeLast
+};
 
+@interface GVRNameViewController : UIViewController
+@property (nonatomic, strong)   NSString    *playerName;
+
++ (instancetype)firstNameViewController;
+
++ (instancetype)lastNameViewController;
+
+- (instancetype)initWithDialogType:(GVRNameViewControllerDialogType)type;
 
 @end
