@@ -54,19 +54,21 @@ GVRViewControllerBaseViewProperty(GVRNameViewController, GVRNameView, nameView)
     [super viewDidLoad];
     
     [self.nameView.actionButton setTitle:[self actionButtonTitle] forState:UIControlStateNormal];
+
+    RACSignal *nameValid = [self.nameView.textField.rac_textSignal map:^id(NSString *name) {
+        return @(name.length > 0);
+    }];
     
-    RAC(self, playerName)
-        = [[self.nameView.textField rac_textSignal] map:^id(NSString *firstPlayerName)
-    {
+    RAC(self, playerName) = [[self.nameView.textField rac_textSignal] map:^id(NSString *firstPlayerName) {
         return firstPlayerName;
     }];
     
     @weakify(self)
-    self.nameView.actionButton.rac_command
-        = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input)
+    RACCommand *nextActionCommand = [[RACCommand alloc] initWithEnabled:nameValid
+                                                            signalBlock:^RACSignal *(id input)
     {
         @strongify(self)
-            
+        
         if (GVRNameViewControllerDialogTypeFirst == self.type) {
             
             [self.navigationController pushViewController:[GVRNameViewController lastNameViewController]
@@ -75,8 +77,21 @@ GVRViewControllerBaseViewProperty(GVRNameViewController, GVRNameView, nameView)
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         
+        
         return [RACSignal empty];
     }];
+    
+    [[self.nameView.actionButton rac_signalForControlEvents:UIControlEventTouchUpInside]
+     subscribeNext:^(UIButton *sender) {
+         [nextActionCommand execute:sender];
+     }];
+    
+    RACEvent event;
+    event.eventType
+    
+    //RACSignal *buttonEnabled = RACAbleWithStart(nextActionCommand, enabled);
+    RAC(self.nameView.actionButton, enabled) = nameValid;
+    //RAC(self.nameView.actionButton, enabled) = buttonEnabled;
 }
 
 - (NSString *)actionButtonTitle {
