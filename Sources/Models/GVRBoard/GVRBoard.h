@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 #import "GVRBoardPosition.h"
+#import "GVRGame.h"
 
 @class GVRChecker;
 @class GVRBoardPosition;
+@class GVRTrajectory;
 
 static const NSUInteger GVRBoardSize = 10;
 
@@ -34,6 +36,7 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 
 - (void)removeCheckerAtRow:(NSUInteger)row column:(NSUInteger)column;
 - (void)removeCheckerAtCell:(GVRBoardCell)cell;
+- (void)removeAllCheckers;
 
 - (void)moveCheckerFromCell:(GVRBoardCell)fromCell toCell:(GVRBoardCell)toCell;
 - (void)moveCheckerFromRow:(NSUInteger)fromRow
@@ -58,5 +61,28 @@ static const NSUInteger GVRInitialCheckersFilledRowsCount = 6;
 - (void)iterateDiagonallyFromCell:(GVRBoardCell)fromCell
                            toCell:(GVRBoardCell)toCell
                         withBlock:(void (^)(GVRBoardPosition *position, BOOL *stop))block;
+
+
+- (GVRBoardPosition *)victimPositionFromCell:(GVRBoardCell)fromCell
+                                   direction:(GVRBoardDirection)direction
+                                   forPlayer:(GVRPlayer)player
+                                       error:(NSError **)error;
+
+- (GVRBoardPosition *)victimPositionFromCell:(GVRBoardCell)fromCell
+                                      toCell:(GVRBoardCell)toCell
+                                   forPlayer:(GVRPlayer)player
+                                       error:(NSError **)error;
+
+- (BOOL)isReqFirstMoveAvailalbleForPlayer:(GVRPlayer)player;
+
+- (BOOL)isReqFirstMoveAvailalbleForChecker:(GVRChecker *)checker
+                                  fromCell:(GVRBoardCell)cell
+                                    player:(GVRPlayer)player;
+
+- (BOOL)isReqMoveAvailalbleForChecker:(GVRChecker *)checker
+                             fromCell:(GVRBoardCell)fromCell
+                            direction:(GVRBoardDirection)direction
+                               player:(GVRPlayer)player
+                          isFirstMove:(BOOL)isFirstMove;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "GVRChecker.h"
 
+#import "GVRBoardPosition.h"
+
 @interface GVRChecker ()
 @property (nonatomic, assign)   GVRCheckerType  type;
 @property (nonatomic, assign)   GVRCheckerColor color;
@@ -60,6 +62,42 @@
 - (void)promoteCheckerType {
     self.type = GVRCheckerTypeKing;
 }
+
+
+- (BOOL)isAllowedDistanceToVictim:(NSInteger)distance {
+    GVRCheckerType type = self.type;
+    if (GVRCheckerTypeMan == type) {
+        return labs(distance) == 1 ? YES : NO;
+    } else if (GVRCheckerTypeKing == type) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL)isAllowedDistanceToVictimFromCell:(GVRBoardCell)fromCell
+                                   toCell:(GVRBoardCell)toCell
+{
+    return [self isAllowedDistanceToVictim:GVRRowDistanceBetweenCells(fromCell, toCell)];
+}
+
+- (BOOL)isAllowedSingleJumpDistance:(NSInteger)distance {
+    GVRCheckerType type = self.type;
+    if (GVRCheckerTypeMan == type) {
+        return distance > 0 && distance <= 1 ? YES : NO;
+    } else if (GVRCheckerTypeKing == type) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL)isAllowedSingleJumpDistanceFromCell:(GVRBoardCell)fromCell
+                                     toCell:(GVRBoardCell)toCell
+{
+    return [self isAllowedSingleJumpDistance:GVRRowDistanceBetweenCells(fromCell, toCell)];
+}
+
 
 #pragma mark - 
 #pragma mark NSCopying

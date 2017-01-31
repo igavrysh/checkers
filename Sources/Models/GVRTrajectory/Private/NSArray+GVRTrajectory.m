@@ -20,4 +20,15 @@
     return cell;
 }
 
+- (NSString *)cellsDescription {
+    NSMutableString *string = [NSMutableString new];
+    for (NSUInteger i = 0; i < self.count; i++) {
+        GVRBoardCell cell = [self cellAtIndex:i];
+        
+        [string appendFormat:@"<%ld, %ld>", (long)cell.row, (long)cell.column];
+    }
+    
+    return [string copy];
+}
+
 @end

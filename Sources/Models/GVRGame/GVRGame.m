@@ -14,6 +14,17 @@
 
 #import "GVRBlockMacros.h"
 
+GVRCheckerColor GVRCheckerColorForPlayer(GVRPlayer player) {
+    GVRCheckerColor color = GVRCheckerColorNone;
+    if (GVRPlayerWhiteCheckers == player) {
+        color = GVRCheckerColorWhite;
+    } else if (GVRPlayerBlackCheckers == player) {
+        color = GVRCheckerColorBlack;
+    }
+    
+    return color;
+}
+
 @interface GVRGame()
 @property (nonatomic, strong)   GVRBoard        *board;
 @property (nonatomic, assign)   GVRPlayer       activePlayer;
@@ -28,7 +39,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
     }
     
     return self;
@@ -51,7 +61,6 @@
 }
 
 - (void)end:(void(^)(BOOL success))block {
-    
     GVRBlockPerform(block, TRUE);
 }
 
@@ -59,7 +68,7 @@
                 forPlayer:(GVRPlayer)player
     withCompletionHandler:(void(^)(BOOL success))block
 {
-    GVRTrajectory *trajectory = [GVRTrajectory trajectoryWithSteps:steps board:self.board];
+    GVRTrajectory *trajectory = [GVRTrajectory trajectoryWithSteps:steps];
     
     NSError *error = nil;
     
@@ -67,6 +76,11 @@
     
     if (error) {
         NSLog(@"Error: %@", error);
+    }
+    
+    if (result) {
+        self.activePlayer = GVRPlayerWhiteCheckers == self.activePlayer
+            ? GVRPlayerBlackCheckers : GVRPlayerWhiteCheckers;
     }
     
     GVRBlockPerform(block, result);

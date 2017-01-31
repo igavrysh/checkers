@@ -1,12 +1,75 @@
 PODS:
   - Kiwi (2.4.0)
+  - libextobjc (0.4.1):
+    - libextobjc/EXTADT (= 0.4.1)
+    - libextobjc/EXTConcreteProtocol (= 0.4.1)
+    - libextobjc/EXTKeyPathCoding (= 0.4.1)
+    - libextobjc/EXTNil (= 0.4.1)
+    - libextobjc/EXTSafeCategory (= 0.4.1)
+    - libextobjc/EXTScope (= 0.4.1)
+    - libextobjc/EXTSelectorChecking (= 0.4.1)
+    - libextobjc/EXTSynthesize (= 0.4.1)
+    - libextobjc/NSInvocation+EXT (= 0.4.1)
+    - libextobjc/NSMethodSignature+EXT (= 0.4.1)
+    - libextobjc/RuntimeExtensions (= 0.4.1)
+    - libextobjc/UmbrellaHeader (= 0.4.1)
+  - libextobjc/EXTADT (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTConcreteProtocol (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTKeyPathCoding (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTNil (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSafeCategory (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTScope (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSelectorChecking (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/EXTSynthesize (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/NSInvocation+EXT (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/NSMethodSignature+EXT (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/RuntimeExtensions (0.4.1)
+  - libextobjc/UmbrellaHeader (0.4.1)
+  - RACAlertAction (0.1.0):
+    - ReactiveCocoa
+  - ReactiveCocoa (2.1.8):
+    - ReactiveCocoa/Core (= 2.1.8)
+    - ReactiveCocoa/no-arc (= 2.1.8)
+  - ReactiveCocoa/Core (2.1.8):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.1.8)
+  - ReactiveViewModel (0.1.1):
+    - ReactiveCocoa (~> 2.1)
 
 DEPENDENCIES:
   - Kiwi
+  - libextobjc
+  - RACAlertAction
+  - ReactiveCocoa (= 2.1.8)
+  - ReactiveViewModel (from `https://github.com/ashfurrow/ReactiveViewModel.git`, tag `0.1.2`)
+
+EXTERNAL SOURCES:
+  ReactiveViewModel:
+    :git: https://github.com/ashfurrow/ReactiveViewModel.git
+    :tag: 0.1.2
+
+CHECKOUT OPTIONS:
+  ReactiveViewModel:
+    :git: https://github.com/ashfurrow/ReactiveViewModel.git
+    :tag: 0.1.2
 
 SPEC CHECKSUMS:
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
+  RACAlertAction: f641fa41e2b63eaea096f5ad49991f45f96a3388
+  ReactiveCocoa: f89f2e009a87951b50321bf9feb958823fcc617e
+  ReactiveViewModel: 5d852269482387abd4e343cff4c05004967a0707
 
-PODFILE CHECKSUM: b0c62b865e2b3fce3b859ee60c014b9dcb8b9783
+PODFILE CHECKSUM: 978d060dedc1c64b5dce256a28f9412339c68e79
 
 COCOAPODS: 1.0.1

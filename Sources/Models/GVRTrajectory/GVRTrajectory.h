@@ -9,39 +9,35 @@
 #import <Foundation/Foundation.h>
 
 #import "GVRGame.h"
+#import "GVRBoardPosition.h"
 
 @class GVRBoard;
 
 FOUNDATION_EXPORT NSString *const GVRTrajectoryErrorDomain;
 enum {
-    GVRTrajectoryStepOnWhiteCell = 1000,
-    GVRTrajectoryNoActiveCheckerInStepsSequence,
-    GVRTrajectoryPlayerMovesOpponentsChecker,
-    GVRTrajectoryMoreThanOneOneCellMove,
-    GVRTrajectoryTypeInconsistencyManAndKing,
-    GVRTrajectoryStepOnFilledCell,
-    GVRTrajectoryStepOutOfBoard,
-    GVRTrajectoryNonDiagonalMove,
-    GVRTrajectoryBackwardsMove,
-    GVRTrajectoryLongJump,
-    GVRTrajectoryJumpOverFriendlyChecker,
-    GVRTrajectoryMissRequiredJump
+    GVRTrajectoryStepOnWhiteCell                = 1000,
+    GVRTrajectoryNoActiveCheckerInStepsSequence = 1001,
+    GVRTrajectoryPlayerMovesOpponentsChecker    = 1002,
+    GVRTrajectoryMoreThanOneOneCellMove         = 1003,
+    GVRTrajectoryTypeInconsistencyManAndKing    = 1004,
+    GVRTrajectoryStepOnFilledCell               = 1005,
+    GVRTrajectoryStepOutOfBoard                 = 1006,
+    GVRTrajectoryNonDiagonalMove                = 1007,
+    GVRTrajectoryBackwardsMove                  = 1008,
+    GVRTrajectoryLongJump                       = 1009,
+    GVRTrajectoryJumpOverFriendlyChecker        = 1010,
+    GVRTrajectoryMissRequiredJump               = 1011,
+    GVRTrajectoryIncorrectFormat                = 1012,
+    GVRTrajectoryNoStepsInTrajectory            = 1013,
+    GVRTrajectoryCannotFindTheSpaceToLand       = 1014
 };
 
 @interface GVRTrajectory : NSObject
 @property (nonatomic, readonly)         NSArray     *steps;
 
-+ (instancetype)trajectoryWithSteps:(NSArray *)steps board:(GVRBoard *)board;
++ (instancetype)trajectoryWithSteps:(NSArray *)steps;
 
-+ (instancetype)manTrajectoryWithSteps:(NSArray *)steps;
-
-+ (instancetype)kingTrajectoryWithSteps:(NSArray *)steps;
-
-- (instancetype)initWithSteps:(NSArray *)steps board:(GVRBoard *)board;
-
-- (BOOL)isAllowedDistanceToVictim:(NSInteger)distance;
-
-- (BOOL)isAllowedSingleJumpDistance:(NSInteger)distance;
+- (instancetype)initWithSteps:(NSArray *)steps;
 
 - (BOOL)applyForBoard:(GVRBoard *)board
                player:(GVRPlayer)player

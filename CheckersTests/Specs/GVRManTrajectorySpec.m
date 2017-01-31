@@ -504,12 +504,49 @@ context(@"when board is initialized", ^{
         });
     });
     
-    context(@"when white man kills black man and doesn't kill next black man, located nearby", ^{
+    context(@"when white man cannot kill black man since it is blocked by other white man", ^{
+        it(@"shout set success flag of moving by opposite direction to true", ^{
+            GVRBoardCell initialCell = GVRBoardCellMake(6, 6);
+            GVRBoardCell opponent1Cell = GVRBoardCellMake(5, 7);
+            GVRBoardCell ally1Cell = GVRBoardCellMake(4, 8);
+            GVRBoardCell finalCell = GVRBoardCellMake(7, 7);
+            
+            __block BOOL checkerMoved = NO;
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent1Cell];
+            [board addChecker:[GVRChecker whiteMan] atCell:ally1Cell];
+            
+            [game moveChekerBySteps:@[[NSValue valueWithCell:initialCell],
+                                      [NSValue valueWithCell:finalCell]]
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponent1Cell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:ally1Cell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:opponent1Cell];
+                 [board removeCheckerAtCell:ally1Cell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
+        });
+    });
+    
+    context(@"when white man kills black man and doesn't kill next black man, located nearby, vertical case", ^{
         it(@"should set success flag to false", ^{
             GVRBoardCell initialCell = GVRBoardCellMake(0, 0);
             GVRBoardCell opponent1Cell = GVRBoardCellMake(1, 1);
             GVRBoardCell opponent2Cell = GVRBoardCellMake(3, 1);
-            GVRBoardCell interimCell = GVRBoardCellMake(2, 2);
+            GVRBoardCell finalCell = GVRBoardCellMake(2, 2);
             
             __block BOOL checkerMoved = YES;
             
@@ -517,8 +554,9 @@ context(@"when board is initialized", ^{
             [board addChecker:[GVRChecker blackMan] atCell:opponent1Cell];
             [board addChecker:[GVRChecker blackMan] atCell:opponent2Cell];
             
-            [game moveChekerBySteps:@[[NSValue valueWithCell:initialCell],
-                                      [NSValue valueWithCell:interimCell]]
+            NSArray *path = @[[NSValue valueWithCell:initialCell],
+                              [NSValue valueWithCell:finalCell]];
+            [game moveChekerBySteps:path
                           forPlayer:GVRPlayerWhiteCheckers
               withCompletionHandler:^(BOOL success)
              {
@@ -530,19 +568,19 @@ context(@"when board is initialized", ^{
                  
                  [[theValue([[board positionForCell:opponent2Cell] isFilled]) should] beYes];
                  
-                 [[theValue([[board positionForCell:interimCell] isFilled]) should] beNo];
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beNo];
                  
                  [board removeCheckerAtCell:initialCell];
                  [board removeCheckerAtCell:opponent1Cell];
                  [board removeCheckerAtCell:opponent2Cell];
-                 [board removeCheckerAtCell:interimCell];
+                 [board removeCheckerAtCell:finalCell];
              }];
             
             [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beNo];
         });
     });
     
-    context(@"when white man kills black man and kills next black man, with no other options left", ^{
+    context(@"when white man kills black man and kills next black man, with no other options left, vertical case", ^{
         it(@"should set success flag to true", ^{
             GVRBoardCell initialCell = GVRBoardCellMake(0, 0);
             GVRBoardCell opponent1Cell = GVRBoardCellMake(1, 1);
@@ -669,6 +707,86 @@ context(@"when board is initialized", ^{
             [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
         });
     });
+    
+    context(@"when white man kills black man and kills next black man, with no other options left, horizontal case", ^{
+        it(@"should set success flag to true", ^{
+            GVRBoardCell initialCell = GVRBoardCellMake(2, 0);
+            GVRBoardCell opponent1Cell = GVRBoardCellMake(1, 1);
+            GVRBoardCell opponent2Cell = GVRBoardCellMake(1, 3);
+            GVRBoardCell interimCell = GVRBoardCellMake(0, 2);
+            GVRBoardCell finalCell = GVRBoardCellMake(2, 4);
+            
+            __block BOOL checkerMoved = NO;
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent1Cell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent2Cell];
+            
+            [game moveChekerBySteps:@[[NSValue valueWithCell:initialCell],
+                                      [NSValue valueWithCell:interimCell],
+                                      [NSValue valueWithCell:finalCell]]
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponent1Cell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:opponent2Cell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:interimCell] isFilled]) should] beNo];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beYes];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:opponent1Cell];
+                 [board removeCheckerAtCell:opponent2Cell];
+                 [board removeCheckerAtCell:interimCell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beYes];
+        });
+    });
+    
+    context(@"when white man kills only one black man, and another black man stay antouched, horizontal case", ^{
+        it(@"should set success flag to flase", ^{
+            GVRBoardCell initialCell = GVRBoardCellMake(3, 0);
+            GVRBoardCell opponent1Cell = GVRBoardCellMake(2, 1);
+            GVRBoardCell opponent2Cell = GVRBoardCellMake(2, 3);
+            GVRBoardCell finalCell = GVRBoardCellMake(1, 2);
+            
+            __block BOOL checkerMoved = YES;
+            [board addChecker:[GVRChecker whiteMan] atCell:initialCell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent1Cell];
+            [board addChecker:[GVRChecker blackMan] atCell:opponent2Cell];
+            
+            [game moveChekerBySteps:@[[NSValue valueWithCell:initialCell],
+                                      [NSValue valueWithCell:finalCell]]
+                          forPlayer:GVRPlayerWhiteCheckers
+              withCompletionHandler:^(BOOL success)
+             {
+                 checkerMoved = success;
+                 
+                 [[theValue([[board positionForCell:initialCell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:opponent1Cell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:opponent2Cell] isFilled]) should] beYes];
+                 
+                 [[theValue([[board positionForCell:finalCell] isFilled]) should] beNo];
+                 
+                 [board removeCheckerAtCell:initialCell];
+                 [board removeCheckerAtCell:opponent1Cell];
+                 [board removeCheckerAtCell:opponent2Cell];
+                 [board removeCheckerAtCell:finalCell];
+             }];
+            
+            [[expectFutureValue(theValue(checkerMoved)) shouldEventually] beNo];
+        });
+    });
+    
 });
 
 SPEC_END
