@@ -86,8 +86,8 @@ GVRViewControllerBaseViewProperty(GVRNameViewController, GVRNameView, nameView)
          [nextActionCommand execute:sender];
      }];
     
-    RACEvent event;
-    event.eventType
+    //RACEvent event;
+    //event.eventType
     
     //RACSignal *buttonEnabled = RACAbleWithStart(nextActionCommand, enabled);
     RAC(self.nameView.actionButton, enabled) = nameValid;
