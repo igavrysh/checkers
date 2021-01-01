@@ -1,40 +1,40 @@
 PODS:
-  - Kiwi (2.4.0)
-  - libextobjc (0.4.1):
-    - libextobjc/EXTADT (= 0.4.1)
-    - libextobjc/EXTConcreteProtocol (= 0.4.1)
-    - libextobjc/EXTKeyPathCoding (= 0.4.1)
-    - libextobjc/EXTNil (= 0.4.1)
-    - libextobjc/EXTSafeCategory (= 0.4.1)
-    - libextobjc/EXTScope (= 0.4.1)
-    - libextobjc/EXTSelectorChecking (= 0.4.1)
-    - libextobjc/EXTSynthesize (= 0.4.1)
-    - libextobjc/NSInvocation+EXT (= 0.4.1)
-    - libextobjc/NSMethodSignature+EXT (= 0.4.1)
-    - libextobjc/RuntimeExtensions (= 0.4.1)
-    - libextobjc/UmbrellaHeader (= 0.4.1)
-  - libextobjc/EXTADT (0.4.1):
+  - Kiwi (3.0.0)
+  - libextobjc (0.6):
+    - libextobjc/EXTADT (= 0.6)
+    - libextobjc/EXTConcreteProtocol (= 0.6)
+    - libextobjc/EXTKeyPathCoding (= 0.6)
+    - libextobjc/EXTNil (= 0.6)
+    - libextobjc/EXTSafeCategory (= 0.6)
+    - libextobjc/EXTScope (= 0.6)
+    - libextobjc/EXTSelectorChecking (= 0.6)
+    - libextobjc/EXTSynthesize (= 0.6)
+    - "libextobjc/NSInvocation+EXT (= 0.6)"
+    - "libextobjc/NSMethodSignature+EXT (= 0.6)"
+    - libextobjc/RuntimeExtensions (= 0.6)
+    - libextobjc/UmbrellaHeader (= 0.6)
+  - libextobjc/EXTADT (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTConcreteProtocol (0.4.1):
+  - libextobjc/EXTConcreteProtocol (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTKeyPathCoding (0.4.1):
+  - libextobjc/EXTKeyPathCoding (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTNil (0.4.1):
+  - libextobjc/EXTNil (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSafeCategory (0.4.1):
+  - libextobjc/EXTSafeCategory (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTScope (0.4.1):
+  - libextobjc/EXTScope (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSelectorChecking (0.4.1):
+  - libextobjc/EXTSelectorChecking (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSynthesize (0.4.1):
+  - libextobjc/EXTSynthesize (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/NSInvocation+EXT (0.4.1):
+  - "libextobjc/NSInvocation+EXT (0.6)":
     - libextobjc/RuntimeExtensions
-  - libextobjc/NSMethodSignature+EXT (0.4.1):
+  - "libextobjc/NSMethodSignature+EXT (0.6)":
     - libextobjc/RuntimeExtensions
-  - libextobjc/RuntimeExtensions (0.4.1)
-  - libextobjc/UmbrellaHeader (0.4.1)
+  - libextobjc/RuntimeExtensions (0.6)
+  - libextobjc/UmbrellaHeader (0.6)
   - RACAlertAction (0.1.0):
     - ReactiveCocoa
   - ReactiveCocoa (2.1.8):
@@ -53,6 +53,13 @@ DEPENDENCIES:
   - ReactiveCocoa (= 2.1.8)
   - ReactiveViewModel (from `https://github.com/ashfurrow/ReactiveViewModel.git`, tag `0.1.2`)
 
+SPEC REPOS:
+  trunk:
+    - Kiwi
+    - libextobjc
+    - RACAlertAction
+    - ReactiveCocoa
+
 EXTERNAL SOURCES:
   ReactiveViewModel:
     :git: https://github.com/ashfurrow/ReactiveViewModel.git
@@ -64,12 +71,12 @@ CHECKOUT OPTIONS:
     :tag: 0.1.2
 
 SPEC CHECKSUMS:
-  Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
-  libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
+  Kiwi: fbeafef0f00e4d8f7dcb3420a4930afe70af77f7
+  libextobjc: aed8b7d2b07f511c1a7ecaacb33ea03e327c69b7
   RACAlertAction: f641fa41e2b63eaea096f5ad49991f45f96a3388
   ReactiveCocoa: f89f2e009a87951b50321bf9feb958823fcc617e
   ReactiveViewModel: 5d852269482387abd4e343cff4c05004967a0707
 
 PODFILE CHECKSUM: 978d060dedc1c64b5dce256a28f9412339c68e79
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.10.0
